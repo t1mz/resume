@@ -2196,8 +2196,5 @@ td {
 #td-nowrap {
 	white-space: nowrap;
 	text-align:"." center;
-	min-width:200px;
-	
+	min-width:200px;	
 }
-#smallsize {font-size: 8pt;}
-#hello
