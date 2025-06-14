@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тимофей Земцов - IT-специалист, преподаватель</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
+        :root {
+            /* Основные цвета */
+            --primary-color: #FF6B35;
+            --primary-dark: #E55A2A;
+            --primary-light: #FF8C5A;
+            --secondary-color: #4A4A4A;
+            --light-color: #F8F9FA;
+            --dark-color: #333333;
+            --bg-color: #ffffff;
+            --card-bg: #f9f9f9;
+            
+            /* Отступы */
+            --section-padding: 80px 0;
+            --section-spacing: 60px;
+            --element-spacing: 20px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255,107,53,0.05) 0%, rgba(255,255,255,0.1) 100%);
+            z-index: -1;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .container {
+            width: 100%;
+            /* max-width: 1200px; */
+            margin: 0 auto;
+            padding: 0 20px;
+            justify-content: center; /* Центрируем элементы внутри контейнера */
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* ===== ШАПКА И НАВИГАЦИЯ ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            transition: all 0.3s ease;
+            height: 70px;
+            
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            justify-content: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            padding-left: 15px;
+            line-height: 1.2;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+            
+        }
+        
+        nav ul li {
+            margin-left: 12px;
+        }
+        
+        nav ul li a {
+            color: var(--secondary-color);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        nav ul li a i {
+            margin-right: 6px;
+            font-size: 1rem;
+        }
+        
+        nav ul li a:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        .nav-active {
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-right: 15px;
+            margin-left: 15px;
+        }
+        
+        /* ===== МОБИЛЬНОЕ МЕНЮ ===== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1001;
+            padding: 70px 20px 20px;
+            transition: right 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu ul li {
+            margin-bottom: 10px;
+        }
+        
+        .mobile-menu ul li a {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+        
+        .mobile-menu ul li a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* ===== РАЗДЕЛЫ ===== */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: var(--section-padding);
+            scroll-margin-top: 70px;
+        }
+        
+        /* Навигационные кнопки вверх/вниз */
+        .scroll-nav {
+            position: fixed;
+            right: 30px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .scroll-nav.top {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .scroll-nav.bottom {
+            bottom: 30px;
+            right: 30px;
+        }
+        
+        .scroll-btn {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .scroll-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Главная секция */
+        #home {
+            background: transparent;
+            text-align: center;
+            padding-top: 100px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 0 auto 30px;
+            background: url('https://i.imgur.com/msg552260542-14291.jpg') center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-size: 3.0rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .hero-fullname {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* Секция "Обо мне" */
+        #about {
+            background: var(--light-color);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .about-content-with-photo {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .about-photo {
+            flex: 1;
+            max-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .about-text {
+            flex: 2;
+            text-align: justify;
+            hyphens: auto;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .about-btn-container {
+            text-align: center;
+            margin: 30px 0;
+            width: 100%;
+        }
+        
+        /* Модальное окно "Подробнее" */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        .modal-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .modal-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .modal-list li i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .modal-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Таймлайн опыта работы */
+        #experience {
+            background: white;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-light);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        .timeline-year.top {
+            top: -25px;
+        }
+        
+        .timeline-year.bottom {
+            bottom: -25px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            width: 100%;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            width: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            border-left: none;
+            border-right: 3px solid var(--primary-color);
+        }
+        
+        .timeline-date {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-icon {
+            right: -60px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-icon {
+            left: -60px;
+        }
+        
+        /* Карточки квалификации */
+        .qualifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 5px;
+            margin-top: 30px;
+        }
+        
+        .qualification-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            height: 180px;
+        }
+        
+        .qualification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .qualification-img {
+            width: 160px;
+            height: 100%;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        
+        .qualification-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .qualification-title {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+        
+        .qualification-type {
+            display: inline-block;
+            background: var(--primary-light);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Галерея портфолио */
+        .portfolio-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Центрирование по горизонтали */
+            gap: 10px;
+            margin-top: 30px;
+            
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
+            font-size: 3rem;
+        }
+        
+        .portfolio-content {
+            padding: 20px;
+        }
+        
+        .portfolio-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .portfolio-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .portfolio-place {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Карусель фото */
+        .photo-carousel {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+        }
+        
+        .carousel-img {
+            width: 100%;
+            height: 500px;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
+            font-size: 5rem;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+        
+        .carousel-btn {
+            background: rgba(255,255,255,0.7);
+            color: var(--primary-color);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-btn:hover {
+            background: white;
+        }
+        
+        /* Контакты */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            color: var(--secondary-color);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-name {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            background: var(--primary-light);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background: var(--primary-color);
+        }
+        
+        /* Футер */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 992px) {
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .about-content-with-photo {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-photo {
+                max-width: 300px;
+                margin-bottom: 30px;
+            }
+            
+            .timeline:before {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                text-align: left;
+                border-left: 3px solid var(--primary-color);
+                border-right: none;
+            }
+            
+            .timeline-icon {
+                left: 10px !important;
+                right: auto !important;
+            }
+            
+            .timeline-year {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .scroll-nav.top {
+                display: none;
+            }
+            
+            .carousel-img {
+                height: 300px;
+            }
+            
+            .qualifications-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            }
+            
+            .qualification-card {
+                height: auto;
+                flex-direction: column;
+            }
+            
+            .qualification-img {
+                width: 100%;
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border: 3px solid white;
+            border-radius: 5px;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Project Carousel */
+        .project-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .project-carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-slide {
+            min-width: 100%;
+            text-align: center;
+        }
+        
+        .project-slide img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .project-carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+        
+        .project-carousel-btn {
+            background: rgba(255,255,255,0.7);
+            color: var(--primary-color);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .project-carousel-btn:hover {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта с навигацией -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Земцов<br>Тимофей</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-active"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> Обо мне</a></li>
+                    <li><a href="#experience"><i class="fas fa-briefcase"></i> Опыт</a></li>
+                    <li><a href="#qualification"><i class="fas fa-graduation-cap"></i> Квалификация</a></li>
+                    <li><a href="#achievements"><i class="fas fa-trophy"></i> Успехи учеников</a></li>
+                    <li><a href="#portfolio"><i class="fas fa-laptop-code"></i> Портфолио</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
+                    <li><a href="#resume"><i class="fas fa-file-alt"></i> Резюме</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i> Меню</button>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu">
+        <button class="close-menu"><i class="fas fa-times"></i></button>
+        <ul>
+            <li><a href="#home"><i class="fas fa-home"></i> Главная</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> Обо мне</a></li>
+            <li><a href="#experience"><i class="fas fa-briefcase"></i> Опыт</a></li>
+            <li><a href="#qualification"><i class="fas fa-graduation-cap"></i> Квалификация</a></li>
+            <li><a href="#achievements"><i class="fas fa-trophy"></i> Успехи учеников</a></li>
+            <li><a href="#portfolio"><i class="fas fa-laptop-code"></i> Портфолио</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
+            <li><a href="#resume"><i class="fas fa-file-alt"></i> Резюме</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Lightbox для изображений -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-lightbox"><i class="fas fa-times"></i></button>
+        <div class="lightbox-content">
+            <img src="" alt="Увеличенное изображение">
+        </div>
+    </div>
+
+    <!-- Project Carousel Modal -->
+    <div class="modal" id="projectCarouselModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h2 id="projectTitle">Просмотр проекта</h2>
+            <div class="project-carousel">
+                <div class="project-carousel-container" id="projectCarousel">
+                    <!-- Slides will be added dynamically -->
+                </div>
+                <div class="project-carousel-controls">
+                    <button class="project-carousel-btn prev-project-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="project-carousel-btn next-project-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Навигационные кнопки -->
+    <div class="scroll-nav top">
+        <div class="scroll-btn scroll-up"><i class="fas fa-arrow-up"></i></div>
+        <div class="scroll-btn scroll-down"><i class="fas fa-arrow-down"></i></div>
+    </div>
+    <div class="scroll-nav bottom">
+        <div class="scroll-btn scroll-top"><i class="fas fa-home"></i></div>
+    </div>
+
+    <!-- Разделы сайта -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-img"></div>
+                <h1 class="hero-title">Тимофей Александрович Земцов</h1>
+                <h2 class="hero-subtitle">IT-специалист, преподаватель</h2>
+                <p>Опыт работы - 11 лет</p>
+                <div class="hero-btns">
+                    <a href="#about" class="btn">Узнать больше</a>
+                    <a href="#contact" class="btn btn-outline">Связаться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>Обо мне</h2>
+            <div class="about-content">
+                <div class="about-content-with-photo">
+                    <div class="about-photo">
+                        <img src="https://i.imgur.com/msg552260542-14291.jpg" alt="Тимофей Земцов">
+                    </div>
+                    <div class="about-text">
+                        <p>Постоянно стремлюсь к развитию навыков и компетенций, карьерному росту. Успешно преподаю навыки IT-сферы - программирование Python и C#, логика и алгоритмика, 3D моделирование в Blender и разработку в игровом движке Unity, компьютерные сети и комплектующие, микросхемотехника. Подготовка к ОГЭ и ЕГЭ по информатике.</p>
+                        
+                        <p>Обучаю навыкам проектной деятельности - концептуальное оформление, разработку, работе в команде, питчинг и защита проектов. Владею английским языком на уровне C1 - профессиональные знания, переговоры, чтение и перевод технической и художественной литературы, отлично понимаю на слух.</p>
+                        
+                        <p>Развиты навыки общения с людьми разных возрастных групп и обучение навыкам использования современными компьютерными устройствами и гаджетами. Хорошо работаю с детьми и подростками, нахожу с ними общий язык. Хорошо веду работу над мотивацией учащихся, создаю активные коллективы и волонтерские группы.</p>
+                    </div>
+                </div>
+                
+                <div class="about-btn-container">
+                    <button class="btn" id="moreAboutBtn">Подробнее</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2>Опыт работы</h2>
+            <p>Общий стаж работы - более 11 лет.</p>
+            <div class="timeline">
+                <div class="timeline-year top">2025</div>
+                
+                <!-- IT-Куб -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Август 2023 — текущее время (2 года)</span>
+                        <h3>Центр цифрового образования детей «IT-Куб г.Арамиль»</h3>
+                        <h4>Педагог Дополнительного Образования</h4>
+                        <p>Направления: Разработка VR/AR приложений, Проектная Деятельность, Программирование на Python</p>
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    
+                    </div>
+                    <!-- Добавим модальное окно для деталей -->
+                    <div class="modal" id="experienceModal">
+                        <div class="modal-content">
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                            <h2 id="modal-company"></h2>
+                            <h3 id="modal-position"></h3>
+                            <p id="modal-period"></p>
+                            <div id="modal-description"></div>
+                            <a id="modal-link" href="#" target="_blank" class="btn">Сайт компании</a>
+                        </div>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                </div>
+                
+                <!-- Солнечный круг -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Сентябрь 2024 — текущее время (1 год)</span>
+                        <h3>Частная школа «Солнечный круг»</h3>
+                        <h4>Учитель информатики</h4>
+                        <p>Ведение занятий по компьютерной грамотности и информатике в 3 - 5 классах.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                </div>
+                
+                <!-- Школа №5 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Октябрь 2021 — Август 2023 (1 год 11 месяцев)</span>
+                        <h3>МКОУ СОШ №5 г.Кирово-Чепецка</h3>
+                        <h4>Учитель информатики, Системный Администратор</h4>
+                        <p>Ведение информатики, обслуживание сети, парка компьютерной и орг.техники.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                </div>
+                
+                <!-- Суджук -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Ноябрь 2020 — Август 2023 (2 года 10 месяцев)</span>
+                        <h3>Торговая марка «Суджук»</h3>
+                        <h4>Системный администратор</h4>
+                        <p>Обслуживание компьютеров, оргтехники, торгового оборудования, сети магазина.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                </div>
+                
+                <!-- ЭР-Телеком -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Сентябрь 2017 — Сентябрь 2020 (3 года 1 месяц)</span>
+                        <h3>ЭР-Телеком Холдинг</h3>
+                        <h4>Сервисный Инженер</h4>
+                        <p>Предоставление клиентам доступа к услугам связи провайдера Дом.ru.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                </div>
+                
+                <!-- Школа №5 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Сентябрь 2013 — Сентябрь 2017 (4 года 1 месяц)</span>
+                        <h3>МКОУ СОШ №5 г.Кирово-Чепецка</h3>
+                        <h4>Учитель информатики, Техник-Программист</h4>
+                        <p>Ведение информатики, обслуживание сети, парка компьютерной и орг.техники.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                </div>
+
+                <!-- Администрация города -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Апрель 2013 — Июнь 2013 (3 месяца)</span>
+                        <h3>Администрация города г.Кирово-Чепецка</h3>
+                        <h4>Практика - помощник Cистемного Администратора</h4>
+                        <p>Техническая поддержка, обслуживание оргтехники.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                </div>
+                
+                <div class="timeline-year bottom">2013</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="qualification">
+        <div class="container">
+            <h2>Квалификация</h2>
+            <p>Повышения квалификации, сертификаты и благодарности</p>
+            <div class="qualifications-grid">
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Диплом+1">
+                    <div class="qualification-img">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Сертификат</span>
+                        <h3 class="qualification-title">Участник образовательного интенсива</h3>
+                        <p>"Педагогическая индивидуальность"</p>
+                    </div>
+                </div>
+                
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Диплом+2">
+                    <div class="qualification-img">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Использование современного оборудования</h3>
+                        <p>В центрах доп.образования IT-Куб</p>
+                    </div>
+                </div>
+                
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Диплом+3">
+                    <div class="qualification-img">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Преподавание информатики и математики</h3>
+                        <p>В условиях цифровизации образования</p>
+                    </div>
+                </div>
+                
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Диплом+4">
+                    <div class="qualification-img">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Благодарность</span>
+                        <h3 class="qualification-title">За оценку работ на фестивале проектов</h3>
+                        <p>СУНЦ УрФУ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <h2>Успехи учеников</h2>
+            <p>Достижения моих студентов на конкурсах и олимпиадах</p>
+            <div class="qualifications-grid">
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Успех+1">
+                    <div class="qualification-img">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Победа</span>
+                        <h3 class="qualification-title">Команда "Код будущего"</h3>
+                        <p>1 место на хакатоне по веб-разработке, 2023 г.</p>
+                    </div>
+                </div>
+                
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Успех+2">
+                    <div class="qualification-img">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Призер</span>
+                        <h3 class="qualification-title">Петров А. - Олимпиада</h3>
+                        <p>Региональная олимпиада по программированию, 2022 г.</p>
+                    </div>
+                </div>
+                
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Успех+3">
+                    <div class="qualification-img">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Лучший проект</span>
+                        <h3 class="qualification-title">"Умная школа"</h3>
+                        <p>Образовательный проект на конкурсе IT-стартапов, 2021 г.</p>
+                    </div>
+                </div>
+                
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Успех+4">
+                    <div class="qualification-img">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Гран-при</span>
+                        <h3 class="qualification-title">Проект "VR-лаборатория"</h3>
+                        <p>На выставке научно-технического творчества, 2022 г.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2>Портфолио проектов</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-title="Образовательная платформа" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+2", "https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+3"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Образовательная платформа</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Хакатон "Образование 4.0"</span>
+                            <span>1 место</span>
+                        </div>
+                        <p>Платформа для дистанционного обучения с интерактивными заданиями и автоматической проверкой кода.</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-title="Чат-бот для школы" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+2"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Чат-бот для школы</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Конкурс "IT-Школа"</span>
+                            <span>2 место</span>
+                        </div>
+                        <p>Телеграм-бот для автоматизации расписания, домашних заданий и уведомлений для учащихся.</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-title="Обучающая игра" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+2", "https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+3"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Обучающая игра</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Фестиваль науки</span>
+                            <span>Лучший образовательный проект</span>
+                        </div>
+                        <p>Игра для изучения основ алгоритмизации и программирования для школьников 5-7 классов.</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-name">WhatsApp</div>
+                    <a href="#" class="contact-link">Написать</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="contact-name">Telegram</div>
+                    <a href="#" class="contact-link">Написать</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-vk"></i>
+                    </div>
+                    <div class="contact-name">VK</div>
+                    <a href="#" class="contact-link">Перейти</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="contact-name">Сферум</div>
+                    <a href="#" class="contact-link">Перейти</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-name">Email</div>
+                    <a href="mailto:timz3m+work@ya.ru" class="contact-link">Написать</a>
+                </div>
+            </div>
+            <p style="margin-top: 30px; text-align: center;">
+                Номер телефона можно найти в загружаемом <a href="info/Земцов Тимофей Александрович.pdf" target="_blank">резюме</a>
+            </p>
+        </div>
+    </section>
+
+    <section id="resume">
+        <div class="container" style="text-align: center;">
+            <h2>Резюме</h2>
+            <p style="max-width: 700px; margin: 0 auto 30px;">Вы можете скачать мое подробное резюме в формате PDF, чтобы ознакомиться с полной информацией о моем профессиональном опыте, навыках и достижениях.</p>
+            <a href="info/Земцов Тимофей Александрович.pdf" target="_blank" class="btn"><i class="fas fa-download"></i> Скачать резюме</a>
+        </div>
+    </section>
+
+    <!-- Модальное окно "Подробнее" -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h2>Подробная информация</h2>
+            <ul class="modal-list">
+                <li>
+                    <i class="fas fa-language"></i>
+                    <div>
+                        <strong>Английский язык</strong><br>
+                        Уровень C1 - профессиональные знания, переговоры, чтение и перевод технической и художественной литературы, отлично понимаю на слух.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <strong>Работа с людьми</strong><br>
+                        Развиты навыки общения с людьми разных возрастных групп и обучение навыкам использования современными компьютерными устройствами и гаджетами.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-child"></i>
+                    <div>
+                        <strong>Работа с детьми и подростками</strong><br>
+                        Хорошо работаю с детьми и подростками, нахожу с ними общий язык. Хорошо веду работу над мотивацией учащихся, создаю активные коллективы и волонтерские группы.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-video"></i>
+                    <div>
+                        <strong>Видеомонтаж и обработка изображений</strong><br>
+                        Навыки видеомонтажа (Adobe Premiere до '21, начиная с 2021 DaVinci Resolve), редактирования и ретуши изображений (Adobe Photoshop).
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-laptop"></i>
+                    <div>
+                        <strong>Офисные программы</strong><br>
+                        Профессиональное владение офисными пакетами Office – Excel, Word, etc. Быстрое усваивание новых программ.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-brain"></i>
+                    <div>
+                        <strong>Интересы</strong><br>
+                        Интересуюсь аналитикой данных, статистикой, подсчётами. Активно использую генеративные ИИ для оформления ресурсов и автоматизации рутинных задач.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-hiking"></i>
+                    <div>
+                        <strong>Увлечения</strong><br>
+                        Велоспорт, туризм, посткроссинг, киноиндустрия, современные технологии и гаджеты, английский язык.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-car"></i>
+                    <div>
+                        <strong>Автомобиль</strong><br>
+                        Имеется личный автомобиль, категория B.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Готовность к работе</strong><br>
+                        Открыт к предложениям по удаленной работе, а так-же совместительству в г.Екатеринбург и в Сысертским/Белоярском районах (Челябинский/Тюменский тракт).
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Земцов<br>Тимофей</div>
+                <p>IT-специалист, преподаватель</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fas fa-comments"></i></a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2025 Земцов Тимофей. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Основные переменные
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a, .mobile-menu ul li a');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.overlay');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const scrollUpBtn = document.querySelector('.scroll-up');
+        const scrollDownBtn = document.querySelector('.scroll-down');
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        const moreAboutBtn = document.getElementById('moreAboutBtn');
+        const aboutModal = document.getElementById('aboutModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const closeLightbox = document.querySelector('.close-lightbox');
+        const qualificationCards = document.querySelectorAll('.qualification-card');
+        const projectCarouselModal = document.getElementById('projectCarouselModal');
+        const projectCarousel = document.getElementById('projectCarousel');
+        const projectTitle = document.getElementById('projectTitle');
+        const demoBtns = document.querySelectorAll('.demo-btn');
+        const closeProjectModal = projectCarouselModal.querySelector('.close-modal');
+        const prevProjectBtn = document.querySelector('.prev-project-btn');
+        const nextProjectBtn = document.querySelector('.next-project-btn');
+        // Добавим в скрипт обработку кнопок "Подробнее"
+        const timelineBtns = document.querySelectorAll('.timeline-details-btn');
+        const experienceModal = document.getElementById('experienceModal');
+
+
+        
+        // Текущий активный раздел
+        let currentSection = 0;
+        let currentProjectIndex = 0;
+        let currentProjectSlides = [];
+        
+        // Плавная прокрутка к якорю
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    // Закрываем мобильное меню, если открыто
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    
+                    // Прокрутка к разделу
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Обновление активного пункта меню
+                    updateActiveNav(targetId);
+                }
+            });
+        });
+        timelineBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.closest('.timeline-content');
+                const company = content.querySelector('h3').textContent;
+                const position = content.querySelector('h4').textContent;
+                const period = content.querySelector('.timeline-date').textContent;
+                const description = content.querySelector('p').textContent;
+                
+                // Заполняем модальное окно
+                document.getElementById('modal-company').textContent = company;
+                document.getElementById('modal-position').textContent = position;
+                document.getElementById('modal-period').textContent = period;
+                document.getElementById('modal-description').textContent = description;
+                
+                // Здесь можно добавить реальные ссылки
+                document.getElementById('modal-link').href = '#';
+                
+                experienceModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        // Обновление активного пункта меню
+        function updateActiveNav(targetId) {
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === targetId) {
+                    link.classList.add('nav-active');
+                }
+            });
+        }
+        
+        // Открытие/закрытие мобильного меню
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
+        // Открытие/закрытие модального окна "Подробнее"
+        moreAboutBtn.addEventListener('click', () => {
+            aboutModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            aboutModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Закрытие модального окна при клике вне его
+        window.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Навигация по разделам кнопками вверх/вниз
+        scrollUpBtn.addEventListener('click', () => {
+            if (currentSection > 0) {
+                currentSection--;
+                scrollToSection(currentSection);
+            }
+        });
+        
+        scrollDownBtn.addEventListener('click', () => {
+            if (currentSection < sections.length - 1) {
+                currentSection++;
+                scrollToSection(currentSection);
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            currentSection = 0;
+            scrollToSection(currentSection);
+        });
+        
+        // Плавная прокрутка к разделу
+        function scrollToSection(index) {
+            window.scrollTo({
+                top: sections[index].offsetTop,
+                behavior: 'smooth'
+            });
+            
+            // Обновление активного пункта меню
+            const targetId = `#${sections[index].id}`;
+            updateActiveNav(targetId);
+        }
+        
+        // Определение текущего раздела при прокрутке
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            // Обновление активного пункта меню
+            if (current) {
+                updateActiveNav(`#${current}`);
+                
+                // Обновление currentSection
+                sections.forEach((section, index) => {
+                    if (section.id === current) {
+                        currentSection = index;
+                    }
+                });
+            }
+        });
+        
+        // Lightbox для квалификаций и успехов
+        qualificationCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imgSrc = card.getAttribute('data-img');
+                lightboxImg.src = imgSrc;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Закрытие lightbox
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Карусель проектов
+        demoBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const portfolioItem = this.closest('.portfolio-item');
+                const title = portfolioItem.getAttribute('data-title');
+                const images = JSON.parse(portfolioItem.getAttribute('data-imgs'));
+                
+                projectTitle.textContent = title;
+                projectCarousel.innerHTML = '';
+                
+                images.forEach(img => {
+                    const slide = document.createElement('div');
+                    slide.className = 'project-slide';
+                    slide.innerHTML = `<img src="${img}" alt="${title}">`;
+                    projectCarousel.appendChild(slide);
+                });
+                
+                currentProjectIndex = 0;
+                updateProjectCarousel();
+                
+                projectCarouselModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Закрытие модального окна проектов
+        closeProjectModal.addEventListener('click', () => {
+            projectCarouselModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        projectCarouselModal.addEventListener('click', (e) => {
+            if (e.target === projectCarouselModal) {
+                projectCarouselModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Навигация по карусели проектов
+        prevProjectBtn.addEventListener('click', () => {
+            currentProjectIndex = (currentProjectIndex - 1 + projectCarousel.children.length) % projectCarousel.children.length;
+            updateProjectCarousel();
+        });
+        
+        nextProjectBtn.addEventListener('click', () => {
+            currentProjectIndex = (currentProjectIndex + 1) % projectCarousel.children.length;
+            updateProjectCarousel();
+        });
+        
+        function updateProjectCarousel() {
+            projectCarousel.style.transform = `translateX(-${currentProjectIndex * 100}%)`;
+        }
+        
+        // Инициализация активного пункта меню
+        updateActiveNav('#home');
+        
+        // Анимированный фон
+        document.addEventListener('scroll', function() {
+            const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            const hue = 20 + scrollPercentage * 20;
+            document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 95%) 0%, hsl(${hue + 20}, 100%, 90%) 100%)`;
+        });
+    </script>
+</body>
+</html>

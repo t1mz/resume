@@ -1,434 +1,1169 @@
-<!DOCTYPE HTML>
-<!--
-	Astral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Визитка Земцов Т.А.</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тимофей Земцов - IT-специалист, преподаватель</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка сайта с навигацией -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Земцов<br>Тимофей</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-active"><i class="fas fa-home"></i>Главная</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i>Обо мне</a></li>
+                    <li><a href="#experience"><i class="fas fa-briefcase"></i>Опыт</a></li>
+                    <li><a href="#qualification"><i class="fas fa-graduation-cap"></i>Квалификация</a></li>
+                    <li><a href="#achievements"><i class="fas fa-trophy"></i> Успехи</a></li>
+                    <li><a href="#portfolio"><i class="fas fa-laptop-code"></i>Портфолио</a></li>
+                    <li><a href="#photos"><i class="fas fa-camera"></i>Фото</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i>Контакты</a></li>
+                    <li><a href="#resume"><i class="fas fa-file-alt"></i>Резюме</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i> Меню</button>
+        </div>
+    </header>
 
-		<!-- Wrapper-->
-			<div id="wrapper">
+    <!-- Мобильное меню -->
+    <div class="mobile-menu">
+        <button class="close-menu"><i class="fas fa-times"></i></button>
+        <ul>
+            <li><a href="#home"><i class="fas fa-home"></i> Главная</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> Обо мне</a></li>
+            <li><a href="#experience"><i class="fas fa-briefcase"></i> Опыт</a></li>
+            <li><a href="#qualification"><i class="fas fa-graduation-cap"></i> Квалификация</a></li>
+            <li><a href="#achievements"><i class="fas fa-trophy"></i> Успехи учеников</a></li>
+            <li><a href="#portfolio"><i class="fas fa-laptop-code"></i> Портфолио</a></li>
+            <li><a href="#photos"><i class="fas fa-camera"></i> Фото</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
+            <li><a href="#resume"><i class="fas fa-file-alt"></i> Резюме</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
 
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#" class="icon solid fa-home"><span>Главная</span></a>
-						<a href="#about" class="icon solid fa-user-circle"><span>Обо мне</span></a>
-						<a href="#work" class="icon solid fa-folder"><span>Опыт работы</span></a>
-						<a href="#qualification" class="icon solid fa-graduation-cap"><span>Квалификация</span></a>
-						<a href="#photos" class="icon solid fa-image"><span>Фотографии</span></a>
-						<a href="#contact" class="icon solid fa-envelope"><span>Контакт</span></a>
-						<a href="info/Земцов Тимофей Александрович.pdf"  target="_blank" class="icon solid fa-download"><span>Резюме</span></a>
-					</nav>
-				<!-- Main -->
-					<div id="main">
+    <!-- Lightbox для фотогалереи -->
+    <div class="lightbox" id="galleryLightbox">
+        <button class="close-lightbox"><i class="fas fa-times"></i></button>
+        <div class="lightbox-content">
+            <img src="" alt="Увеличенное изображение">
+        </div>
+        <div class="lightbox-nav">
+            <button class="lightbox-btn prev-gallery-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-btn next-gallery-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
 
-						<!-- Me -->
-							<article id="home" class="panel intro">
-								<header>
-									<h1>Тимофей Александрович Земцов</h1>
-									<p>IT-специалист</p>
-									<p>Преподаватель</p>
-									<p>Опыт работы - 11 лет</p>
-								</header>
-								<a href="#about" class="jumplink pic">
-									<span class="arrow icon solid fa-chevron-right"><span>Продолжить знакомство</span></span>
-									<img src="images/pics/msg552260542-14291.jpg" alt="" />
-								</a>
-							</article>
-						<!-- about -->
-							<article id="about" class="panel">
-							<header>
-								<h2>Обо мне</h2>
-								<p><b>
-									Земцов Тимофей Александрович<br>
-									Мужчина, 30 лет, родился 4 июля 1994<br>
-									</b></p>
-							</header>
-							
-							<p>Постоянно стремлюсь к развитию навыков и компетенций, карьерному росту.</p>
-							<p>Успешно преподаю навыки IT-сферы - программирование Python и C#, логика и алгоритмика, 3D моделирование в Blender и разработку в игровом движке Unity, компьютерные сети и комплектующие, микросхемотехника. Подготовка к ОГЭ и ЕГЭ по информатике. </p>
-							<p>Обучаю навыкам проектной деятельности - концептуальное оформление, разработку, работе в команде, питчинг и защита проектов.</p>
-							<p>Владею английским языком на уровне C1 - профессиональные знания, переговоры, чтение и перевод технической и художественной литературы, отлично понимаю на слух.</p>
-							<p>Развиты навыки общения с людьми разных возрастных групп и обучение навыкам использования современными компьютерными устройствами и гаджетами. Хорошо работаю с детьми и подростками, нахожу с ними общий язык. Хорошо веду работу над мотивацией учащихся, создаю активные коллективы и волонтерские группы. </p>
-							<p>Навыки видеомонтажа (Adobe Premiere до '21, начиная с 2021 DaVinci Resolve), редактирования и ретуши изображений (Adobe Photoshop). Профессиональное владение офисными пакетами Office – Excel, Word, etc. Быстрое усваивание новых программ.</p>
-							<p>Интересуюсь аналитикой данных, статистикой, подсчётами. Активно использую генеративные ИИ для оформления ресурсов и автоматизации рутинных задач.</p>
-							<p>Увлекаюсь велоспортом, туризмом, посткроссингом, киноиндустрией, современными технологиями и гаджетами, английским языком.</p>
-							<p>Имеется личный автомобиль, категория B.</p>
-							<p></p>
-							<p>Открыт к предложениям по удаленной работе, а так-же совместительству в г.Екатеринбург и в Сысертским/Белоярском районах (Челябинский/Тюменский тракт).</p>
-							<p style="text-align:right;"><a href="#work" style="text-align:right;">
-								<span style="text-align:right;">Продолжить знакомство</span>
-								<a href="#work" class="icon solid fa-long-arrow-alt-right"></a>
-							</a></p>
-							</article>
-						<!-- Work -->
-							<article id="work" class="panel">
-								<header>
-									<h2>Опыт работы</h2>
-								</header>
-								<p>
-									Общий стаж работы - более 11 лет.
-								</p>
-								<table>
-									<tbody>
-									<!--IT-Куб-->
-										<tr>
-											<td class="td-nowrap"><p class="smallsize">Август 2023<br>—<br>текущее время
-												<br>2 года</p>
-												</td>
-											
-											<td><h2>Центр цифрового образования детей<br>«IT-Куб г.Арамиль»</h2>
-											<h3>Педагог Дополнительного Образования</h3>
-										<p>Направления: Разработка VR/AR приложений, Проектная Деятельность, Программирование на Python</p>
-										<p>Ведение курсов дополнительного образования для детей 11 - 17 лет. Организация мастерклассов, конкурсов и прочих мероприятий для детей и взрослых. <br>
-										Подготовка к конкурсам, работа над проектами.<br>
-										Написание образоватльных программ и методических материалов.<br>
-										Проведение дополнительных внебюджетных курсов: "Основы видеомонтажа в Davinci Resolve" и "Основы компьютерной грамотности"</p>
-											</td>
-										</tr>
-										<!--Солнечный круг-->
-										<tr>
-											<td class="td-nowrap"><p class="smallsize">Сентябрь 2024<br>—<br>текущее время
-												<br>1 год</p>
-												</td>
-											
-											<td><h2>Частная школа «Солнечный круг»</h2>
-											<h3>Учитель информатики</h3>
-										<p>Ведение занятий по компьютерной грамотности и информатике в 3 - 5 классах. Совместительство, 1 день в неделю.</p>
-									</td>
-										</tr>
-										<!--Школа-->
-										<tr>
-											<td class="td-nowrap"><p class="smallsize">Октябрь 2021<br>—<br>Август 2023
-												<br>1 год 11 месяцев</p>
-												<p><a href=#ER-telecom class="p">Перерыв</a></p>
-												<p>Сентябрь 2013<br>—<br>Сентябрь 2017<br>
-												4 года 1 месяц</p>
-												</td>
-											
-											<td><h2>МКОУ СОШ №5 г.Кирово-Чепецка</h2>
-											<h3>Учитель информатики, Системный Администратор<br>(инженер-электроник, техник-программист)</h3>
-										<p>Ведение предмета Информатика и ИКТ в общеобразовательной школе (среднее/старшее звено) и внеурочная деятельность, факультативы, подготовка к ГИА и ЕГЭ.</p>
-									<p>Обслуживание сети, парка компьютерной и орг.техники, ведение сайта и электронных систем (дневник, электронная отчетность, и т.п.). <br>
-									Экосистема Linux (AltLinux, Ubuntu) <br>
-									Перевод сети на ЕСПД, сайта школы на Госвеб, переезд на новый электронный журнал. <br>
-									Заказ, установка и настройка нового оборудования, мелкая диагностика.<br>
-									Технический специалист при проведении ГИА и ЕГЭ, а так-же сопровождение проведения других мероприятий, конкурсов и аттестаций.<br>
-									В 2013 самостоятельная организация локальной сети школы с нуля (монтаж, подключение и настройка).
-										</p></td>
-										</tr>
-										<!--Магазин-->
-										<tr>
-											<td class="td-nowrap">
-												<p>Ноябрь 2020<br>—<br>Август 2023<br>
-												2 года 10 месяцев
-												</p>
-											</td>
-											<td>
-												<h2>
-												Торговая марка «Суджук»<br> - сеть супермаркетов
-												</h2>
-												<h3>
-												Системный администратор
-												</h3>
-												<p>
-													Обслуживание компьютеров, оргтехники, торгового оборудования (Кассы, ККТ, Весы,
-													ТСД и т.п.), сети магазина. Резервные копии. Сопровождение и работа с 1С Предприятием
-													8.3, системами ЕГАИС, Меркурий, Честный Знак, и прочими программными средствами.<br>
-													Немного бухгалтерской деятельности (проверка накладных и прочих документов),
-													проведение ревизий. Поиск и закупка оборудования/запчастей.
-													Экосистема Windows, AD.<br>
-													IT отдел из 3х человек, каждый закреплен за одним своим супермаркетом и работает в
-													нем (магазин с кухней, кондитерским и хлебным цехом), не разъездной характер работы,
-													пятидневная рабочая неделя.<br>
-													С сентября 2022г работа на месте только во второй половине дня с 15:00 (совмещение со школой), 7:00-23:00 на звонке для удаленной работы, экстренных выездов.
+    <!-- Project Carousel Modal -->
+    <div class="modal" id="projectCarouselModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h2 id="projectTitle">Просмотр проекта</h2>
+            <div class="project-carousel">
+                <div class="project-carousel-container" id="projectCarousel">
+                    <!-- Slides will be added dynamically -->
+                </div>
+                <div class="project-carousel-controls">
+                    <button class="project-carousel-btn prev-project-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="project-carousel-btn next-project-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-													
-												</p>
-											</td>
-										</tr>
-										<!--Турагенство-->
-										<tr>
-											<td class="td-nowrap">
-												<p>
-													Декабрь 2018<br>—<br>Июль 2024<br>
-													5 лет 7 месяцев
-												</p>
-											</td>
-											<td>
-												<h2>
-												ПутевкаМаркет<br>
-												- Турагенство
-												</h2>
-												<h3>
-													Системный Администратор
-												</h3>
-												<p>Организация офиса и сети с нуля, несколько переездов.<br>
-													Сборка и обслуживание ПК и оргтехники, ПО, кассового терминала. Последующая техподдержка и помощь по мелким вопросам.<br>
-													Работа в офисе и удалённо (соседний город). <br>
-													Частичная занятость, по обращениям.<br>
-													
-												</p>
-											</td>
-										</tr>
-										<!-- Эр-Телеком -->
-										<tr>
-											<td class="td-nowrap">
-												<p>
-													Сентябрь 2017<br>—<br>Сентябрь 2020<br>
-													3 года 1 месяц
-												</p>
-											</td>
-											<td>
-												<h2 id="ER-telecom">
-													ЭР-Телеком Холдинг<br>
-													- телекоммуникации
-												</h2>
-												<h3>
-													Сервисный Инженер
-												</h3>
-												<p>
-													Предоставление клиентам доступа к услугам связи провайдера Дом.ru (монтаж абонентских линий, настройка и обслуживание оборудования клиентов и компании, заполнение договоров) и дополнительных услуг, обучение использованию и дальнейшая консультация по услугам.<br>
-													Сервис и исправление неполадок на сети и у клиентов.<br>
-													Мониторинг за состоянием сети и её обслуживание на закрепленном районе, планово-профилактические и аварийно-восстановительные работы.<br>
-													Приемка и ввод в эксплуатацию вновь построенных, реконструированных, отремонтированных объектов на сети.<br>
-													Документирование и отчетность по выполненным работам, МОЛ.<br>
-													Работа разъездного характера, работы на высоте, допуск по электробезопасности.<br>
-													
-												</p>
-											</td>
-										</tr>
-										<!--Практика-->
-										<tr>
-											<td id="td-nowrap">
-												<p>
-													Апрель 2013<br>—<br>Июнь 2013<br>
-													3 месяца
-												</p>
-											</td>
-											<td>
-												<h2>
-													Администрация города<br>г.Кирово-Чепецка
-												</h2>
-												<h3>
-													Практика - помощник Cистемного Администратора
-												</h3>
-												<p>
-													Техническая поддержка, обслуживание оргтехники.
-													<br>(Первый рабочий опыт по специальности)
-												</p>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<p style="text-align:right;"><a href="#qualification" style="text-align:right;">
-									<span style="text-align:right;">Продолжить знакомство</span>
-									<a href="#qualification" class="icon solid fa-long-arrow-alt-right"></a>
-								</a></p>
-							</article>
-						<!-- Qualifications -->
-							<article id="qualification" class="panel">
-							<header>
-								<h2>Квалификация</h2>
-							</header>
-							<p>
-								Повышения квалификации, сертификаты и благодарности
-							</p>
-							<section>
-								<div class="row">
-									
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/tavatui-intensiv.png" class="image fit" target="_blank"><img src="images/tavatui-intensiv.png" alt=""></a>
-										<p>Участник образовательного интенсива "Педагогическая индивидуальность"</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/itcube-tech.png" class="image fit" target="_blank"><img src="images/itcube-tech.png" alt=""></a>
-										<p>Использование современного оборудования в центрах доп.образования IT-Куб</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/kval-math-inform.png" class="image fit" target="_blank"><img src="images/kval-math-inform.png" alt=""></a>
-										<p>Преподавание информатики и математики в условиях цифровизации образования</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/sunc-jury.png" class="image fit" target="_blank"><img src="images/sunc-jury.png" alt=""></a>
-										<p>Благодарственность за оценку работ на фестивале проектов СУНЦ УрФУ</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/diploma-perepodgotovka-pdo.png" class="image fit" target="_blank"><img src="images/diploma-perepodgotovka-pdo.jpg" alt=""></a>
-										<p>Диплом проф.переподготовки на педагога дополнительного оброазования</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/Ya-7fgos.bmp" class="image fit" target="_blank"><img src="images/Ya-7fgos.jpg" alt=""></a>
-										<p>Особенности преподавания информатики в 7 классе по ФГОС третьего поколения</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/Ya-python.jpg" class="image fit"  target="_blank"><img src="images/Ya-python.jpg" alt=""></a>
-										<p>Углубленное программирование на Python для учителей</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/minfin-python.png" class="image fit" target="_blank"><img src="images/minfin-python.jpg" alt=""></a>
-										<p>Использование Python при обучении информатики в условиях обновленных ФГОС</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/iro-ib.bmp" class="image fit"  target="_blank"><img src="images/iro-ib.jpg" alt=""></a>
-										<p>Информационная безопасность</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/iro-kachestvo.bmp" class="image fit" target="_blank"><img src="images/iro-kachestvo.jpg" alt=""></a>
-										<p>Повышение качества обр.результатов по информатике на основе анализа оценочных процедур</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/iro-fgos.bmp" class="image fit" target="_blank"><img src="images/iro-fgos.jpg" alt=""></a>
-										<p>Реализация требований обновленных ФГОС НОО, ФГОС ООО, ФГОС СОО в работе учителя</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/diploma.bmp" class="image fit" target="_blank"><img src="images/diploma.jpg" alt=""></a>
-										<p>Диплом об образовании<br>
-										"Техн. обслуживание вычислительной техники и компьютерных сетей"</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/oni-srazhalis-za-thanks.png" class="image fit" target="_blank"><img src="images/oni-srazhalis-za-thanks.jpg" alt=""></a>
-										<p>Благодарность за сотрудничество и содействие в организации всеросссийского медиапроекта "Они сражались за..." </p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/kvantorium-thanks.bmp" class="image fit" target="_blank"><img src="images/kvantorium-thanks.jpg" alt=""></a>
-										<p>Благодарность за подготовку команды победителей от Кванториума </p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/er-telecom-thanks.png" class="image fit" target="_blank"><img src="images/er-telecom-thanks.png" alt=""></a>
-										<p>Благодарность за отзывчивость и доброжелательность </p>
-									</div>
-									</div>
-							</section>
-							<p style="text-align:right;"><a href="#photos" style="text-align:right;">
-								<span style="text-align:right;">Продолжить знакомство</span>
-								<a href="#photos" class="icon solid fa-long-arrow-alt-right"></a>
-							</a></p>
-							</article>
-						<!-- Photos -->	
-							<article id="photos" class="panel">
-								<header>
-									<h2>Фото</h2>
-								</header>
-								<p>
-									<!-- Описание для фото -->
-								</p>
-								<section>
-									<div class="row">
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/photo__0145_11.09.2023_C1__2250.jpg" class="image fit" target="_blank"><img src="images/pics/photo__0145_11.09.2023_C1__2250.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/photo__0055_11.09.2023_C1__0806.jpg" class="image fit" target="_blank"><img src="images/pics/photo__0055_11.09.2023_C1__0806.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/photo__0011_11.09.2023_C1__0128.jpg" class="image fit" target="_blank"><img src="images/pics/photo__0011_11.09.2023_C1__0128.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/me1.png" class="image fit" target="_blank"><img src="images/pics/me1.png" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/me2.jpg" class="image fit"><img src="images/pics/me2.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/iM6mMNztMM8.jpg" class="image fit"><img src="images/pics/iM6mMNztMM8.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/IMG_20210203_125724.jpg" class="image fit"><img src="images/pics/IMG_20210203_125724.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pics/IMG-20220719-WA0012.jpg" class="image fit"><img src="images/pics/IMG-20220719-WA0012.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="images/pic06.jpg" class="image fit"><img src="images/pic06.jpg" alt=""></a>
-										</div>
-										<!--<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic08.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic09.jpg" alt=""></a>
-										</div>-->
-									</div>
-								</section>
-								<p style="text-align:right;"><a href="#contact" style="text-align:right;">
-									<span style="text-align:right;">Связаться со мной</span>
-									<a href="#contact" class="icon solid fa-long-arrow-alt-right"></a>
-								</a></p>
-							</article>					
-						<!-- Contact -->
-							<article id="contact" class="panel">
-								<header>
-									<h2>Контакты</h2>
-								</header>
-								<p>E-mail: <a href="mailto:timz3m+work@ya.ru">timz3m+work@ya.ru</a></p>
-								<div class="row">
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/qr/vk.jpeg" class="image fit" target="_blank"><img src="images/qr/vk-small.jpg" alt=""></a>
-										<p text-a>Vk / Сферум</p>
-									</div>
-									<div class="col-4 col-6-medium col-12-small">
-										<a href="images/qr/whatsapp.jpeg" class="image fit" target="_blank"><img src="images/qr/whatsapp-small.jpg" alt=""></a>
-										<p text-a>WhatsApp</p>
-									</div>
-									<!-- <div class="col-4 col-6-medium col-12-small">
-										<a href="images/qr/viber.jpeg" class="image fit" target="_blank"><img src="images/qr/viber-small.jpg" alt=""></a>
-										<p text-a>Viber</p>
-									</div>-->
-								<p>Номер телефона можно найти в загружаемом <a href="info/Земцов Тимофей Александрович.pdf"  target="_blank">резюме</a>, а так-же в подписи отправляемых мной писем.
-									<br>Перед звонком прошу предупреждать по почте/смс.</p>
-								<p>Контакты текущих и прошлых работодателей высылаю письмом по требованию.</p>
-								<!-- <form action="#" method="post">
-									<div>
-										<div class="row">
-											<div class="col-6 col-12-medium">
-												<input type="text" name="name" placeholder="Имя" />
-											</div>
-											<div class="col-6 col-12-medium">
-												<input type="text" name="email" placeholder="Почта" />
-											</div>
-											<div class="col-12">
-												<input type="text" name="subject" placeholder="Тема" />
-											</div>
-											<div class="col-12">
-												<textarea name="message" placeholder="Сообщение" rows="6"></textarea>
-											</div>
-											<div class="col-12">
-												<input type="submit" value="Отправить" />
-											</div>
-										</div>
-									</div>
-								</form> -->
-							</article>
+    <!-- Модальное окно для опыта работы (обновленное) -->
+    <div class="modal" id="experienceModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <div class="modal-company-header">
+                <img id="modal-logo" src="" alt="Логотип компании" class="modal-company-logo">
+                <div class="modal-company-info">
+                    <h2 id="modal-company"></h2>
+                    <h3 id="modal-position"></h3>
+                    <p id="modal-period"></p>
+                </div>
+            </div>
+            <div id="modal-description"></div>
+            <div class="modal-logo-grid" id="modal-logos"></div>
+            <a id="modal-link" href="#" target="_blank" class="btn">Сайт компании</a>
+        </div>
+    </div>
 
+    <!-- Навигационные кнопки -->
+    <div class="scroll-nav top">
+        <div class="scroll-btn scroll-up"><i class="fas fa-arrow-up"></i></div>
+        <div class="scroll-btn scroll-down"><i class="fas fa-arrow-down"></i></div>
+    </div>
+    <div class="scroll-nav bottom">
+        <div class="scroll-btn scroll-top"><i class="fas fa-home"></i></div>
+    </div>
 
-					</div>
+    <!-- Разделы сайта -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-img"></div>
+                <h1 class="hero-title">Тимофей Александрович Земцов</h1>
+                <h2 class="hero-subtitle">IT-специалист, Преподаватель</h2>
+                <p>Опыт работы - 11 лет</p>
+                <div class="hero-btns">
+                    <a href="#about" class="btn">Узнать больше</a>
+                    <a href="#contact" class="btn btn-outline">Связаться</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-				<!-- Footer -->
-					<div id="footer">
-						<ul class="copyright">
-							<li>&copy; Земцов Тимофей, Июнь 2025</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</div>
+    <section id="about">
+        <div class="container">
+            <h2>Обо мне</h2>
+            <div class="about-content">
+                <div class="about-content-with-photo">
+                    <div class="about-photo">
+                        <!-- ОБНОВЛЕННЫЙ ПУТЬ К ФОТО -->
+                        <img src="images/pics/msg552260542-14291.jpg" alt="Тимофей Земцов">
+                    </div>
+                    <div class="about-text">
+                        <p>IT-специалист с  опытом работы 10 лет и страстью к преподаванию. <br>Специализируюсь на VR/AR-разработке и системном администрировании.</p>
+                        <p>Преподаю в Центре цифрового образования «IT-Куб»,<br>где помогаю детям 7-17 лет осваивать современные технологии</p>
+                        <p>Постоянно стремлюсь к развитию навыков и компетенций, карьерному росту. </p>
+                    </div>
+                </div>
+                
+                <div class="about-btn-container">
+                    <button class="btn" id="moreAboutBtn">Подробнее</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-			</div>
+    <section id="experience">
+        <div class="container">
+            <h2>Опыт работы</h2>
+            <p>Общий стаж работы - более 11 лет.</p>
+            <div class="timeline">
+                <div class="timeline-year top">2025</div>
+                
+                <!-- IT-Куб -->
+                <div class="timeline-item" data-logo="https://via.placeholder.com/80x80/FF6B35/FFFFFF?text=IT-Куб">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Август 2023 — текущее время (2 года)</span>
+                        <h3>Центр цифрового образования детей «IT-Куб г.Арамиль»</h3>
+                        <h4>Педагог Дополнительного Образования</h4>
+                        <p>Направления: Разработка VR/AR приложений, Проектная Деятельность, Программирование на Python</p>
+                        
+                        <!-- Скрытое подробное описание -->
+                        <div class="full-details" style="display:none;">
+                            <p><strong>Основные обязанности:</strong></p>
+                            <ul>
+                                <li>Разработка образовательных программ по VR/AR технологиям</li>
+                                <li>Обучение школьников программированию на Python</li>
+                                <li>Руководство проектной деятельностью учащихся</li>
+                                <li>Подготовка команд к участию в хакатонах и конкурсах</li>
+                                <li>Организация мастер-классов и открытых уроков</li>
+                            </ul>
+                            <p><strong>Достижения:</strong></p>
+                            <ul>
+                                <li>Подготовил 3 призёров регионального конкурса по программированию</li>
+                                <li>Разработал авторскую методику преподавания VR-технологий</li>
+                                <li>Организовал школьный IT-фестиваль с участием 150+ учеников</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                </div>
+                
+                <!-- Солнечный круг -->
+                <div class="timeline-item" data-logo="https://via.placeholder.com/80x80/FF8C5A/FFFFFF?text=Солнце">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Сентябрь 2024 — текущее время (1 год)</span>
+                        <h3>Частная школа «Солнечный круг»</h3>
+                        <h4>Учитель информатики</h4>
+                        <p>Ведение занятий по компьютерной грамотности и информатике в 3 - 5 классах.</p>
+                        
+                        <div class="full-details" style="display:none;">
+                            <p><strong>Основные обязанности:</strong></p>
+                            <ul>
+                                <li>Разработка учебных программ по информатике для начальной школы</li>
+                                <li>Проведение уроков по основам компьютерной грамотности</li>
+                                <li>Организация внеклассных мероприятий по IT-тематике</li>
+                                <li>Подготовка учащихся к школьным олимпиадам</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                </div>
+                
+                <!-- Школа №5 -->
+                <div class="timeline-item" data-logo="https://via.placeholder.com/80x80/E55A2A/FFFFFF?text=Шк5">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Октябрь 2021 — Август 2023 (1 год 11 месяцев)</span>
+                        <h3>МКОУ СОШ №5 г.Кирово-Чепецка</h3>
+                        <h4>Учитель информатики, Системный Администратор</h4>
+                        <p>Ведение информатики, обслуживание сети, парка компьютерной и орг.техники.</p>
+                        
+                        <div class="full-details" style="display:none;">
+                            <p><strong>Основные обязанности:</strong></p>
+                            <ul>
+                                <li>Преподавание информатики для 8-11 классов</li>
+                                <li>Обслуживание компьютерного парка школы (50+ компьютеров)</li>
+                                <li>Администрирование локальной сети и серверов</li>
+                                <li>Техническая поддержка учителей и администрации</li>
+                                <li>Организация работы компьютерных классов</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                </div>
+                
+                <!-- Суджук -->
+                <div class="timeline-item" data-logo="https://via.placeholder.com/80x80/FF6B35/FFFFFF?text=Судж">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Ноябрь 2020 — Август 2023 (2 года 10 месяцев)</span>
+                        <h3>Торговая марка «Суджук»</h3>
+                        <h4>Системный администратор</h4>
+                        <p>Обслуживание компьютеров, оргтехники, торгового оборудования, сети магазина.</p>
+                        
+                        <div class="full-details" style="display:none;">
+                            <p><strong>Основные обязанности:</strong></p>
+                            <ul>
+                                <li>Обслуживание компьютерной техники в офисе и торговых точках</li>
+                                <li>Поддержка работы торгового оборудования (кассы, сканеры)</li>
+                                <li>Администрирование локальной сети и Wi-Fi</li>
+                                <li>Настройка и поддержка программного обеспечения</li>
+                                <li>Обучение сотрудников работе с техникой</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                </div>
+                
+                <!-- ЭР-Телеком -->
+                <div class="timeline-item" data-logo="https://via.placeholder.com/80x80/FF8C5A/FFFFFF?text=ЭРТ">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Сентябрь 2017 — Сентябрь 2020 (3 года 1 месяц)</span>
+                        <h3>ЭР-Телеком Холдинг</h3>
+                        <h4>Сервисный Инженер</h4>
+                        <p>Предоставление клиентам доступа к услугам связи провайдера Дом.ru.</p>
+                        
+                        <div class="full-details" style="display:none;">
+                            <p><strong>Основные обязанности:</strong></p>
+                            <ul>
+                                <li>Подключение новых клиентов к интернету и ТВ</li>
+                                <li>Обслуживание и ремонт сетевого оборудования</li>
+                                <li>Прокладка и монтаж сетевых кабелей</li>
+                                <li>Консультирование клиентов по вопросам подключения</li>
+                                <li>Решение технических проблем абонентов</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                </div>
+                
+                <!-- Школа №5 -->
+                <div class="timeline-item" data-logo="https://via.placeholder.com/80x80/E55A2A/FFFFFF?text=Шк5">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Сентябрь 2013 — Сентябрь 2017 (4 года 1 месяц)</span>
+                        <h3>МКОУ СОШ №5 г.Кирово-Чепецка</h3>
+                        <h4>Учитель информатики, Техник-Программист</h4>
+                        <p>Ведение информатики, обслуживание сети, парка компьютерной и орг.техники.</p>
+                        
+                        <div class="full-details" style="display:none;">
+                            <p><strong>Основные обязанности:</strong></p>
+                            <ul>
+                                <li>Преподавание информатики для 9-11 классов</li>
+                                <li>Подготовка учащихся к ЕГЭ по информатике</li>
+                                <li>Обслуживание компьютерных классов</li>
+                                <li>Разработка и поддержка школьного сайта</li>
+                                <li>Техническая поддержка учебного процесса</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+                <!-- Администрация города -->
+                <div class="timeline-item" data-logo="https://via.placeholder.com/80x80/FF6B35/FFFFFF?text=Адм">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Апрель 2013 — Июнь 2013 (3 месяца)</span>
+                        <h3>Администрация города г.Кирово-Чепецка</h3>
+                        <h4>Практика - помощник Cистемного Администратора</h4>
+                        <p>Техническая поддержка, обслуживание оргтехники.</p>
+                        
+                        <div class="full-details" style="display:none;">
+                            <p><strong>Основные обязанности:</strong></p>
+                            <ul>
+                                <li>Техническая поддержка сотрудников администрации</li>
+                                <li>Обслуживание оргтехники (принтеры, сканеры)</li>
+                                <li>Установка и настройка программного обеспечения</li>
+                                <li>Помощь в администрировании локальной сети</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-outline timeline-details-btn">Подробнее</button>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                </div>
+                
+                <div class="timeline-year bottom">2013</div>
+            </div>
+        </div>
+    </section>
 
-	</body>
+    <section id="qualification">
+        <div class="container">
+            <h2>Квалификация</h2>
+            <p>Повышения квалификации, сертификаты и благодарности</p>
+            <div class="qualifications-grid">
+                <!-- Образовательные интенсивы -->
+                <div class="qualification-card" data-img="images/tavatui-intensiv.png">
+                    <div class="qualification-img">
+                        <img src="images/tavatui-intensiv.png" alt="Сертификат образовательного интенсива">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Сертификат</span>
+                        <h3 class="qualification-title">Участник образовательного интенсива</h3>
+                        <p>"Педагогическая индивидуальность"</p>
+                    </div>
+                </div>
+                
+                <!-- Повышения квалификации IT-Куб -->
+                <div class="qualification-card" data-img="images/itcube-tech.png">
+                    <div class="qualification-img">
+                        <img src="images/itcube-tech.png" alt="Сертификат IT-Куб">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Использование современного оборудования</h3>
+                        <p>В центрах доп.образования IT-Куб</p>
+                    </div>
+                </div>
+                
+                <!-- Цифровизация образования -->
+                <div class="qualification-card" data-img="images/kval-math-inform.png">
+                    <div class="qualification-img">
+                        <img src="images/kval-math-inform.png" alt="Сертификат цифровизации образования">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Преподавание информатики и математики</h3>
+                        <p>В условиях цифровизации образования</p>
+                    </div>
+                </div>
+                
+                <!-- Благодарности -->
+                <div class="qualification-card" data-img="images/sunc-jury.png">
+                    <div class="qualification-img">
+                        <img src="images/sunc-jury.png" alt="Благодарность СУНЦ УрФУ">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Благодарность</span>
+                        <h3 class="qualification-title">За оценку работ на фестивале проектов</h3>
+                        <p>СУНЦ УрФУ</p>
+                    </div>
+                </div>
+                
+                <!-- Профессиональная переподготовка -->
+                <div class="qualification-card" data-img="images/diploma-perepodgotovka-pdo.jpg">
+                    <div class="qualification-img">
+                        <img src="images/diploma-perepodgotovka-pdo.jpg" alt="Диплом переподготовки">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Диплом переподготовки</span>
+                        <h3 class="qualification-title">Педагог дополнительного образования</h3>
+                        <p>Профессиональная переподготовка</p>
+                    </div>
+                </div>
+                
+                <!-- ФГОС третьего поколения -->
+                <div class="qualification-card" data-img="images/Ya-7fgos.jpg">
+                    <div class="qualification-img">
+                        <img src="images/Ya-7fgos.jpg" alt="Сертификат ФГОС">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Преподавание информатики в 7 классе</h3>
+                        <p>По ФГОС третьего поколения</p>
+                    </div>
+                </div>
+                
+                <!-- Python для учителей -->
+                <div class="qualification-card" data-img="images/Ya-python.jpg">
+                    <div class="qualification-img">
+                        <img src="images/Ya-python.jpg" alt="Сертификат Python">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Углубленное программирование на Python</h3>
+                        <p>Для учителей</p>
+                    </div>
+                </div>
+                
+                <!-- Python и ФГОС -->
+                <div class="qualification-card" data-img="images/minfin-python.jpg">
+                    <div class="qualification-img">
+                        <img src="images/minfin-python.jpg" alt="Сертификат Python ФГОС">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Использование Python при обучении информатики</h3>
+                        <p>В условиях обновленных ФГОС</p>
+                    </div>
+                </div>
+                
+                <!-- Информационная безопасность -->
+                <div class="qualification-card" data-img="images/iro-ib.jpg">
+                    <div class="qualification-img">
+                        <img src="images/iro-ib.jpg" alt="Сертификат информационной безопасности">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Информационная безопасность</h3>
+                        <p>ИРО Кировской области</p>
+                    </div>
+                </div>
+                
+                <!-- Качество образования -->
+                <div class="qualification-card" data-img="images/iro-kachestvo.jpg">
+                    <div class="qualification-img">
+                        <img src="images/iro-kachestvo.jpg" alt="Сертификат качества образования">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Повышение качества образовательных результатов</h3>
+                        <p>По информатике на основе анализа оценочных процедур</p>
+                    </div>
+                </div>
+                
+                <!-- Обновленные ФГОС -->
+                <div class="qualification-card" data-img="images/iro-fgos.jpg">
+                    <div class="qualification-img">
+                        <img src="images/iro-fgos.jpg" alt="Сертификат обновленных ФГОС">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Повышение квалификации</span>
+                        <h3 class="qualification-title">Реализация требований обновленных ФГОС</h3>
+                        <p>НОО, ООО, СОО в работе учителя</p>
+                    </div>
+                </div>
+                
+                <!-- Диплом об образовании -->
+                <div class="qualification-card" data-img="images/diploma.jpg">
+                    <div class="qualification-img">
+                        <img src="images/diploma.jpg" alt="Диплом об образовании">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Диплом об образовании</span>
+                        <h3 class="qualification-title">Техническое обслуживание вычислительной техники</h3>
+                        <p>И компьютерных сетей</p>
+                    </div>
+                </div>
+                
+                <!-- Благодарность "Они сражались за..." -->
+                <div class="qualification-card" data-img="images/oni-srazhalis-za-thanks.jpg">
+                    <div class="qualification-img">
+                        <img src="images/oni-srazhalis-za-thanks.jpg" alt="Благодарность медиапроект">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Благодарность</span>
+                        <h3 class="qualification-title">За сотрудничество в медиапроекте</h3>
+                        <p>Всероссийский проект "Они сражались за..."</p>
+                    </div>
+                </div>
+                
+                <!-- Благодарность от Кванториума -->
+                <div class="qualification-card" data-img="images/kvantorium-thanks.jpg">
+                    <div class="qualification-img">
+                        <img src="images/kvantorium-thanks.jpg" alt="Благодарность Кванториум">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Благодарность</span>
+                        <h3 class="qualification-title">За подготовку команды победителей</h3>
+                        <p>От Кванториума</p>
+                    </div>
+                </div>
+                
+                <!-- Благодарность от ЭР-Телеком -->
+                <div class="qualification-card" data-img="images/er-telecom-thanks.png">
+                    <div class="qualification-img">
+                        <img src="images/er-telecom-thanks.png" alt="Благодарность ЭР-Телеком">
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Благодарность</span>
+                        <h3 class="qualification-title">За отзывчивость и доброжелательность</h3>
+                        <p>ЭР-Телеком Холдинг</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <h2>Успехи учеников</h2>
+            <p>Достижения моих студентов в 2024-2025 учебном году</p>
+            <div class="qualifications-grid">
+                <!-- Серебряные призеры областного конкурса по разработке игр -->
+                <div class="qualification-card" data-img="images/oni-srazhalis-za-thanks.png">
+                    <div class="qualification-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Серебряные призеры</span>
+                        <h3 class="qualification-title">Областной конкурс по разработке игр "ЮнитиДжем"</h3>
+                        <p>г. Верхняя Пышма</p>
+                    </div>
+                </div>
+                
+                <!-- Финалисты всероссийского конкурса -->
+                <div class="qualification-card" data-img="images/kvantorium-thanks.jpg">
+                    <div class="qualification-img">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Финалисты</span>
+                        <h3 class="qualification-title">Конкурс "Культура Сахалинских Корейцев"</h3>
+                        <p>г. Санкт-Петербург</p>
+                    </div>
+                </div>
+                
+                <!-- Серебряные призеры всероссийского хакатона -->
+                <div class="qualification-card" data-img="images/er-telecom-thanks.png">
+                    <div class="qualification-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Серебряные призеры</span>
+                        <h3 class="qualification-title">Хакатон "Обучаюсь. Проектирую. Программирую. Будущее"</h3>
+                        <p>г. Нижний-Новгород</p>
+                    </div>
+                </div>
+                
+                <!-- Финалисты Национальной Технической Олимпиады -->
+                <div class="qualification-card" data-img="images/diploma-perepodgotovka-pdo.jpg">
+                    <div class="qualification-img">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Финалисты</span>
+                        <h3 class="qualification-title">Национальная Техническая Олимпиада (VR разработка)</h3>
+                        <p>г. Москва</p>
+                    </div>
+                </div>
+                
+                <!-- Остальные карточки остаются без изменений -->
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=ProVR">
+                    <div class="qualification-img">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Серебряные призеры</span>
+                        <h3 class="qualification-title">Хакатон "ProVR"</h3>
+                        <p>г. Оренбург</p>
+                    </div>
+                </div>
+                
+                <!-- Особый диплом на VRAR Planet -->
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=VRAR">
+                    <div class="qualification-img">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Особый диплом</span>
+                        <h3 class="qualification-title">Фестиваль "VRAR Planet"</h3>
+                        <p>г. Великий Новгород</p>
+                    </div>
+                </div>
+                
+                <!-- Призеры конкурса по 3D-Моделированию -->
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=3D">
+                    <div class="qualification-img">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Призеры</span>
+                        <h3 class="qualification-title">Конкурс по 3D-Моделированию "Нарядим 3D-Ёлку?"</h3>
+                        <p>г. Санкт-Петербург</p>
+                    </div>
+                </div>
+                
+                <!-- Первое место в конкурсе проектов -->
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=VR-метка">
+                    <div class="qualification-img">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Первое место</span>
+                        <h3 class="qualification-title">Конкурс проектов "VR-метка на карте России"</h3>
+                        <p>г. Санкт-Петербург</p>
+                    </div>
+                </div>
+                
+                <!-- Особый диплом на Техномарте -->
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Техномарт">
+                    <div class="qualification-img">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Особый диплом</span>
+                        <h3 class="qualification-title">Фестиваль "Техномарт", хакатон Play Digital Art</h3>
+                        <p>г. Екатеринбург</p>
+                    </div>
+                </div>
+                
+                <!-- Призеры Varwin Хакатон -->
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Varwin">
+                    <div class="qualification-img">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Серебряные призеры</span>
+                        <h3 class="qualification-title">Хакатон "Varwin Хакатон 2025"</h3>
+                        <p>г. Санкт-Петербург</p>
+                    </div>
+                </div>
+                
+                <!-- Победители Проекторий -->
+                <div class="qualification-card" data-img="https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Проекторий">
+                    <div class="qualification-img">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="qualification-content">
+                        <span class="qualification-type">Первое и второе место</span>
+                        <h3 class="qualification-title">Конкурс итоговых проектов "Проекторий"</h3>
+                        <p>г. Арамиль</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2>Портфолио проектов</h2>
+            <div class="portfolio-grid">
+                <!-- Игра "Машина Будущего" -->
+                <div class="portfolio-item" data-title="Машина Будущего" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+2"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Машина Будущего</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Игра • Unity</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Игра "Лабиринт Осознания" -->
+                <div class="portfolio-item" data-title="Лабиринт Осознания" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+2"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Лабиринт Осознания</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Игра • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Игра "Survivor on the Island" -->
+                <div class="portfolio-item" data-title="Survivor on the Island" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+2"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Survivor on the Island</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Игра • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Симулятор "Приготовление Кимчхи" -->
+                <div class="portfolio-item" data-title="Приготовление Кимчхи" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Приготовление Кимчхи</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Симулятор • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Приложение "Дивизион Двигатели УЗГА" -->
+                <div class="portfolio-item" data-title="Дивизион Двигатели УЗГА" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Дивизион Двигатели УЗГА</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Приложение • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Симулятор "Сборка ПК" -->
+                <div class="portfolio-item" data-title="Сборка ПК" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Сборка ПК</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Симулятор • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Симулятор "Визит на Оренскуф" -->
+                <div class="portfolio-item" data-title="Визит на Оренскуф" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Визит на Оренскуф</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Симулятор • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Экскурсия "Музей VR техники" -->
+                <div class="portfolio-item" data-title="Музей VR техники" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Музей VR техники</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Экскурсия • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Приложение "Экскурсия по набережной г.Арамиль" -->
+                <div class="portfolio-item" data-title="Экскурсия по набережной г.Арамиль" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Экскурсия по набережной г.Арамиль</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Приложение • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+
+                <!-- Приложение "Дом Мечты" -->
+                <div class="portfolio-item" data-title="MakeDream. Построй дом мечты" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">MakeDream. Построй дом мечты</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Приложение • Unity</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Игра "Знакомство с БПЛА" -->
+                <div class="portfolio-item" data-title="Знакомство с БПЛА" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Знакомство с БПЛА</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Игра • Unity</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Экскурсия "Экскурсия Артек, корпус Хрустальный" -->
+                <div class="portfolio-item" data-title="Экскурсия Артек, корпус Хрустальный" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Экскурсия Артек, корпус Хрустальный</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Экскурсия • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Экскурсия "Музей музыкальных инструментов" -->
+                <div class="portfolio-item" data-title="Музей музыкальных инструментов" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Музей музыкальных инструментов</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Экскурсия • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Приложение "Зубные заболевания AR" -->
+                <div class="portfolio-item" data-title="Зубные заболевания AR" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Зубные заболевания AR</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Приложение • Varwin</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Визуальная новелла "Записки Героя Ленинграда" -->
+                <div class="portfolio-item" data-title="Записки Героя Ленинграда" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Записки Героя Ленинграда</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Визуальная новелла • Unity</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Приложение "Экскурсия по ЕТХМ" -->
+                <div class="portfolio-item" data-title="Экскурсия по ЕТХМ" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Экскурсия по ЕТХМ</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Приложение • Unity</span>
+                        </div>
+                        <p>Дописать описание</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+                
+                <!-- Проект "Благоустройство Пустыря за ЦЦОД IT-Куб г.Арамиль" -->
+                <div class="portfolio-item" data-title="Благоустройство Пустыря за ЦЦОД IT-Куб г.Арамиль" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+                    <div class="portfolio-img">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Благоустройство Пустыря за ЦЦОД IT-Куб г.Арамиль</h3>
+                        <div class="portfolio-info">
+                            <span class="portfolio-place">Проект • Unity</span>
+                        </div>
+                        <p>Возрождение парка Голубкина</p>
+                        <button class="btn btn-outline demo-btn" style="margin-top: 15px; width: 100%;">Демонстрация</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел Фото (обновленный) -->
+<section id="photos">
+    <div class="container">
+        <h2>Фотогалерея</h2>
+        <p>Моменты из моей преподавательской деятельности и проектов</p>
+        <div class="photo-carousel">
+            <div class="carousel-container" id="photoCarousel">
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/photo__0145_11.09.2023_C1__2250.jpg" alt="Занятие по программированию">
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/photo__0055_11.09.2023_C1__0806.jpg" alt="Хакатон с учащимися">
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/photo__0011_11.09.2023_C1__0128.jpg" alt="Защита проектов">
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/me1.png" alt="Мастер-класс по VR">
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/me2.jpg" alt="Работа с учениками">
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/iM6mMNztMM8.jpg" alt="Презентация проекта">
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/IMG_20210203_125724.jpg" alt="Командная работа">
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-img">
+                        <img src="images/pics/IMG-20220719-WA0012.jpg" alt="Успешная защита">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Управление каруселью -->
+            <div class="carousel-controls">
+                <button class="carousel-btn prev-photo-btn" aria-label="Предыдущее фото">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next-photo-btn" aria-label="Следующее фото">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Индикаторы -->
+            <div class="carousel-indicators" id="photoIndicators">
+                <!-- Индикаторы добавляются через JS -->
+            </div>
+            
+            <!-- Счетчик и прогресс-бар добавляются через JS -->
+        </div>
+    </div>
+</section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-name">WhatsApp</div>
+                    <a href="https://wa.me/79127210890" class="contact-link" target="_blank" >Написать</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-telegram" target="_blank" ></i>
+                    </div>
+                    <div class="contact-name">Telegram</div>
+                    <a href="https://t.me/timzboi" class="contact-link" target="_blank" >Написать</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-vk"></i>
+                    </div>
+                    <div class="contact-name">VK</div>
+                    <a href="https://vk.com/timofey_zemtsov" class="contact-link" target="_blank" >Перейти</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="contact-name">Сферум</div>
+                    <a href="https://web.vk.me/convo/713877179" class="contact-link" target="_blank" >Перейти</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-name">Email</div>
+                    <a href="mailto:timz3m+work@ya.ru" class="contact-link" target="_blank" >Написать</a>
+                </div>
+            </div>
+            <p style="margin-top: 30px; text-align: center;">
+                Номер телефона можно найти в загружаемом <a href="info/Земцов Тимофей Александрович.pdf" target="_blank">резюме</a>
+            </p>
+        </div>
+    </section>
+
+    <section id="resume">
+        <div class="container" style="text-align: center;">
+            <h2>Резюме</h2>
+            <p style="max-width: 700px; margin: 0 auto 30px;">Вы можете скачать мое подробное резюме в формате PDF, чтобы ознакомиться с полной информацией о моем профессиональном опыте, навыках и достижениях.</p>
+            <a href="info/Земцов Тимофей Александрович.pdf" target="_blank" class="btn"><i class="fas fa-download"></i> Скачать резюме</a>
+        </div>
+    </section>
+
+    <!-- Модальное окно "Подробнее" -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h2>Подробная информация</h2>
+            <ul class="modal-list">
+                <li>
+                    <i class="fas fa-laptop-code"></i>
+                    <div>
+                        <strong>Преподавание</strong><br>
+                        Успешно преподаю навыки IT-сферы - программирование Python и C#, логика и алгоритмика, 3D моделирование в Blender и разработку в игровом движке Unity, компьютерные сети и комплектующие, микросхемотехника. Подготовка к ОГЭ и ЕГЭ по информатике.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <strong>Проектная Деятельность</strong><br>
+                        Обучаю навыкам проектной деятельности - концептуальное оформление, разработку, работе в команде, питчинг и защита проектов.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-language"></i>
+                    <div>
+                        <strong>Английский язык</strong><br>
+                        Уровень C1 - профессиональные знания, переговоры, чтение и перевод технической и художественной литературы, отлично понимаю на слух.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <strong>Работа с людьми</strong><br>
+                        Развиты навыки общения с людьми разных возрастных групп и обучение навыкам использования современными компьютерными устройствами и гаджетами.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-child"></i>
+                    <div>
+                        <strong>Работа с детьми и подростками</strong><br>
+                        Хорошо работаю с детьми и подростками, нахожу с ними общий язык. Хорошо веду работу над мотивацией учащихся, создаю активные коллективы и волонтерские группы.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-video"></i>
+                    <div>
+                        <strong>Видеомонтаж и обработка изображений</strong><br>
+                        Навыки видеомонтажа (Adobe Premiere до '21, начиная с 2021 DaVinci Resolve), редактирования и ретуши изображений (Adobe Photoshop).
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-laptop"></i>
+                    <div>
+                        <strong>Офисные программы</strong><br>
+                        Профессиональное владение офисными пакетами Office – Excel, Word, etc. Быстрое усваивание новых программ.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-brain"></i>
+                    <div>
+                        <strong>Интересы</strong><br>
+                        Интересуюсь аналитикой данных, статистикой, подсчётами. Активно использую генеративные ИИ для оформления ресурсов и автоматизации рутинных задач.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-hiking"></i>
+                    <div>
+                        <strong>Увлечения</strong><br>
+                        Велоспорт, туризм, посткроссинг, киноиндустрия, современные технологии и гаджеты, английский язык.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-car"></i>
+                    <div>
+                        <strong>Автомобиль</strong><br>
+                        Имеется личный автомобиль, категория B.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Готовность к работе</strong><br>
+                        Открыт к предложениям по удаленной работе, а так-же совместительству в г.Екатеринбург и в Сысертским/Белоярском районах (Челябинский/Тюменский тракт).
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Земцов<br>Тимофей<br>Александрович</div>
+                <p>IT-специалист, Преподаватель</p>
+                
+                <div class="social-links">
+                    <a href="https://vk.com/timofey_zemtsov" target="_blank" ><i class="fab fa-vk"></i></a>
+                    <a href="https://t.me/timzboi"><i class="fab fa-telegram" target="_blank" ></i></a>
+                    <a href="mailto:timz3m+work@ya.ru"><i class="fas fa-envelope" target="_blank" ></i></a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2025 Земцов Тимофей. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
