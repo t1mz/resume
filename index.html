@@ -39,6 +39,28 @@
 
 
 <body>
+
+    <div id="preloader" class="search-preloader">
+        <div class="particles" id="particles"></div>
+        
+        <div class="search-title" id="searchTitle">Загрузка...</div>
+        
+        <div class="progress-circle-container">
+            <svg class="progress-svg" viewBox="0 0 140 140">
+                <circle class="progress-bg" cx="70" cy="70" r="65"></circle>
+                <circle class="progress-fill" id="progressCircle" cx="70" cy="70" r="65"></circle>
+            </svg>
+            <div class="progress-percent" id="progressPercent">0%</div>
+        </div>
+        
+        <div class="search-status" id="searchStatus">Инициализация<span class="search-dots"></span></div>
+        <div class="search-details" id="searchDetails">Проверка системы...</div>
+        
+        <div class="found-message" id="foundMessage">✅ Специалист найден!</div>
+        <div class="specialist-name" id="specialistName">Встречайте...</div>
+    </div>
+
+
     <!-- Шапка сайта с навигацией -->
     <header>
         <div class="container header-container">

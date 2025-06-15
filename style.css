@@ -2852,3 +2852,286 @@ body * {
 .btn {
     /* Эти элементы сохраняют свои цвета */
 }
+
+/* ПРЕЛОАДЕР */
+.search-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-preloader::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    opacity: 0;
+    transition: opacity 2s ease;
+    z-index: -1;
+}
+
+.search-preloader.almost-done::before {
+    opacity: 1;
+}
+
+.search-preloader::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    z-index: -1;
+}
+
+.search-preloader.final-transition::after {
+    opacity: 1;
+}
+
+.search-preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+.search-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    text-align: center;
+}
+
+.progress-circle-container {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+.progress-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 8;
+}
+
+.progress-fill {
+    fill: none;
+    stroke: #3498db;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 408;
+    stroke-dashoffset: 408;
+    transition: stroke 0.5s ease;
+}
+
+.search-preloader.found-phase .progress-fill {
+    stroke: #ffffff;
+}
+
+.progress-percent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    font-weight: bold;
+    color: #3498db;
+    transition: color 0.5s ease;
+}
+
+.search-preloader.found-phase .progress-percent {
+    color: white;
+}
+
+.search-status {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.6s forwards;
+    text-align: center;
+    min-height: 25px;
+}
+
+.search-dots {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.9s forwards;
+}
+
+.search-dots::after {
+    content: '';
+    animation: searchDots 1.5s infinite;
+}
+
+@keyframes searchDots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+.search-details {
+    font-size: 14px;
+    opacity: 0.7;
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 1.2s forwards;
+    min-height: 20px;
+}
+
+.found-message {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.found-message.show {
+    animation: foundAnimation 1.2s ease forwards;
+}
+
+.specialist-name {
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.specialist-name.show {
+    animation: specialistReveal 1s ease 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes foundAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes specialistReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.particles.show {
+    opacity: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    animation: particleFloat 3s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-200px) scale(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .search-title {
+        font-size: 24px;
+    }
+    
+    .progress-circle-container {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .progress-percent {
+        font-size: 28px;
+    }
+    
+    .found-message {
+        font-size: 28px;
+    }
+    
+    .specialist-name {
+        font-size: 36px;
+    }
+    
+    .search-status {
+        font-size: 16px;
+    }
+    
+    .search-details {
+        font-size: 12px;
+    }
+}

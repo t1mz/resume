@@ -1911,3 +1911,122 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         diagnoseThemeIssues();
     }, 2000);
 }
+
+/* ПРЕЛОАДЕР */
+window.addEventListener('load', function() {
+    document.body.style.overflow = 'hidden';
+    setTimeout(startSearchPreloader, 100);
+});
+
+function startSearchPreloader() {
+    const progressCircle = document.getElementById('progressCircle');
+    const progressPercent = document.getElementById('progressPercent');
+    const searchTitle = document.getElementById('searchTitle');
+    const searchStatus = document.getElementById('searchStatus');
+    const searchDetails = document.getElementById('searchDetails');
+    const foundMessage = document.getElementById('foundMessage');
+    const specialistName = document.getElementById('specialistName');
+    const preloader = document.getElementById('preloader');
+    
+    if (!preloader) return;
+    
+    let progress = 0;
+    const circumference = 2 * Math.PI * 65;
+    
+    searchTitle.textContent = 'Загрузка...';
+    searchStatus.innerHTML = 'Поиск IT-специалистов<span class="search-dots"></span>';
+    
+    const phases = [
+        { progress: 15, detail: 'Сканирование профилей...' },
+        { progress: 30, detail: 'Анализ навыков...' },
+        { progress: 50, detail: 'Анализ компетенций...' },
+        { progress: 70, detail: 'Проверка опыта...' },
+        { progress: 85, detail: 'Оценка стажа работы...' },
+        { progress: 100, detail: 'Анализ достижений...' }
+    ];
+    
+    let currentPhase = 0;
+    let detailsList = [];
+    
+    const interval = setInterval(() => {
+        progress += Math.random() * 1.5 + 0.8;
+        
+        if (progress >= 90 && !preloader.classList.contains('almost-done')) {
+            preloader.classList.add('almost-done');
+        }
+        
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            showFoundSpecialist();
+        }
+        
+        const offset = circumference - (progress / 100) * circumference;
+        progressCircle.style.strokeDashoffset = offset;
+        progressPercent.textContent = Math.round(progress) + '%';
+        
+        if (currentPhase < phases.length && progress >= phases[currentPhase].progress) {
+            const phase = phases[currentPhase];
+            detailsList.push(phase.detail);
+            searchDetails.innerHTML = detailsList.join('<br>');
+            currentPhase++;
+        }
+        
+    }, 100);
+    
+    function showFoundSpecialist() {
+        setTimeout(() => {
+            searchTitle.textContent = 'Готово!';
+            searchStatus.innerHTML = 'Идеальное совпадение!';
+            searchDetails.style.display = 'none';
+            
+            setTimeout(() => {
+                foundMessage.classList.add('show');
+                
+                setTimeout(() => {
+                    specialistName.classList.add('show');
+                    createParticles();
+                    
+                    setTimeout(() => {
+                        preloader.classList.add('hidden');
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                        document.body.style.overflow = 'auto';
+                        
+                        setTimeout(() => {
+                            if (preloader.parentNode) {
+                                preloader.parentNode.removeChild(preloader);
+                            }
+                        }, 1200);
+                    }, 1000);
+                }, 600);
+                
+            }, 100);
+        }, 200);
+    }
+    
+    function createParticles() {
+        const particles = document.getElementById('particles');
+        if (!particles) return;
+        
+        particles.classList.add('show');
+        
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particles.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 3000);
+            }, i * 100);
+        }
+    }
+}
