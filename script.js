@@ -12,20 +12,18 @@ const moreAboutBtn = document.getElementById('moreAboutBtn');
 const aboutModal = document.getElementById('aboutModal');
 const closeModalBtn = document.querySelector('.close-modal');
 
-// РАЗДЕЛЯЕМ LIGHTBOX И ГАЛЕРЕЮ
+// ИСПРАВЛЕНО: Правильное объявление переменных lightbox
 const lightbox = document.getElementById('galleryLightbox');
-const lightboxImg = lightbox.querySelector('img');
+// УБИРАЕМ статическую ссылку на изображение - будем получать динамически
 const closeLightbox = document.querySelector('.close-lightbox');
 const qualificationCards = document.querySelectorAll('.qualification-card');
 
+// ИСПРАВЛЕНО: Правильное объявление переменных карусели проектов
 const projectCarouselModal = document.getElementById('projectCarouselModal');
+const closeProjectModal = projectCarouselModal?.querySelector('.close-modal');
 const projectCarousel = document.getElementById('projectCarousel');
-const projectTitle = document.getElementById('projectTitle');
-const demoBtns = document.querySelectorAll('.demo-btn');
-const closeProjectModal = projectCarouselModal.querySelector('.close-modal');
 const prevProjectBtn = document.querySelector('.prev-project-btn');
 const nextProjectBtn = document.querySelector('.next-project-btn');
-
 
 // Карусель фото
 const photoCarousel = document.getElementById('photoCarousel');
@@ -37,7 +35,7 @@ const nextGalleryBtn = document.querySelector('.next-gallery-btn');
 
 // Текущий активный раздел
 let currentSection = 0;
-let currentProjectIndex = 0;
+let currentProjectIndex = 0; // ИСПРАВЛЕНО: Только одно объявление
 let currentProjectSlides = [];
 let currentPhotoIndex = 0;
 let currentGalleryIndex = 0;
@@ -79,71 +77,91 @@ function updateActiveNav(targetId) {
     });
 }
 
+// ИСПРАВЛЕНО: Проверяем существование элементов перед добавлением обработчиков
 // Открытие/закрытие мобильного меню
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.add('active');
-    overlay.classList.add('active');
-});
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+        overlay.classList.add('active');
+    });
+}
 
-closeMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.remove('active');
-    overlay.classList.remove('active');
-});
+if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+}
 
-overlay.addEventListener('click', () => {
-    mobileMenu.classList.remove('active');
-    overlay.classList.remove('active');
-});
+if (overlay) {
+    overlay.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+}
 
 // Открытие/закрытие модального окна "Подробнее"
-moreAboutBtn.addEventListener('click', () => {
-    aboutModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-});
+if (moreAboutBtn && aboutModal) {
+    moreAboutBtn.addEventListener('click', () => {
+        aboutModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+}
 
-closeModalBtn.addEventListener('click', () => {
-    aboutModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
+if (closeModalBtn && aboutModal) {
+    closeModalBtn.addEventListener('click', () => {
+        aboutModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
 
 // Закрытие модального окна при клике вне его
 window.addEventListener('click', (e) => {
-    if (e.target === aboutModal) {
+    if (aboutModal && e.target === aboutModal) {
         aboutModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
 });
 
+// ИСПРАВЛЕНО: Проверяем существование кнопок навигации
 // Навигация по разделам кнопками вверх/вниз
-scrollUpBtn.addEventListener('click', () => {
-    if (currentSection > 0) {
-        currentSection--;
-        scrollToSection(currentSection);
-    }
-});
+if (scrollUpBtn) {
+    scrollUpBtn.addEventListener('click', () => {
+        if (currentSection > 0) {
+            currentSection--;
+            scrollToSection(currentSection);
+        }
+    });
+}
 
-scrollDownBtn.addEventListener('click', () => {
-    if (currentSection < sections.length - 1) {
-        currentSection++;
-        scrollToSection(currentSection);
-    }
-});
+if (scrollDownBtn) {
+    scrollDownBtn.addEventListener('click', () => {
+        if (currentSection < sections.length - 1) {
+            currentSection++;
+            scrollToSection(currentSection);
+        }
+    });
+}
 
-scrollTopBtn.addEventListener('click', () => {
-    currentSection = 0;
-    scrollToSection(currentSection);
-});
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+        currentSection = 0;
+        scrollToSection(currentSection);
+    });
+}
 
 // Плавная прокрутка к разделу
 function scrollToSection(index) {
-    window.scrollTo({
-        top: sections[index].offsetTop,
-        behavior: 'smooth'
-    });
-    
-    // Обновление активного пункта меню
-    const targetId = `#${sections[index].id}`;
-    updateActiveNav(targetId);
+    if (sections[index]) {
+        window.scrollTo({
+            top: sections[index].offsetTop,
+            behavior: 'smooth'
+        });
+        
+        // Обновление активного пункта меню
+        const targetId = `#${sections[index].id}`;
+        updateActiveNav(targetId);
+    }
 }
 
 // Определение текущего раздела при прокрутке
@@ -174,346 +192,16 @@ window.addEventListener('scroll', () => {
 
 // ========== ИСПРАВЛЕНИЕ: РАЗДЕЛЕНИЕ LIGHTBOX И ГАЛЕРЕИ ==========
 
-// Простой lightbox для документов (квалификация/успехи) - БЕЗ КАРУСЕЛИ
-qualificationCards.forEach(card => {
-    card.addEventListener('click', () => {
-        const imgSrc = card.getAttribute('data-img');
-        
-        // СКРЫВАЕМ КНОПКИ НАВИГАЦИИ ДЛЯ ДОКУМЕНТОВ
-        const lightboxNav = lightbox.querySelector('.lightbox-nav');
-        lightboxNav.style.display = 'none';
-        
-        lightboxImg.src = imgSrc;
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    });
-});
-
-// Карусель проектов
-demoBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-        const portfolioItem = this.closest('.portfolio-item');
-        const title = portfolioItem.getAttribute('data-title');
-        const images = JSON.parse(portfolioItem.getAttribute('data-imgs'));
-        
-        projectTitle.textContent = title;
-        projectCarousel.innerHTML = '';
-        
-        images.forEach(img => {
-            const slide = document.createElement('div');
-            slide.className = 'project-slide';
-            slide.innerHTML = `<img src="${img}" alt="${title}">`;
-            projectCarousel.appendChild(slide);
-        });
-        
-        currentProjectIndex = 0;
-        updateProjectCarousel();
-        
-        projectCarouselModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    });
-});
-
-// Закрытие модального окна проектов
-closeProjectModal.addEventListener('click', () => {
-    projectCarouselModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
-
-projectCarouselModal.addEventListener('click', (e) => {
-    if (e.target === projectCarouselModal) {
-        projectCarouselModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Навигация по карусели проектов
-prevProjectBtn.addEventListener('click', () => {
-    currentProjectIndex = (currentProjectIndex - 1 + projectCarousel.children.length) % projectCarousel.children.length;
-    updateProjectCarousel();
-});
-
-nextProjectBtn.addEventListener('click', () => {
-    currentProjectIndex = (currentProjectIndex + 1) % projectCarousel.children.length;
-    updateProjectCarousel();
-});
-
-function updateProjectCarousel() {
-    projectCarousel.style.transform = `translateX(-${currentProjectIndex * 100}%)`;
-}
-
-
-
-// ========== КАРУСЕЛЬ ФОТОГАЛЕРЕИ (ТОЛЬКО ДЛЯ РАЗДЕЛА ФОТО) ==========
-function initPhotoCarousel() {
-    const slides = photoCarousel.querySelectorAll('.carousel-slide');
-    
-    // Создаем индикаторы
-    photoIndicators.innerHTML = '';
-    slides.forEach((slide, index) => {
-        const indicator = document.createElement('div');
-        indicator.className = 'carousel-indicator';
-        if (index === 0) indicator.classList.add('active');
-        indicator.addEventListener('click', () => {
-            currentPhotoIndex = index;
-            updatePhotoCarousel();
-        });
-        photoIndicators.appendChild(indicator);
-    });
-    
-    // Обновление карусели
-    function updatePhotoCarousel() {
-        photoCarousel.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
-        
-        // Обновляем активный индикатор
-        document.querySelectorAll('.carousel-indicator').forEach((indicator, i) => {
-            if (i === currentPhotoIndex) {
-                indicator.classList.add('active');
-            } else {
-                indicator.classList.remove('active');
-            }
-        });
-    }
-    
-    // Кнопки навигации
-    prevPhotoBtn.addEventListener('click', () => {
-        currentPhotoIndex = (currentPhotoIndex - 1 + slides.length) % slides.length;
-        updatePhotoCarousel();
-        resetPhotoInterval();
-    });
-    
-    nextPhotoBtn.addEventListener('click', () => {
-        currentPhotoIndex = (currentPhotoIndex + 1) % slides.length;
-        updatePhotoCarousel();
-        resetPhotoInterval();
-    });
-    
-    // Автоматическая прокрутка
-    function startPhotoInterval() {
-        photoInterval = setInterval(() => {
-            currentPhotoIndex = (currentPhotoIndex + 1) % slides.length;
-            updatePhotoCarousel();
-        }, 5000);
-    }
-    
-    function resetPhotoInterval() {
-        clearInterval(photoInterval);
-        startPhotoInterval();
-    }
-    
-    // Запускаем автоматическую прокрутку
-    startPhotoInterval();
-}
-
-// ========== ГАЛЕРЕЯ ФОТОГРАФИЙ (ПРИ КЛИКЕ НА ФОТО) ==========
-function initGallery() {
-    // ТОЛЬКО изображения из фотогалереи, НЕ из других разделов
-    const carouselImages = document.querySelectorAll('#photos .carousel-img img');
-    galleryImages = Array.from(carouselImages).map(img => img.src);
-    
-    // Добавляем обработчики клика ТОЛЬКО на изображения в фотогалерее
-    carouselImages.forEach((img, index) => {
-        img.addEventListener('click', () => {
-            currentGalleryIndex = index;
-            openPhotoGallery();
-        });
-    });
-}
-
-// Открытие галереи ФОТОГРАФИЙ (с навигацией)
-function openPhotoGallery() {
-    // ПОКАЗЫВАЕМ кнопки навигации для фотогалереи
-    const lightboxNav = lightbox.querySelector('.lightbox-nav');
-    lightboxNav.style.display = 'flex';
-    
-    lightboxImg.src = galleryImages[currentGalleryIndex];
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-// Закрытие галереи
-function closeGallery() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Навигация по фотогалерее
-function prevGalleryImage() {
-    if (galleryImages.length > 0) {
-        currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
-        lightboxImg.src = galleryImages[currentGalleryIndex];
-    }
-}
-
-function nextGalleryImage() {
-    if (galleryImages.length > 0) {
-        currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
-        lightboxImg.src = galleryImages[currentGalleryIndex];
-    }
-}
-
-// Обработчики событий для галереи
-prevGalleryBtn.addEventListener('click', prevGalleryImage);
-nextGalleryBtn.addEventListener('click', nextGalleryImage);
-closeLightbox.addEventListener('click', closeGallery);
-lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-        closeGallery();
-    }
-});
-
-// Обработка клавиатуры для галереи
-document.addEventListener('keydown', (e) => {
-    if (lightbox.style.display === 'flex') {
-        // Навигация только если открыта фотогалерея (есть кнопки навигации)
-        const lightboxNav = lightbox.querySelector('.lightbox-nav');
-        const navVisible = lightboxNav.style.display !== 'none';
-        
-        if (navVisible) {
-            if (e.key === 'ArrowLeft') {
-                prevGalleryImage();
-            } else if (e.key === 'ArrowRight') {
-                nextGalleryImage();
-            }
-        }
-        
-        if (e.key === 'Escape') {
-            closeGallery();
-        }
-    }
-});
-
-// Инициализация активного пункта меню
-updateActiveNav('#home');
-
-// Анимированный фон
-document.addEventListener('scroll', function() {
-    const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    const hue = 20 + scrollPercentage * 20;
-    document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 95%) 0%, hsl(${hue + 20}, 100%, 90%) 100%)`;
-});
-
-// Инициализация карусели фото и галереи после загрузки страницы
-document.addEventListener('DOMContentLoaded', () => {
-    initPhotoCarousel();
-    initGallery();
-});
-// ========== ДОБАВЬТЕ ЭТИ ФУНКЦИИ В КОНЕЦ ФАЙЛА ==========
-
-// Создание счетчика фотографий
-function createPhotoCounter(total) {
-    const existingCounter = document.querySelector('.photo-counter');
-    if (existingCounter) existingCounter.remove();
-    
-    const counter = document.createElement('div');
-    counter.className = 'photo-counter';
-    counter.textContent = `1 / ${total}`;
-    document.querySelector('.photo-carousel').appendChild(counter);
-}
-
-// Обновление счетчика
-function updatePhotoCounter() {
-    const counter = document.querySelector('.photo-counter');
-    const total = photoCarousel.querySelectorAll('.carousel-slide').length;
-    if (counter) {
-        counter.textContent = `${currentPhotoIndex + 1} / ${total}`;
-    }
-}
-
-// Создание прогресс-бара
-function createProgressBar() {
-    const existingProgress = document.querySelector('.carousel-progress');
-    if (existingProgress) existingProgress.remove();
-    
-    const progressBar = document.createElement('div');
-    progressBar.className = 'carousel-progress';
-    progressBar.style.width = '0%';
-    document.querySelector('.photo-carousel').appendChild(progressBar);
-}
-
-// Обновление прогресс-бара
-function updateProgressBar(progress) {
-    const progressBar = document.querySelector('.carousel-progress');
-    if (progressBar) {
-        progressBar.style.width = `${progress}%`;
-    }
-}
-
-// Инициализация превью соседних фотографий
-function initPhotoPreview() {
-    const slides = photoCarousel.querySelectorAll('.carousel-slide');
-    
-    slides.forEach((slide, index) => {
-        const img = slide.querySelector('img');
-        if (!img) return;
-        
-        slide.setAttribute('data-index', index);
-    });
-}
-
-// Обновление превью соседних фотографий
-function updatePhotoPreview() {
-    const slides = photoCarousel.querySelectorAll('.carousel-slide');
-    const totalSlides = slides.length;
-    
-    if (totalSlides <= 1) return;
-    
-    const currentSlide = slides[currentPhotoIndex];
-    const prevIndex = (currentPhotoIndex - 1 + totalSlides) % totalSlides;
-    const nextIndex = (currentPhotoIndex + 1) % totalSlides;
-    
-    const prevImg = slides[prevIndex]?.querySelector('img');
-    const nextImg = slides[nextIndex]?.querySelector('img');
-    
-    // Очищаем все превью
-    slides.forEach(slide => {
-        slide.classList.remove('active');
-    });
-    
-    // Устанавливаем текущий слайд как активный
-    currentSlide.classList.add('active');
-    
-    // Устанавливаем фоновые изображения для превью
-    if (prevImg && nextImg) {
-        updatePreviewStyles(prevImg.src, nextImg.src);
-    }
-}
-
-// Обновление стилей превью
-function updatePreviewStyles(prevImgSrc, nextImgSrc) {
-    // Удаляем предыдущие стили
-    const existingStyle = document.getElementById('dynamic-preview-styles');
-    if (existingStyle) existingStyle.remove();
-    
-    // Создаем новые стили
-    const style = document.createElement('style');
-    style.id = 'dynamic-preview-styles';
-    style.textContent = `
-        .carousel-slide.active::before {
-            background-image: url("${prevImgSrc}");
-            background-size: cover;
-            background-position: center;
-        }
-        .carousel-slide.active::after {
-            background-image: url("${nextImgSrc}");
-            background-size: cover;
-            background-position: center;
-        }
-    `;
-    document.head.appendChild(style);
-}
-// ========== ИСПРАВЛЕННЫЙ LIGHTBOX ДЛЯ ДОКУМЕНТОВ С ЗУМОМ ==========
-
-// ========== ИСПРАВЛЕННЫЙ LIGHTBOX ДЛЯ ДОКУМЕНТОВ С ЗУМОМ ==========
-
-// Простой lightbox для документов (квалификация/успехи) - БЕЗ КАРУСЕЛИ, НО С ЗУМОМ
+// ВОССТАНОВЛЕНО: Lightbox для документов с зумом и загрузкой
 qualificationCards.forEach(card => {
     card.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
         const imgSrc = card.getAttribute('data-img');
-        const title = card.querySelector('.qualification-title').textContent;
+        const title = card.querySelector('.qualification-title')?.textContent || 'Документ';
+        
+        if (!imgSrc || !lightbox) return;
         
         console.log('Открываем документ:', imgSrc, title); // Для отладки
         
@@ -523,9 +211,11 @@ qualificationCards.forEach(card => {
             lightboxNav.style.display = 'none';
         }
         
-        // Получаем правильный элемент изображения
+        // ИСПРАВЛЕНО: Получаем актуальную ссылку на изображение
         const lightboxContent = lightbox.querySelector('.lightbox-content');
         const currentLightboxImg = lightboxContent.querySelector('img');
+        
+        if (!currentLightboxImg) return;
         
         // Устанавливаем изображение
         currentLightboxImg.src = imgSrc;
@@ -553,6 +243,217 @@ qualificationCards.forEach(card => {
         addZoomHandler(currentLightboxImg);
     });
 });
+
+// ИСПРАВЛЕНО: Проверяем существование элементов карусели проектов
+// Закрытие модального окна проектов
+if (closeProjectModal && projectCarouselModal) {
+    closeProjectModal.addEventListener('click', () => {
+        projectCarouselModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
+
+if (projectCarouselModal) {
+    projectCarouselModal.addEventListener('click', (e) => {
+        if (e.target === projectCarouselModal) {
+            projectCarouselModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
+// Навигация по карусели проектов
+if (prevProjectBtn) {
+    prevProjectBtn.addEventListener('click', () => {
+        if (projectCarousel && projectCarousel.children.length > 0) {
+            currentProjectIndex = (currentProjectIndex - 1 + projectCarousel.children.length) % projectCarousel.children.length;
+            updateProjectCarousel();
+        }
+    });
+}
+
+if (nextProjectBtn) {
+    nextProjectBtn.addEventListener('click', () => {
+        if (projectCarousel && projectCarousel.children.length > 0) {
+            currentProjectIndex = (currentProjectIndex + 1) % projectCarousel.children.length;
+            updateProjectCarousel();
+        }
+    });
+}
+
+function updateProjectCarousel() {
+    if (projectCarousel) {
+        projectCarousel.style.transform = `translateX(-${currentProjectIndex * 100}%)`;
+    }
+}
+
+// ========== КАРУСЕЛЬ ФОТОГАЛЕРЕИ (ТОЛЬКО ДЛЯ РАЗДЕЛА ФОТО) ==========
+function initPhotoCarousel() {
+    if (!photoCarousel || !photoIndicators) return;
+    
+    const slides = photoCarousel.querySelectorAll('.carousel-slide');
+    
+    // Создаем индикаторы
+    photoIndicators.innerHTML = '';
+    slides.forEach((slide, index) => {
+        const indicator = document.createElement('div');
+        indicator.className = 'carousel-indicator';
+        if (index === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', () => {
+            currentPhotoIndex = index;
+            updatePhotoCarousel();
+        });
+        photoIndicators.appendChild(indicator);
+    });
+    
+    // Обновление карусели
+    function updatePhotoCarousel() {
+        if (!photoCarousel) return;
+        
+        photoCarousel.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+        
+        // Обновляем активный индикатор
+        document.querySelectorAll('.carousel-indicator').forEach((indicator, i) => {
+            if (i === currentPhotoIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+    
+    // Кнопки навигации
+    if (prevPhotoBtn) {
+        prevPhotoBtn.addEventListener('click', () => {
+            currentPhotoIndex = (currentPhotoIndex - 1 + slides.length) % slides.length;
+            updatePhotoCarousel();
+            resetPhotoInterval();
+        });
+    }
+    
+    if (nextPhotoBtn) {
+        nextPhotoBtn.addEventListener('click', () => {
+            currentPhotoIndex = (currentPhotoIndex + 1) % slides.length;
+            updatePhotoCarousel();
+            resetPhotoInterval();
+        });
+    }
+    
+    // Автоматическая прокрутка
+    function startPhotoInterval() {
+        photoInterval = setInterval(() => {
+            currentPhotoIndex = (currentPhotoIndex + 1) % slides.length;
+            updatePhotoCarousel();
+        }, 5000);
+    }
+    
+    function resetPhotoInterval() {
+        clearInterval(photoInterval);
+        startPhotoInterval();
+    }
+    
+    // Запускаем автоматическую прокрутку
+    if (slides.length > 0) {
+        startPhotoInterval();
+    }
+}
+
+// ========== ГАЛЕРЕЯ ФОТОГРАФИЙ (ПРИ КЛИКЕ НА ФОТО) ==========
+function initGallery() {
+    // ТОЛЬКО изображения из фотогалереи, НЕ из других разделов
+    const carouselImages = document.querySelectorAll('#photos .carousel-img img');
+    galleryImages = Array.from(carouselImages).map(img => img.src);
+    
+    // Добавляем обработчики клика ТОЛЬКО на изображения в фотогалерее
+    carouselImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            currentGalleryIndex = index;
+            openPhotoGallery();
+        });
+    });
+}
+
+// Открытие галереи ФОТОГРАФИЙ (с навигацией)
+function openPhotoGallery() {
+    if (!lightbox) return;
+    
+    // ПОКАЗЫВАЕМ кнопки навигации для фотогалереи
+    const lightboxNav = lightbox.querySelector('.lightbox-nav');
+    if (lightboxNav) {
+        lightboxNav.style.display = 'flex';
+    }
+    
+    // ИСПРАВЛЕНО: Получаем актуальную ссылку на изображение
+    const currentLightboxImg = lightbox.querySelector('.lightbox-content img');
+    if (!currentLightboxImg) return;
+    
+    // ИСПРАВЛЕНО: Очищаем все элементы от предыдущего просмотра документов
+    cleanupDocumentElements();
+    
+    // Устанавливаем изображение из фотогалереи
+    currentLightboxImg.src = galleryImages[currentGalleryIndex];
+    currentLightboxImg.alt = 'Фотография';
+    
+    // Сбрасываем все стили зума для фотогалереи
+    currentLightboxImg.classList.remove('zoomed');
+    currentLightboxImg.style.transform = '';
+    currentLightboxImg.style.cursor = '';
+    currentLightboxImg.style.transformOrigin = '';
+    
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// НОВАЯ ФУНКЦИЯ: Очистка элементов от просмотра документов
+function cleanupDocumentElements() {
+    // Удаляем индикатор зума
+    const indicator = lightbox.querySelector('.zoom-indicator');
+    if (indicator) indicator.remove();
+    
+    // Удаляем информацию о документе
+    const info = lightbox.querySelector('.lightbox-info');
+    if (info) info.remove();
+    
+    // Удаляем кнопку сохранения
+    const saveButton = lightbox.querySelector('.save-button');
+    if (saveButton) saveButton.remove();
+}
+
+// Закрытие галереи (обновленное)
+function closeGallery() {
+    if (!lightbox) return;
+    
+    lightbox.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    
+    // Очищаем все элементы (зум, индикаторы, кнопки)
+    cleanupDocumentElements();
+    
+    // Получаем текущее изображение и сбрасываем все его стили
+    const currentImg = lightbox.querySelector('.lightbox-content img');
+    if (currentImg) {
+        // Сбрасываем трансформации
+        currentImg.classList.remove('zoomed');
+        currentImg.style.transform = '';
+        currentImg.style.cursor = '';
+        currentImg.style.transformOrigin = '';
+        currentImg.alt = '';
+        
+        // Удаляем обработчики событий зума (если есть)
+        if (currentImg._mouseMoveHandler) {
+            document.removeEventListener('mousemove', currentImg._mouseMoveHandler);
+        }
+        if (currentImg._mouseUpHandler) {
+            document.removeEventListener('mouseup', currentImg._mouseUpHandler);
+        }
+        
+        // Очищаем ссылки на обработчики
+        currentImg._mouseMoveHandler = null;
+        currentImg._mouseUpHandler = null;
+    }
+}
+
+// ========== ФУНКЦИИ ДЛЯ ЗУМА И ЗАГРУЗКИ ДОКУМЕНТОВ ==========
 
 // Добавление информации о документе в lightbox
 function addLightboxDocumentInfo(title) {
@@ -582,7 +483,7 @@ function addZoomIndicator() {
     lightbox.appendChild(indicator);
 }
 
-// НОВОЕ: Добавление кнопки сохранения
+// Добавление кнопки сохранения
 function addSaveButton(imgSrc, title) {
     // Удаляем существующую кнопку
     const existingButton = lightbox.querySelector('.save-button');
@@ -602,7 +503,7 @@ function addSaveButton(imgSrc, title) {
     lightbox.appendChild(saveButton);
 }
 
-// НОВОЕ: Функция скачивания изображения (исправленная)
+// Функция скачивания изображения
 async function downloadImage(imgSrc, title) {
     try {
         // Получаем изображение как blob
@@ -650,7 +551,7 @@ function updateZoomIndicator(isZoomed) {
     }
 }
 
-// ИСПРАВЛЕННОЕ: Добавление обработчика зума
+// Добавление обработчика зума
 function addZoomHandler(imgElement) {
     // Очищаем предыдущие обработчики событий
     const newImg = imgElement.cloneNode(true);
@@ -660,11 +561,11 @@ function addZoomHandler(imgElement) {
     let isZoomed = false;
     let startX, startY, translateX = 0, translateY = 0;
     let isDragging = false;
-    let isMouseDown = false; // НОВОЕ: отслеживаем состояние кнопки мыши
-    let dragThreshold = 5; // Минимальное движение для считывания как перетаскивание
+    let isMouseDown = false;
+    let dragThreshold = 5;
     let clickStartX, clickStartY;
     
-    // ИСПРАВЛЕНО: Обработка нажатия мыши
+    // Обработка нажатия мыши
     newImg.addEventListener('mousedown', (e) => {
         clickStartX = e.clientX;
         clickStartY = e.clientY;
@@ -679,14 +580,13 @@ function addZoomHandler(imgElement) {
         e.preventDefault();
     });
     
-    // ИСПРАВЛЕНО: Перетаскивание только при зажатой кнопке мыши
+    // Перетаскивание
     const mouseMoveHandler = (e) => {
         if (!isMouseDown || !isZoomed) return;
         
         const deltaX = Math.abs(e.clientX - clickStartX);
         const deltaY = Math.abs(e.clientY - clickStartY);
         
-        // Если движение больше порога И кнопка мыши зажата, считаем это перетаскиванием
         if ((deltaX > dragThreshold || deltaY > dragThreshold) && isMouseDown) {
             isDragging = true;
             
@@ -696,17 +596,15 @@ function addZoomHandler(imgElement) {
         }
     };
     
-    // ИСПРАВЛЕНО: Обработка отпускания мыши
+    // Обработка отпускания мыши
     const mouseUpHandler = (e) => {
         const deltaX = Math.abs(e.clientX - clickStartX);
         const deltaY = Math.abs(e.clientY - clickStartY);
         
-        // Если это был клик (малое движение И не было перетаскивания), переключаем зум
         if (!isDragging && deltaX <= dragThreshold && deltaY <= dragThreshold && isMouseDown) {
             toggleZoom(e, newImg, ZOOM_LEVEL);
         }
         
-        // Сбрасываем состояния
         isMouseDown = false;
         isDragging = false;
         
@@ -715,7 +613,7 @@ function addZoomHandler(imgElement) {
         }
     };
     
-    // НОВОЕ: Функция переключения зума
+    // Функция переключения зума
     function toggleZoom(e, img, zoomLevel) {
         isZoomed = !isZoomed;
         
@@ -723,7 +621,6 @@ function addZoomHandler(imgElement) {
             img.classList.add('zoomed');
             img.style.cursor = 'grab';
             
-            // Центрируем зум на точке клика
             const rect = img.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -747,7 +644,7 @@ function addZoomHandler(imgElement) {
         updateZoomIndicator(isZoomed);
     }
     
-    // НОВОЕ: Обработка покидания области изображения
+    // Обработка покидания области изображения
     newImg.addEventListener('mouseleave', () => {
         if (isDragging) {
             isMouseDown = false;
@@ -783,7 +680,6 @@ function addZoomHandler(imgElement) {
             newImg.classList.add('zoomed');
             newImg.style.cursor = 'grab';
             
-            // Сохраняем текущий уровень зума при прокрутке колеса
             if (currentScale !== ZOOM_LEVEL) {
                 newImg.style.transform = `scale(${currentScale}) translate(${translateX}px, ${translateY}px)`;
             } else {
@@ -794,7 +690,7 @@ function addZoomHandler(imgElement) {
         updateZoomIndicator(isZoomed);
     });
     
-    // Touch события для мобильных устройств (исправлены)
+    // Touch события для мобильных устройств
     let touchStartDistance = 0;
     let initialScale = 1;
     let touchStartX, touchStartY;
@@ -802,7 +698,6 @@ function addZoomHandler(imgElement) {
     
     newImg.addEventListener('touchstart', (e) => {
         if (e.touches.length === 2) {
-            // Pinch to zoom
             touchStartDistance = Math.hypot(
                 e.touches[0].pageX - e.touches[1].pageX,
                 e.touches[0].pageY - e.touches[1].pageY
@@ -823,7 +718,6 @@ function addZoomHandler(imgElement) {
     
     newImg.addEventListener('touchmove', (e) => {
         if (e.touches.length === 2) {
-            // Pinch to zoom
             const touchDistance = Math.hypot(
                 e.touches[0].pageX - e.touches[1].pageX,
                 e.touches[0].pageY - e.touches[1].pageY
@@ -861,7 +755,6 @@ function addZoomHandler(imgElement) {
             const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
             const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
             
-            // Если это был тап (малое движение), переключаем зум
             if (!isTouchDragging && deltaX <= dragThreshold && deltaY <= dragThreshold) {
                 const fakeEvent = {
                     clientX: e.changedTouches[0].clientX,
@@ -881,76 +774,209 @@ function addZoomHandler(imgElement) {
     newImg._mouseUpHandler = mouseUpHandler;
 }
 
-// Закрытие lightbox (обновленное)
-function closeGallery() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-    
-    // Очищаем зум и индикаторы
-    const indicator = lightbox.querySelector('.zoom-indicator');
-    if (indicator) indicator.remove();
-    
-    const info = lightbox.querySelector('.lightbox-info');
-    if (info) info.remove();
-    
-    const saveButton = lightbox.querySelector('.save-button');
-    if (saveButton) saveButton.remove();
-    
-    // Получаем текущее изображение
-    const currentImg = lightbox.querySelector('.lightbox-content img');
-    if (currentImg) {
-        // Сбрасываем трансформации
-        currentImg.classList.remove('zoomed');
-        currentImg.style.transform = '';
-        currentImg.style.cursor = '';
-        currentImg.style.transformOrigin = '';
+// Навигация по фотогалерее
+function prevGalleryImage() {
+    if (galleryImages.length > 0) {
+        // ИСПРАВЛЕНО: Получаем актуальную ссылку на изображение
+        const currentLightboxImg = lightbox.querySelector('.lightbox-content img');
+        if (!currentLightboxImg) return;
         
-        // Удаляем обработчики событий
-        if (currentImg._mouseMoveHandler) {
-            document.removeEventListener('mousemove', currentImg._mouseMoveHandler);
-        }
-        if (currentImg._mouseUpHandler) {
-            document.removeEventListener('mouseup', currentImg._mouseUpHandler);
-        }
+        currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+        currentLightboxImg.src = galleryImages[currentGalleryIndex];
     }
 }
 
-// ========== РАСКРЫВАЮЩИЕСЯ КАРТОЧКИ ОПЫТА РАБОТЫ ==========
-
-// Получаем все раскрывающиеся карточки
-const expandableCards = document.querySelectorAll('.expandable-card');
-const expandButtons = document.querySelectorAll('.timeline-expand-btn');
-
-// Обработчики для кнопок раскрытия
-expandButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.stopPropagation(); // Предотвращаем всплытие события
+function nextGalleryImage() {
+    if (galleryImages.length > 0) {
+        // ИСПРАВЛЕНО: Получаем актуальную ссылку на изображение
+        const currentLightboxImg = lightbox.querySelector('.lightbox-content img');
+        if (!currentLightboxImg) return;
         
-        const card = this.closest('.timeline-item');
-        const isExpanded = card.classList.contains('expanded');
-        
-        toggleCard(card, !isExpanded);
-        updateButtonText(this, !isExpanded);
+        currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+        currentLightboxImg.src = galleryImages[currentGalleryIndex];
+    }
+}
+
+// ИСПРАВЛЕНО: Проверяем существование элементов перед добавлением обработчиков
+// Обработчики событий для галереи
+if (prevGalleryBtn) {
+    prevGalleryBtn.addEventListener('click', prevGalleryImage);
+}
+
+if (nextGalleryBtn) {
+    nextGalleryBtn.addEventListener('click', nextGalleryImage);
+}
+
+if (closeLightbox) {
+    closeLightbox.addEventListener('click', closeGallery);
+}
+
+if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeGallery();
+        }
     });
-});
+}
 
-// Обработчики для клика по всей карточке (опционально)
-expandableCards.forEach(card => {
-    card.addEventListener('click', function(e) {
-        // Проверяем, что клик не по кнопке или ссылке
-        if (e.target.closest('.timeline-expand-btn') || e.target.closest('.company-link')) {
-            return;
+// Обработка клавиатуры для галереи
+document.addEventListener('keydown', (e) => {
+    if (lightbox && lightbox.style.display === 'flex') {
+        // Навигация только если открыта фотогалерея (есть кнопки навигации)
+        const lightboxNav = lightbox.querySelector('.lightbox-nav');
+        const navVisible = lightboxNav && lightboxNav.style.display !== 'none';
+        
+        if (navVisible) {
+            if (e.key === 'ArrowLeft') {
+                prevGalleryImage();
+            } else if (e.key === 'ArrowRight') {
+                nextGalleryImage();
+            }
         }
         
-        const isExpanded = this.classList.contains('expanded');
-        const button = this.querySelector('.timeline-expand-btn');
-        
-        toggleCard(this, !isExpanded);
-        updateButtonText(button, !isExpanded);
-    });
+        if (e.key === 'Escape') {
+            closeGallery();
+        }
+    }
 });
 
-// Функция переключения состояния карточки
+// Инициализация активного пункта меню
+updateActiveNav('#home');
+
+// Анимированный фон
+document.addEventListener('scroll', function() {
+    const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    const hue = 20 + scrollPercentage * 20;
+    document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 95%) 0%, hsl(${hue + 20}, 100%, 90%) 100%)`;
+});
+
+// ИСПРАВЛЕНО: Основная инициализация после загрузки страницы
+document.addEventListener('DOMContentLoaded', () => {
+    initPhotoCarousel();
+    initGallery();
+    initPortfolioNew();
+    initAchievementBadges();
+    initTimelineCards(); // ДОБАВЛЕНО: Инициализация карточек timeline
+});
+
+// ========== ОБНОВЛЕННОЕ ПОРТФОЛИО И КАРУСЕЛЬ ПРОЕКТОВ ==========
+
+// ИСПРАВЛЕНО: Упрощенная инициализация портфолио
+function initPortfolioNew() {
+    const demoBtns = document.querySelectorAll('.demo-btn');
+    
+    // Добавляем обработчики для кнопок демонстрации
+    demoBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openProjectCarouselNew(this);
+        });
+    });
+}
+
+// Открытие карусели проекта (обновленная функция)
+function openProjectCarouselNew(button) {
+    if (!projectCarouselModal || !projectCarousel) return;
+    
+    const portfolioItem = button.closest('.portfolio-item');
+    const title = portfolioItem.getAttribute('data-title');
+    const images = portfolioItem.getAttribute('data-imgs');
+    
+    const projectTitle = document.getElementById('projectTitle');
+    
+    if (!title || !images || !projectTitle) {
+        console.warn('Не найдены данные проекта или элементы карусели');
+        return;
+    }
+    
+    try {
+        const imageArray = JSON.parse(images);
+        
+        // Устанавливаем заголовок
+        projectTitle.textContent = title;
+        
+        // Очищаем карусель
+        projectCarousel.innerHTML = '';
+        
+        // Добавляем слайды
+        imageArray.forEach((img, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'project-slide';
+            slide.innerHTML = `
+                <img src="${img}" alt="${title} - Скриншот ${index + 1}" 
+                     onerror="this.src='https://via.placeholder.com/800x600/CCCCCC/FFFFFF?text=Изображение+недоступно'">
+            `;
+            projectCarousel.appendChild(slide);
+        });
+        
+        // Сбрасываем индекс и обновляем карусель
+        currentProjectIndex = 0;
+        updateProjectCarousel();
+        
+        // Показываем модальное окно
+        projectCarouselModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+    } catch (error) {
+        console.error('Ошибка при парсинге изображений:', error);
+    }
+}
+
+// Инициализация значков достижений
+function initAchievementBadges() {
+    const badges = document.querySelectorAll('.achievement-badge');
+    
+    badges.forEach(badge => {
+        badge.addEventListener('mouseenter', () => {
+            badge.style.animationPlayState = 'paused';
+            badge.style.transform = 'scale(1.1)';
+        });
+        
+        badge.addEventListener('mouseleave', () => {
+            badge.style.animationPlayState = 'running';
+            badge.style.transform = 'scale(1)';
+        });
+    });
+}
+
+// ========== ИСПРАВЛЕННЫЕ РАСКРЫВАЮЩИЕСЯ КАРТОЧКИ ОПЫТА РАБОТЫ ==========
+
+function initTimelineCards() {
+    // Получаем все раскрывающиеся карточки
+    const expandableCards = document.querySelectorAll('.expandable-card');
+    const expandButtons = document.querySelectorAll('.timeline-expand-btn');
+
+    // Обработчики для кнопок раскрытия
+    expandButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Предотвращаем всплытие события
+            
+            const card = this.closest('.timeline-item');
+            const isExpanded = card.classList.contains('expanded');
+            
+            toggleCard(card, !isExpanded);
+            updateButtonText(this, !isExpanded);
+        });
+    });
+
+    // Обработчики для клика по всей карточке (опционально)
+    expandableCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Проверяем, что клик не по кнопке или ссылке
+            if (e.target.closest('.timeline-expand-btn') || e.target.closest('.company-link')) {
+                return;
+            }
+            
+            const isExpanded = this.classList.contains('expanded');
+            const button = this.querySelector('.timeline-expand-btn');
+            
+            toggleCard(this, !isExpanded);
+            updateButtonText(button, !isExpanded);
+        });
+    });
+}
+
+// ИСПРАВЛЕННАЯ функция переключения состояния карточки с сохранением ширины на мобильных
 function toggleCard(card, shouldExpand) {
     const fullDetails = card.querySelector('.full-details');
     
@@ -958,7 +984,42 @@ function toggleCard(card, shouldExpand) {
         // Раскрываем карточку
         card.classList.add('expanded');
         
-        // Плавная анимация появления
+        // ИСПРАВЛЕНО: НЕ изменяем стили ширины на мобильных устройствах
+        const isMobile = window.innerWidth <= 992;
+        
+        if (!isMobile) {
+            // На десктопе можем применять градиентный фон
+            const timelineContent = card.querySelector('.timeline-content');
+            timelineContent.style.background = 'linear-gradient(135deg, rgba(255, 107, 53, 0.03) 0%, rgba(255, 255, 255, 0.8) 100%)';
+        }
+        // На мобильных НЕ применяем никаких дополнительных стилей к .timeline-content
+        
+        // НОВОЕ: Рассчитываем реальную высоту содержимого
+        fullDetails.style.maxHeight = 'none';
+        fullDetails.style.overflow = 'visible';
+        const realHeight = fullDetails.scrollHeight;
+        
+        // Временно возвращаем стили для анимации
+        fullDetails.style.maxHeight = '0';
+        fullDetails.style.overflow = 'hidden';
+        
+        // Принудительный reflow для применения стилей
+        fullDetails.offsetHeight;
+        
+        // Запускаем анимацию до реальной высоты
+        fullDetails.style.maxHeight = realHeight + 'px';
+        fullDetails.style.opacity = '1';
+        fullDetails.style.marginTop = '20px';
+        
+        // После завершения анимации убираем ограничения
+        setTimeout(() => {
+            if (card.classList.contains('expanded')) {
+                fullDetails.style.maxHeight = 'none';
+                fullDetails.style.overflow = 'visible';
+            }
+        }, 600);
+        
+        // Плавная анимация появления элементов
         setTimeout(() => {
             const elements = fullDetails.querySelectorAll('p, ul, .company-link');
             elements.forEach((el, index) => {
@@ -971,14 +1032,41 @@ function toggleCard(card, shouldExpand) {
         
     } else {
         // Скрываем карточку
-        card.classList.remove('expanded');
+        const currentHeight = fullDetails.scrollHeight;
         
-        // Сбрасываем стили анимации
-        const elements = fullDetails.querySelectorAll('p, ul, .company-link');
-        elements.forEach(el => {
-            el.style.opacity = '';
-            el.style.transform = '';
-        });
+        // Устанавливаем текущую высоту для плавной анимации
+        fullDetails.style.maxHeight = currentHeight + 'px';
+        fullDetails.style.overflow = 'hidden';
+        
+        // Принудительный reflow
+        fullDetails.offsetHeight;
+        
+        // Анимируем к нулевой высоте
+        fullDetails.style.maxHeight = '0';
+        fullDetails.style.opacity = '0';
+        fullDetails.style.marginTop = '0';
+        
+        // Убираем класс expanded и сбрасываем стили после завершения анимации
+        setTimeout(() => {
+            card.classList.remove('expanded');
+            
+            // ИСПРАВЛЕНО: Сбрасываем только те стили, которые мы добавляли
+            const timelineContent = card.querySelector('.timeline-content');
+            const isMobile = window.innerWidth <= 992;
+            
+            if (!isMobile) {
+                // На десктопе убираем градиент
+                timelineContent.style.background = '';
+            }
+            // На мобильных НЕ трогаем стили ширины
+            
+            // Сбрасываем стили анимации элементов
+            const elements = fullDetails.querySelectorAll('p, ul, .company-link');
+            elements.forEach(el => {
+                el.style.opacity = '';
+                el.style.transform = '';
+            });
+        }, 600);
     }
     
     // Плавная прокрутка к карточке при раскрытии
@@ -994,26 +1082,20 @@ function toggleCard(card, shouldExpand) {
 
 // Функция обновления текста кнопки
 function updateButtonText(button, isExpanded) {
+    if (!button) return;
+    
     const icon = button.querySelector('i');
-    const text = button.querySelector('.btn-text') || button.childNodes[button.childNodes.length - 1];
     
     if (isExpanded) {
-        if (text.textContent) {
-            text.textContent = ' Скрыть';
-        } else {
-            button.innerHTML = '<i class="fas fa-chevron-up"></i> Скрыть';
-        }
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Скрыть';
     } else {
-        if (text.textContent) {
-            text.textContent = ' Подробнее';
-        } else {
-            button.innerHTML = '<i class="fas fa-chevron-down"></i> Подробнее';
-        }
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> Подробнее';
     }
 }
 
 // Добавляем глобальные функции для управления всеми карточками
 window.expandAllCards = function() {
+    const expandableCards = document.querySelectorAll('.expandable-card');
     expandableCards.forEach(card => {
         const button = card.querySelector('.timeline-expand-btn');
         toggleCard(card, true);
@@ -1022,28 +1104,13 @@ window.expandAllCards = function() {
 };
 
 window.collapseAllCards = function() {
+    const expandableCards = document.querySelectorAll('.expandable-card');
     expandableCards.forEach(card => {
         const button = card.querySelector('.timeline-expand-btn');
         toggleCard(card, false);
         updateButtonText(button, false);
     });
 };
-
-// Автоматическое раскрытие первой карточки (опционально)
-// Раскомментируйте, если хотите, чтобы первая карточка была раскрыта по умолчанию
-/*
-document.addEventListener('DOMContentLoaded', () => {
-    if (expandableCards.length > 0) {
-        const firstCard = expandableCards[0];
-        const firstButton = firstCard.querySelector('.timeline-expand-btn');
-        
-        setTimeout(() => {
-            toggleCard(firstCard, true);
-            updateButtonText(firstButton, true);
-        }, 500);
-    }
-});
-*/
 
 // Клавиатурная навигация (опционально)
 document.addEventListener('keydown', (e) => {
@@ -1058,18 +1125,4 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         window.collapseAllCards();
     }
-});
-
-// Инициализация стилей для элементов внутри скрытых деталей
-document.addEventListener('DOMContentLoaded', () => {
-    expandableCards.forEach(card => {
-        const fullDetails = card.querySelector('.full-details');
-        const elements = fullDetails.querySelectorAll('p, ul, .company-link');
-        
-        elements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(10px)';
-            el.style.transition = 'all 0.4s ease';
-        });
-    });
 });

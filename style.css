@@ -542,6 +542,7 @@ section {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     position: relative;
     border-left: 3px solid var(--primary-color);
+    transition: all 0.4s ease;
 }
 
 .timeline-item:nth-child(even) .timeline-content {
@@ -579,9 +580,191 @@ section {
     left: -60px;
 }
 
-/* Логотипы компаний в опыте работы - УДАЛЕНЫ ИЗ КРАТКОГО ОПИСАНИЯ */
+/* ===== ИСПРАВЛЕННЫЕ РАСКРЫВАЮЩИЕСЯ КАРТОЧКИ ОПЫТА РАБОТЫ ===== */
 
-/* Карточки квалификации */
+/* Основные стили для карточек */
+.timeline-item.expandable-card {
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.timeline-item.expandable-card .timeline-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Краткое описание */
+.short-description {
+    margin-bottom: 15px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* ИСПРАВЛЕНО: Динамическая высота для раскрытых карточек */
+.full-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.6s ease;
+    margin-top: 0;
+}
+
+/* ИСПРАВЛЕНО: Раскрытое состояние с автоматической высотой */
+.timeline-item.expanded .full-details {
+    max-height: none;
+    height: auto;
+    opacity: 1;
+    margin-top: 20px;
+    overflow: visible;
+}
+
+/* ИСПРАВЛЕНО: Раскрытые карточки с градиентом ТОЛЬКО на десктопе */
+@media (min-width: 993px) {
+    .timeline-item.expanded .timeline-content {
+        background: linear-gradient(135deg, 
+            rgba(255, 107, 53, 0.03) 0%, 
+            rgba(255, 255, 255, 0.8) 100%);
+        border-radius: 10px;
+        padding: 25px;
+    }
+}
+
+/* Стили для содержимого деталей */
+.full-details p {
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.full-details ul {
+    margin: 10px 0 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.full-details li {
+    margin-bottom: 8px;
+    color: #555;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 20px;
+}
+
+.full-details li::before {
+    content: '▸';
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* ИСПРАВЛЕНО: Правильное выравнивание для правых карточек */
+.timeline-item:nth-child(odd) .full-details {
+    text-align: right;
+}
+
+.timeline-item:nth-child(odd) .full-details ul {
+    text-align: right;
+}
+
+.timeline-item:nth-child(odd) .full-details li {
+    padding-left: 0;
+    padding-right: 20px;
+}
+
+.timeline-item:nth-child(odd) .full-details li::before {
+    left: auto;
+    right: 0;
+    content: '◂';
+}
+
+/* Кнопка раскрытия */
+.timeline-expand-btn {
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    width: fit-content;
+}
+
+/* ИСПРАВЛЕНО: Правильное позиционирование кнопки для правых карточек */
+.timeline-item:nth-child(odd) .timeline-expand-btn {
+    margin-left: auto;
+}
+
+.timeline-item:nth-child(even) .timeline-expand-btn {
+    margin-right: auto;
+}
+
+.timeline-expand-btn i {
+    transition: transform 0.3s ease;
+}
+
+/* Состояние кнопки при раскрытии */
+.timeline-item.expanded .timeline-expand-btn i {
+    transform: rotate(180deg);
+}
+
+/* Ссылка на сайт компании */
+.company-link {
+    margin-top: 20px;
+}
+
+/* ИСПРАВЛЕНО: Правильное выравнивание ссылок */
+.timeline-item:nth-child(odd) .company-link {
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) .company-link {
+    text-align: left;
+}
+
+.company-link .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.company-link .btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Анимация появления элементов */
+.full-details > * {
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    transition-delay: 0.1s;
+}
+
+.timeline-item.expanded .full-details > * {
+    transform: translateY(0);
+}
+
+/* Улучшенные стили для списков */
+.full-details ul {
+    background: rgba(255, 107, 53, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+/* ИСПРАВЛЕНО: Разные бордеры для левых и правых карточек */
+.timeline-item:nth-child(even) .full-details ul {
+    border-left: 3px solid var(--primary-color);
+}
+
+.timeline-item:nth-child(odd) .full-details ul {
+    border-right: 3px solid var(--primary-color);
+}
+
 /* ===== ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ КАРТОЧЕК КВАЛИФИКАЦИИ ===== */
 
 /* Карточки квалификации */
@@ -610,7 +793,6 @@ section {
     border-color: var(--primary-color);
 }
 
-/* ОБНОВЛЕНО: Контейнер для изображения */
 .qualification-img {
     width: 160px;
     height: 100%;
@@ -623,7 +805,6 @@ section {
     position: relative;
 }
 
-/* НОВОЕ: Стили для изображений */
 .qualification-img img {
     width: 100%;
     height: 100%;
@@ -635,9 +816,8 @@ section {
     transform: scale(1.05);
 }
 
-/* Добавляем иконку увеличения при наведении */
 .qualification-img::before {
-    content: '\f00e'; /* FontAwesome search-plus icon */
+    content: '\f00e';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     position: absolute;
@@ -741,7 +921,6 @@ section {
     transition: transform 0.3s ease;
 }
 
-/* НОВОЕ: Зум при клике на изображение */
 .lightbox-content img.zoomed {
     cursor: zoom-out;
     transform: scale(1.5);
@@ -749,7 +928,6 @@ section {
     max-height: none;
 }
 
-/* Кнопка сохранения */
 .save-button {
     position: absolute;
     top: 20px;
@@ -780,7 +958,6 @@ section {
     transform: scale(0.95);
 }
 
-/* Кнопка закрытия */
 .close-lightbox {
     position: absolute;
     top: 20px;
@@ -807,7 +984,6 @@ section {
     transform: scale(1.1);
 }
 
-/* Информация о документе */
 .lightbox-info {
     position: absolute;
     bottom: -60px;
@@ -824,7 +1000,6 @@ section {
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Индикатор зума */
 .zoom-indicator {
     position: absolute;
     bottom: 20px;
@@ -839,43 +1014,41 @@ section {
     opacity: 0.8;
 }
 
-/* Адаптивность */
-@media (max-width: 992px) {
-    .qualifications-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .qualification-card {
-        height: auto;
-        flex-direction: column;
-    }
-    
-    .qualification-img {
-        width: 100%;
-        height: 200px;
-    }
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+    z-index: 10;
 }
 
-@media (max-width: 576px) {
-    .qualification-card {
-        height: auto;
-    }
-    
-    .qualification-img {
-        height: 150px;
-    }
-    
-    .qualification-content {
-        padding: 12px;
-    }
-    
-    .qualification-title {
-        font-size: 1rem;
-    }
+.lightbox-btn {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
-/* Галерея портфолио */
+.lightbox-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* ===== СТИЛИ ДЛЯ ПОРТФОЛИО И ДОСТИЖЕНИЙ ===== */
+
 .portfolio-grid {
     display: flex;
     flex-wrap: wrap;
@@ -886,53 +1059,289 @@ section {
 
 .portfolio-item {
     background: white;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    width: 300px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 600px;
+}
+
+/* ===== СТИЛИ ДЛЯ ПОРТФОЛИО И ДОСТИЖЕНИЙ ===== */
+
+.portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.portfolio-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 600px;
 }
 
 .portfolio-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.achievement-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: white;
+    z-index: 5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: badge-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes badge-glow {
+    from { box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    to { box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+}
+
+.achievement-badge.gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.achievement-badge.silver {
+    background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+}
+
+.achievement-badge.bronze {
+    background: linear-gradient(135deg, #CD7F32, #B8860B);
+}
+
+.achievement-badge.finalist {
+    background: linear-gradient(135deg, #FF6B35, #FF8C5A);
+}
+
+.achievement-badge.special {
+    background: linear-gradient(135deg, #9B59B6, #8E44AD);
 }
 
 .portfolio-img {
     width: 100%;
-    height: 200px;
-    background: #f0f0f0;
+    height: 180px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     color: #aaa;
     font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-img.achievement-img {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
 }
 
 .portfolio-content {
-    padding: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .portfolio-title {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
     color: var(--secondary-color);
+    line-height: 1.3;
+    height: auto;
+    transition: color 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-title {
+    color: var(--primary-color);
 }
 
 .portfolio-info {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 15px;
-    font-size: 0.9rem;
-    color: #777;
 }
 
-.portfolio-place {
-    color: var(--primary-color);
+.portfolio-type {
+    display: inline-block;
+    background: var(--primary-light);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
-/* Карусель фото */
+.achievement-info {
+    background: rgba(255, 107, 53, 0.05);
+    border-left: 4px solid var(--primary-color);
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.achievement-info p {
+    margin-bottom: 4px;
+}
+
+.achievement-info p:last-child {
+    margin-bottom: 0;
+}
+
+.competition-name {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.achievement-place {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+.competition-location {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+
+.team-info {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.portfolio-description {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    font-size: 0.95rem;
+}
+
+.demo-btn {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.demo-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.no-demo {
+    margin-top: auto;
+    text-align: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    color: #6c757d;
+    font-style: italic;
+    border: 2px dashed #dee2e6;
+}
+
+.portfolio-item.achievement-only {
+    border: 2px solid rgba(255, 107, 53, 0.2);
+}
+
+.portfolio-item.achievement-only:hover {
+    border-color: var(--primary-color);
+}
+
+.achievement-badge:hover {
+    transform: scale(1.1);
+    animation-play-state: paused;
+}
+
+/* Project Carousel */
+.project-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.project-carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.project-slide {
+    min-width: 100%;
+    text-align: center;
+}
+
+.project-slide img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.project-carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+}
+
+.project-carousel-btn {
+    background: rgba(255,255,255,0.7);
+    color: var(--primary-color);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.project-carousel-btn:hover {
+    background: white;
+}
+
 /* Карусель фото */
 .photo-carousel {
     position: relative;
@@ -983,43 +1392,6 @@ section {
 .carousel-img:hover img {
     transform: scale(1.02);
     filter: brightness(1.05);
-}
-
-/* Превью соседних фотографий */
-.carousel-slide::before,
-.carousel-slide::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 120px;
-    height: 300px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 12px;
-    opacity: 0;
-    transition: all 0.5s ease;
-    z-index: 2;
-    backdrop-filter: blur(8px) saturate(150%);
-    -webkit-backdrop-filter: blur(8px) saturate(150%);
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.carousel-slide::before {
-    left: 20px;
-    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-}
-
-.carousel-slide::after {
-    right: 20px;
-    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-}
-
-.photo-carousel:hover .carousel-slide.active::before,
-.photo-carousel:hover .carousel-slide.active::after {
-    opacity: 0.8;
 }
 
 .carousel-controls {
@@ -1094,7 +1466,6 @@ section {
     transform: scale(1.1);
 }
 
-/* Счетчик фотографий */
 .photo-counter {
     position: absolute;
     top: 20px;
@@ -1111,7 +1482,6 @@ section {
     z-index: 5;
 }
 
-/* Прогресс-бар для автопрокрутки */
 .carousel-progress {
     position: absolute;
     bottom: 0;
@@ -1121,22 +1491,6 @@ section {
     transition: width 0.1s linear;
     z-index: 5;
     box-shadow: 0 0 10px rgba(255,107,53,0.5);
-}
-
-/* Плавная анимация появления */
-.carousel-slide.entering {
-    animation: slideIn 0.6s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 /* Контакты */
@@ -1232,7 +1586,188 @@ footer {
     color: rgba(255,255,255,0.7);
 }
 
-/* ===== АДАПТИВНОСТЬ ===== */
+/* ===== ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ===== */
+
+/* ДОБАВЛЕНО: Полная ширина для timeline на мобильных */
+@media (max-width: 992px) {
+    /* ИСПРАВЛЕНО: Контейнер timeline на всю ширину экрана */
+    #experience .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* ИСПРАВЛЕНО: Timeline на всю ширину */
+    .timeline {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 10px !important;
+    }
+    
+    /* Timeline линия */
+    .timeline:before {
+        left: 20px !important;
+        width: 2px;
+    }
+    
+    /* ГЛАВНОЕ: Карточки от timeline до правого края экрана (свернутые И развернутые) */
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content,
+    .timeline-item.expanded:nth-child(odd) .timeline-content,
+    .timeline-item.expanded:nth-child(even) .timeline-content {
+        width: calc(100vw - 50px) !important;
+        max-width: calc(100vw - 50px) !important;
+        margin-left: 50px !important;
+        margin-right: 0 !important;
+        text-align: left !important;
+        border-left: 3px solid var(--primary-color) !important;
+        border-right: none !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Иконки timeline */
+    .timeline-icon {
+        left: 5px !important;
+        right: auto !important;
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .timeline-year {
+        display: none;
+    }
+    
+    .timeline-item.expanded {
+        margin-bottom: 40px;
+    }
+    
+    .full-details {
+        font-size: 0.9rem;
+    }
+    
+    /* Все элементы выравниваются слева */
+    .timeline-item:nth-child(odd) .timeline-expand-btn,
+    .timeline-item:nth-child(even) .timeline-expand-btn {
+        margin-left: 0;
+        margin-right: auto;
+    }
+    
+    .timeline-item:nth-child(odd) .company-link,
+    .timeline-item:nth-child(even) .company-link {
+        text-align: left;
+    }
+    
+    .timeline-item:nth-child(odd) .full-details,
+    .timeline-item:nth-child(even) .full-details {
+        text-align: left;
+    }
+    
+    .timeline-item:nth-child(odd) .full-details ul,
+    .timeline-item:nth-child(even) .full-details ul {
+        border-left: 3px solid var(--primary-color);
+        border-right: none;
+    }
+    
+    .timeline-item:nth-child(odd) .full-details li,
+    .timeline-item:nth-child(even) .full-details li {
+        padding-left: 20px;
+        padding-right: 0;
+    }
+    
+    .timeline-item:nth-child(odd) .full-details li::before,
+    .timeline-item:nth-child(even) .full-details li::before {
+        left: 0;
+        right: auto;
+        content: '▸';
+    }
+}
+
+@media (max-width: 576px) {
+    /* ЕЩЕ более агрессивная оптимизация */
+    #experience .container {
+        padding: 0 !important;
+    }
+    
+    .timeline {
+        padding: 0 5px !important;
+    }
+    
+    .timeline:before {
+        left: 15px !important;
+        width: 2px;
+    }
+    
+    /* ИСПРАВЛЕНО: Для всех карточек, включая развернутые */
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content,
+    .timeline-item.expanded:nth-child(odd) .timeline-content,
+    .timeline-item.expanded:nth-child(even) .timeline-content {
+        width: calc(100vw - 40px) !important;
+        max-width: calc(100vw - 40px) !important;
+        margin-left: 40px !important;
+        padding: 15px !important;
+    }
+    
+    .timeline-icon {
+        left: 2px !important;
+        width: 26px;
+        height: 26px;
+        font-size: 0.8rem;
+    }
+    
+    .timeline-expand-btn {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .company-link .btn {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    .full-details ul {
+        padding: 12px;
+        margin: 12px 0;
+    }
+    
+    .full-details li {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin-bottom: 6px;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.1rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+    
+    .timeline-content h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    .timeline-date {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+    }
+    
+    .short-description {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+}
+
+/* ===== ОСТАЛЬНАЯ АДАПТИВНОСТЬ ===== */
 @media (max-width: 992px) {
     h2 {
         font-size: 2.2rem;
@@ -1252,30 +1787,22 @@ footer {
         margin-bottom: 30px;
     }
     
-    .timeline:before {
-        left: 30px;
-    }
-    
-    .timeline-item:nth-child(odd) .timeline-content,
-    .timeline-item:nth-child(even) .timeline-content {
-        width: calc(100% - 80px);
-        margin-left: 80px;
-        text-align: left;
-        border-left: 3px solid var(--primary-color);
-        border-right: none;
-    }
-    
-    .timeline-icon {
-        left: 10px !important;
-        right: auto !important;
-    }
-    
-    .timeline-year {
-        display: none;
-    }
-    
     .carousel-img {
         height: 400px;
+    }
+    
+    .qualifications-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    }
+    
+    .qualification-card {
+        height: auto;
+        flex-direction: column;
+    }
+    
+    .qualification-img {
+        width: 100%;
+        height: 200px;
     }
 }
 
@@ -1306,25 +1833,52 @@ footer {
     }
     
     .scroll-nav.top {
-        display: none;
+        display: flex;
     }
     
     .carousel-img {
         height: 300px;
     }
     
-    .qualifications-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    .portfolio-grid {
+        gap: 25px;
     }
     
-    .qualification-card {
-        height: auto;
-        flex-direction: column;
+    .portfolio-item {
+        width: 300px;
+        min-height: 580px;
     }
     
-    .qualification-img {
+    .achievement-badge {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+        top: 12px;
+        right: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        gap: 15px;
+    }
+    
+    .portfolio-item {
         width: 100%;
-        height: 200px;
+        max-width: 350px;
+        min-height: 540px;
+    }
+    
+    .portfolio-content {
+        padding: 20px;
+    }
+    
+    .portfolio-title {
+        font-size: 1.2rem;
+    }
+    
+    .competition-name {
+        font-size: 0.9rem;
     }
 }
 
@@ -1345,394 +1899,27 @@ footer {
     .carousel-img {
         height: 250px;
     }
-}
-
-/* Lightbox */
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 3000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-}
-
-.lightbox-content {
-    max-width: 90%;
-    max-height: 90vh;
-    position: relative;
-}
-
-.lightbox-content img {
-    max-width: 100%;
-    max-height: 90vh;
-    border: 3px solid white;
-    border-radius: 5px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.close-lightbox {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 2rem;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    padding: 0 20px;
-    z-index: 10;
-}
-
-.lightbox-btn {
-    background: rgba(255, 255, 255, 0.25);
-    color: white;
-    border: none;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.lightbox-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: scale(1.05);
-}
-
-/* Project Carousel */
-.project-carousel {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.project-carousel-container {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.project-slide {
-    min-width: 100%;
-    text-align: center;
-}
-
-.project-slide img {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.project-carousel-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    padding: 0 20px;
-}
-
-.project-carousel-btn {
-    background: rgba(255,255,255,0.7);
-    color: var(--primary-color);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.project-carousel-btn:hover {
-    background: white;
-}
-
-/* Новый раздел Фото */
-#photos {
-    background: var(--light-color);
-}
-
-.photos-section {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/* Логотипы компаний в модальном окне */
-.modal-company-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.modal-company-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    margin-right: 20px;
-    object-fit: contain;
-    background: #f5f5f5;
-    padding: 5px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.modal-company-info {
-    flex: 1;
-}
-
-.modal-logo-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.modal-logo-item {
-    flex: 0 0 calc(33.333% - 15px);
-    text-align: center;
-}
-
-.modal-logo-img {
-    width: 100%;
-    max-height: 80px;
-    object-fit: contain;
-}
-
-/* ===== РАСКРЫВАЮЩИЕСЯ КАРТОЧКИ ОПЫТА РАБОТЫ ===== */
-
-/* Основные стили для карточек */
-.timeline-item.expandable-card {
-    transition: all 0.4s ease;
-    cursor: pointer;
-}
-
-.timeline-item.expandable-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.timeline-content {
-    position: relative;
-    overflow: hidden;
-}
-
-/* Краткое описание */
-.short-description {
-    margin-bottom: 15px;
-    color: #666;
-    line-height: 1.5;
-}
-
-/* Скрытые детали */
-.full-details {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.5s ease;
-    margin-top: 0;
-}
-
-/* Раскрытое состояние */
-.timeline-item.expanded .full-details {
-    max-height: 500px; /* Достаточно для содержимого */
-    opacity: 1;
-    margin-top: 20px;
-}
-
-/* Стили для содержимого деталей */
-.full-details p {
-    margin-bottom: 10px;
-    color: var(--secondary-color);
-    font-weight: 600;
-}
-
-.full-details ul {
-    margin: 10px 0 20px 20px;
-    padding: 0;
-}
-
-.full-details li {
-    margin-bottom: 8px;
-    color: #555;
-    line-height: 1.4;
-    position: relative;
-}
-
-.full-details li::before {
-    content: '▸';
-    color: var(--primary-color);
-    font-weight: bold;
-    position: absolute;
-    left: -15px;
-}
-
-/* Кнопка раскрытия */
-.timeline-expand-btn {
-    margin-top: 15px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    padding: 8px 16px;
-}
-
-.timeline-expand-btn i {
-    transition: transform 0.3s ease;
-}
-
-/* Состояние кнопки при раскрытии */
-.timeline-item.expanded .timeline-expand-btn i {
-    transform: rotate(180deg);
-}
-
-.timeline-item.expanded .timeline-expand-btn .btn-text::after {
-    content: ' Скрыть';
-}
-
-.timeline-item:not(.expanded) .timeline-expand-btn .btn-text::after {
-    content: '';
-}
-
-/* Ссылка на сайт компании */
-.company-link {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.company-link .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.company-link .btn:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* Анимация появления элементов */
-.full-details > * {
-    transform: translateY(10px);
-    transition: all 0.4s ease;
-    transition-delay: 0.1s;
-}
-
-.timeline-item.expanded .full-details > * {
-    transform: translateY(0);
-}
-
-/* Улучшенные стили для списков */
-.full-details ul {
-    background: rgba(255, 107, 53, 0.05);
-    border-left: 3px solid var(--primary-color);
-    padding: 15px 15px 15px 30px;
-    border-radius: 0 8px 8px 0;
-    margin: 15px 0;
-}
-
-/* Индикатор раскрытия в заголовке */
-.timeline-content h3::after {
-    content: '';
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid var(--primary-color);
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-    opacity: 0.7;
-}
-
-.timeline-item.expanded .timeline-content h3::after {
-    transform: rotate(180deg);
-}
-
-/* Градиентный фон для раскрытых карточек */
-.timeline-item.expanded .timeline-content {
-    background: linear-gradient(135deg, 
-        rgba(255, 107, 53, 0.03) 0%, 
-        rgba(255, 255, 255, 0.8) 100%);
-    border-radius: 10px;
-    padding: 25px;
-    margin: -5px;
-}
-
-/* Плавная анимация высоты */
-.timeline-item {
-    overflow: visible;
-}
-
-.timeline-item.expanded {
-    margin-bottom: 60px; /* Дополнительное пространство для раскрытых карточек */
-}
-
-/* Стили для мобильных устройств */
-@media (max-width: 992px) {
-    .timeline-item.expanded {
-        margin-bottom: 40px;
+    
+    .portfolio-item {
+        width: 100%;
+        max-width: 320px;
+        min-height: 520px;
     }
     
-    .full-details {
+    .achievement-info {
+        padding: 10px 12px;
+        margin: 12px 0;
+    }
+    
+    .competition-name {
+        font-size: 0.85rem;
+    }
+    
+    .team-info, .competition-location {
+        font-size: 0.8rem;
+    }
+    
+    .portfolio-description {
         font-size: 0.9rem;
-    }
-    
-    .timeline-item.expanded .full-details {
-        max-height: 600px; /* Больше места на мобильных */
-    }
-    
-    .timeline-content h3::after {
-        display: none; /* Скрываем стрелку в заголовке на мобильных */
-    }
-}
-
-@media (max-width: 576px) {
-    .timeline-expand-btn {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-    }
-    
-    .company-link .btn {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-    }
-    
-    .full-details ul {
-        padding: 10px 10px 10px 25px;
-        margin: 10px 0;
     }
 }
