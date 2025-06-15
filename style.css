@@ -447,16 +447,6 @@ section {
     overflow-y: auto;
 }
 
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--secondary-color);
-    cursor: pointer;
-}
 
 .modal-list {
     list-style-type: none;
@@ -1922,4 +1912,110 @@ footer {
     .portfolio-description {
         font-size: 0.9rem;
     }
+}
+
+/* ===== ИСПРАВЛЕНИЕ КНОПКИ ЗАКРЫТИЯ ДЛЯ МОБИЛЬНЫХ ===== */
+
+/* Улучшенные стили для кнопки закрытия модального окна */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    width: 44px;  /* Минимальный размер для touch */
+    height: 44px; /* Минимальный размер для touch */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    /* Увеличиваем область клика */
+    padding: 0;
+    margin: 0;
+}
+
+.close-modal:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+.close-modal:active {
+    background: rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+}
+
+/* Специальные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .close-modal {
+        top: 10px;
+        right: 10px;
+        width: 48px;  /* Еще больше для мобильных */
+        height: 48px;
+        font-size: 1.6rem;
+        background: rgba(0, 0, 0, 0.05); /* Слегка видимый фон */
+        border: 2px solid transparent;
+        /* Добавляем отступы для увеличения области тапа */
+        margin: -5px;
+        padding: 5px;
+    }
+    
+    .close-modal:hover,
+    .close-modal:focus,
+    .close-modal:active {
+        background: rgba(0, 0, 0, 0.15);
+        border-color: var(--primary-color);
+        outline: none;
+    }
+    
+    /* Увеличиваем область нажатия через псевдоэлемент */
+    .close-modal::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: transparent;
+        border-radius: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .close-modal {
+        top: 8px;
+        right: 8px;
+        width: 52px;
+        height: 52px;
+        font-size: 1.8rem;
+        background: rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* Исправление для всех модальных окон */
+.modal-content {
+    position: relative;
+    /* Обеспечиваем, что кнопка не перекрывается контентом */
+    padding-top: 60px;
+}
+
+/* Дополнительные стили для улучшения доступности */
+.close-modal:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Анимация нажатия для лучшей обратной связи */
+.close-modal:active {
+    animation: buttonPress 0.1s ease-in-out;
+}
+
+@keyframes buttonPress {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
 }

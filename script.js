@@ -109,10 +109,8 @@ if (moreAboutBtn && aboutModal) {
 }
 
 if (closeModalBtn && aboutModal) {
-    closeModalBtn.addEventListener('click', () => {
-        aboutModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
+    // Основной обработчик уже добавлен в enhanceCloseButton()
+    // Дополнительные действия, если нужны
 }
 
 // Закрытие модального окна при клике вне его
@@ -1126,3 +1124,164 @@ document.addEventListener('keydown', (e) => {
         window.collapseAllCards();
     }
 });
+
+// ===== УЛУЧШЕННАЯ ОБРАБОТКА TOUCH-СОБЫТИЙ ДЛЯ МОБИЛЬНЫХ =====
+
+// Функция для улучшенной обработки кнопки закрытия модального окна
+function enhanceCloseButton() {
+    const closeButtons = document.querySelectorAll('.close-modal');
+    
+    closeButtons.forEach(button => {
+        // Добавляем обработчики для всех типов событий
+        
+        // Стандартный клик (работает на всех устройствах)
+        button.addEventListener('click', handleModalClose);
+        
+        // Touch события для мобильных устройств
+        button.addEventListener('touchstart', handleTouchStart, { passive: false });
+        button.addEventListener('touchend', handleTouchEnd, { passive: false });
+        
+        // Keyboard события для доступности
+        button.addEventListener('keydown', handleKeyDown);
+    });
+}
+
+// Переменные для отслеживания touch-событий
+let touchStartTime = 0;
+let touchStartTarget = null;
+
+function handleTouchStart(e) {
+    touchStartTime = Date.now();
+    touchStartTarget = e.target;
+    
+    // Добавляем визуальную обратную связь
+    e.target.style.transform = 'scale(0.95)';
+    e.target.style.background = 'rgba(0, 0, 0, 0.2)';
+}
+
+function handleTouchEnd(e) {
+    const touchEndTime = Date.now();
+    const touchDuration = touchEndTime - touchStartTime;
+    
+    // Убираем визуальную обратную связь
+    setTimeout(() => {
+        e.target.style.transform = '';
+        e.target.style.background = '';
+    }, 100);
+    
+    // Проверяем, что это был быстрый тап на том же элементе
+    if (touchDuration < 500 && e.target === touchStartTarget) {
+        e.preventDefault();
+        e.stopPropagation();
+        handleModalClose(e);
+    }
+}
+
+function handleKeyDown(e) {
+    // Обработка Enter и Space для доступности
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleModalClose(e);
+    }
+}
+
+function handleModalClose(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Находим родительское модальное окно
+    const modal = e.target.closest('.modal');
+    
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // Специальная обработка для lightbox
+        if (modal.id === 'galleryLightbox') {
+            closeGallery();
+        }
+        
+        // Специальная обработка для карусели проектов
+        if (modal.id === 'projectCarouselModal') {
+            // Дополнительная логика, если нужна
+        }
+        
+        console.log('Модальное окно закрыто:', modal.id);
+    }
+}
+
+// Функция для предотвращения случайного закрытия при скролле
+function preventAccidentalClose() {
+    const modals = document.querySelectorAll('.modal');
+    
+    modals.forEach(modal => {
+        modal.addEventListener('touchmove', (e) => {
+            // Разрешаем скролл внутри модального окна
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent && modalContent.contains(e.target)) {
+                // Не препятствуем скроллу внутри контента
+                return;
+            }
+        }, { passive: true });
+    });
+}
+
+// Улучшенная функция для определения мобильного устройства
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+           ('ontouchstart' in window) ||
+           (navigator.maxTouchPoints > 0);
+}
+
+// Добавление дополнительных стилей для мобильных устройств
+function addMobileStyles() {
+    if (isMobileDevice()) {
+        const style = document.createElement('style');
+        style.textContent = `
+            .modal-content {
+                /* Дополнительные отступы для мобильных */
+                padding: 60px 20px 20px 20px;
+                max-height: 95vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .close-modal {
+                /* Улучшенная видимость на мобильных */
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+            }
+            
+            /* Увеличенная область тапа */
+            .close-modal::after {
+                content: '';
+                position: absolute;
+                top: -15px;
+                left: -15px;
+                right: -15px;
+                bottom: -15px;
+                background: transparent;
+                border-radius: 50%;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Инициализация улучшений при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    enhanceCloseButton();
+    preventAccidentalClose();
+    addMobileStyles();
+    
+    console.log('Улучшения для мобильных устройств загружены');
+});
+
+// Дополнительная инициализация после загрузки динамического контента
+function reinitializeCloseButtons() {
+    enhanceCloseButton();
+}
+
+// Экспорт функции для использования в основном скрипте
+window.reinitializeCloseButtons = reinitializeCloseButtons;
