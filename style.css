@@ -10,6 +10,26 @@
     --bg-color: #ffffff;
     --card-bg: #f9f9f9;
     
+    /* НОВЫЕ переменные для полного покрытия */
+    --text-color: #333333;
+    --text-muted: #666666;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --section-bg: #ffffff;
+    --footer-bg: #4A4A4A;
+    --modal-bg: #ffffff;
+    --input-bg: #ffffff;
+    --hover-bg: rgba(255, 107, 53, 0.1);
+    --timeline-bg: #ffffff;
+    --qualification-bg: #f9f9f9;
+    --portfolio-bg: #ffffff;
+    --contact-bg: #ffffff;
+    
+    /* Градиенты */
+    --bg-gradient: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+    --bg-overlay: linear-gradient(120deg, rgba(255,107,53,0.05) 0%, rgba(255,255,255,0.1) 100%);
+    
     /* Отступы */
     --section-padding: 80px 0;
     --section-spacing: 60px;
@@ -25,13 +45,15 @@
 body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
-    color: var(--dark-color);
-    background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+    color: var(--text-color);
+    background: var(--bg-color);
     overflow-x: hidden;
     scroll-behavior: smooth;
     position: relative;
     min-height: 100vh;
+    transition: all 0.3s ease;
 }
+
 
 body::before {
     content: '';
@@ -40,15 +62,17 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(120deg, rgba(255,107,53,0.05) 0%, rgba(255,255,255,0.1) 100%);
+    background: var(--bg-overlay);
     z-index: -1;
+    transition: all 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: var(--secondary-color);
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 h2 {
@@ -73,8 +97,9 @@ h2:after {
 p {
     margin-bottom: 1rem;
     text-align: center;
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
-
 a {
     text-decoration: none;
     color: var(--primary-color);
@@ -128,11 +153,13 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: var(--header-bg);
+    box-shadow: 0 2px 10px var(--shadow-color);
     padding: 10px 0;
     transition: all 0.3s ease;
     height: 70px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .header-container {
@@ -140,7 +167,9 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .logo {
@@ -153,7 +182,7 @@ header {
 }
 
 .logo span {
-    color: var(--secondary-color);
+    color: var(--text-color);
 }
 
 nav ul {
@@ -168,7 +197,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: var(--secondary-color);
+    color: var(--text-color);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -176,6 +205,7 @@ nav ul li a {
     border-radius: 4px;
     font-size: 0.9rem;
     white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
 nav ul li a i {
@@ -184,12 +214,21 @@ nav ul li a i {
 }
 
 nav ul li a:hover {
-    background: rgba(255, 107, 53, 0.1);
+    background: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+/* ДОБАВИТЬ новый стиль: */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
 }
 
 .nav-active {
-    background: rgba(255, 107, 53, 0.15);
-    color: var(--primary-color);
+    background: var(--hover-bg);
+    color: var(--primary-color) !important;
 }
 
 .mobile-menu-btn {
@@ -212,11 +251,11 @@ nav ul li a:hover {
     right: -300px;
     width: 280px;
     height: 100vh;
-    background: white;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    background: var(--bg-color);
+    box-shadow: -5px 0 15px var(--shadow-color);
     z-index: 1001;
     padding: 70px 20px 20px;
-    transition: right 0.3s ease;
+    transition: right 0.3s ease, background-color 0.3s ease;
 }
 
 .mobile-menu.active {
@@ -232,12 +271,18 @@ nav ul li a:hover {
 }
 
 .mobile-menu ul li a {
-    color: var(--secondary-color);
+    color: var(--text-color);
     font-size: 1.1rem;
     display: flex;
     align-items: center;
     padding: 10px 15px;
     border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu ul li a:hover {
+    background: var(--hover-bg);
+    color: var(--primary-color);
 }
 
 .mobile-menu ul li a i {
@@ -254,8 +299,9 @@ nav ul li a:hover {
     font-size: 1.5rem;
     background: none;
     border: none;
-    color: var(--secondary-color);
+    color: var(--text-color);
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .overlay {
@@ -280,6 +326,9 @@ section {
     align-items: center;
     padding: var(--section-padding);
     scroll-margin-top: 70px;
+    background: var(--section-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
 
 /* Навигационные кнопки вверх/вниз */
@@ -304,16 +353,17 @@ section {
 .scroll-btn {
     width: 45px;
     height: 45px;
-    background: var(--primary-color);
+    background: var(--primary-color, #FF6B35);
     color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    border: none;
+    font-size: 1.1rem;
 }
 
 .scroll-btn:hover {
@@ -326,6 +376,7 @@ section {
     background: transparent;
     text-align: center;
     padding-top: 100px;
+    transition: all 0.3s ease;
 }
 
 .hero-content {
@@ -374,6 +425,7 @@ section {
 /* Секция "Обо мне" */
 #about {
     background: var(--light-color);
+    transition: all 0.3s ease;
 }
 
 .about-content {
@@ -2018,4 +2070,785 @@ footer {
     0% { transform: scale(1); }
     50% { transform: scale(0.9); }
     100% { transform: scale(1); }
+}
+
+/* ===== КРУГОВАЯ ДИАГРАММА ПРОГРЕССА ===== */
+
+/* Контейнер для диаграммы прогресса */
+/* ИСПРАВЛЕНИЕ: Убираем "куб" вокруг круговой диаграммы */
+
+.progress-indicator {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    
+    /* ВАЖНО: Убираем любой фон и границы */
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.progress-indicator:hover {
+    transform: scale(1.05);
+    /* Убираем любые эффекты фона при hover */
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем фон у SVG */
+.progress-ring {
+    width: 60px;
+    height: 60px;
+    background: none !important;
+    background-color: transparent !important;
+    /* Улучшаем тень только для самого круга */
+    filter: drop-shadow(0 2px 8px rgba(255, 107, 53, 0.3));
+}
+
+/* Если куб все еще виден, добавьте эти правила */
+.progress-indicator * {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* Альтернативный вариант: полностью прозрачный контейнер */
+.progress-indicator::before,
+.progress-indicator::after {
+    display: none !important;
+}
+
+/* Для отладки: временно добавьте красную границу чтобы увидеть границы элемента */
+/*
+.progress-indicator {
+    border: 1px solid red !important;
+}
+*/
+
+/* Анимация прогресса */
+.progress-ring-circle {
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Текст внутри круга */
+.progress-text {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--primary-color);
+    text-align: center;
+    line-height: 1;
+    pointer-events: none;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-text .current {
+    font-size: 13px;
+    color: var(--primary-color);
+}
+
+.progress-text .divider {
+    font-size: 10px;
+    opacity: 0.6;
+    margin: 0 1px;
+}
+
+.progress-text .total {
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* Tooltip */
+.progress-tooltip {
+    position: absolute;
+    left: -85px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.85) !important; /* Принудительно задаем фон */
+    color: white !important;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    line-height: 1.3;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Убираем сброс стилей для tooltip */
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.progress-tooltip::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: rgba(0, 0, 0, 0.85);
+    background: none !important; /* Важно для стрелочки */
+}
+
+/* Показываем tooltip при hover */
+.progress-indicator:hover .progress-tooltip {
+    opacity: 1 !important;
+    visibility: visible !important;
+    left: -90px;
+}
+
+.progress-tooltip .section-name {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: white !important;
+    background: none !important;
+}
+
+.progress-tooltip .section-progress {
+    display: block;
+    font-size: 10px;
+    opacity: 0.8;
+    color: white !important;
+    background: none !important;
+}
+/* Убираем сброс стилей только для содержимого tooltip */
+.progress-tooltip * {
+    background: transparent !important;
+    border: none !important;
+}
+/* НО возвращаем фон самому tooltip */
+.progress-tooltip {
+    background: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Анимации */
+.progress-indicator.updating {
+    animation: progress-pulse 0.6s ease-out;
+}
+
+@keyframes progress-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Эффект завершения (когда все разделы просмотрены) */
+.progress-indicator.completed .progress-ring-circle {
+    stroke: #4CAF50 !important;
+    filter: drop-shadow(0 0 12px rgba(76, 175, 80, 0.6));
+}
+
+.progress-indicator.completed .progress-text {
+    color: #4CAF50;
+}
+
+.progress-indicator.completed {
+    animation: completion-celebration 1s ease-out;
+}
+
+@keyframes completion-celebration {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2) rotate(5deg); }
+    50% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.15) rotate(3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Обновленные стили для навигационных кнопок */
+.scroll-nav.top {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Для мобильных - показываем tooltip */
+@media (max-width: 992px) {
+    .progress-tooltip {
+        /* Вместо display: none делаем адаптивный tooltip */
+        left: -70px;
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+    
+    .progress-indicator:hover .progress-tooltip {
+        left: -75px;
+    }
+}
+
+@media (max-width: 576px) {
+    .progress-tooltip {
+        /* На очень маленьких экранах перемещаем tooltip вверх */
+        left: 50%;
+        top: -45px;
+        transform: translateX(-50%);
+    }
+    
+    .progress-tooltip::after {
+        right: auto;
+        left: 50%;
+        top: 100%;
+        transform: translateX(-50%);
+        border-left-color: transparent;
+        border-top-color: rgba(0, 0, 0, 0.85);
+    }
+    
+    .progress-indicator:hover .progress-tooltip {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+
+/* ===== ТЕМНАЯ ТЕМА ===== */
+[data-theme="dark"] {
+    --home-bg: linear-gradient(135deg, #1a237e 0%, #3f51b5 50%, #1e3a8a 100%);
+    --primary-color: #FF8C5A;
+    --primary-dark: #FF6B35;
+    --primary-light: #FFB087;
+    --secondary-color: #E0E0E0;
+    --light-color: #2A2A2A;
+    --dark-color: #FFFFFF;
+    --bg-color: #1A1A1A;
+    --card-bg: #2D2D2D;
+    --text-color: #FFFFFF;
+    --text-muted: #B0B0B0;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --header-bg: rgba(26, 26, 26, 0.95);
+    --section-bg: #1A1A1A;
+    --footer-bg: #0F0F0F;
+    --modal-bg: #2D2D2D;
+    --input-bg: #404040;
+    --hover-bg: rgba(255, 140, 90, 0.1);
+    --timeline-bg: #2D2D2D;
+    --qualification-bg: #2D2D2D;
+    --portfolio-bg: #2D2D2D;
+    --contact-bg: #2D2D2D;
+    
+    --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    --bg-overlay: linear-gradient(120deg, rgba(255,140,90,0.1) 0%, rgba(45,45,45,0.2) 100%);
+}
+
+/* Темно-синий градиентный фон для главной секции в темной теме */
+[data-theme="dark"] #home {
+    background: var(--home-bg) !important;
+    position: relative;
+}
+
+/* Добавляем overlay для лучшего контраста текста в темной теме */
+[data-theme="dark"] #home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Убеждаемся что контент поверх overlay */
+[data-theme="dark"] #home .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Улучшаем читаемость аватара в темной теме */
+[data-theme="dark"] .hero-img {
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Добавляем легкое свечение тексту для лучшей читаемости */
+[data-theme="dark"] .hero-title,
+[data-theme="dark"] .hero-subtitle,
+[data-theme="dark"] .hero-fullname {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== */
+.theme-toggle {
+    width: 50px;
+    height: 26px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.theme-toggle-track {
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+    border-radius: 13px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    border: 2px solid var(--border-color);
+}
+
+.theme-toggle-thumb {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-icon {
+    font-size: 10px;
+    color: #FFD700;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle.active .theme-toggle-track {
+    background: var(--primary-color);
+    border-color: var(--primary-dark);
+}
+
+.theme-toggle.active .theme-toggle-thumb {
+    transform: translateX(22px);
+    background: #2D2D2D;
+}
+
+.theme-toggle.active .theme-icon {
+    color: #87CEEB;
+}
+
+/* Мобильная версия */
+.theme-toggle.mobile {
+    width: 40px;
+    height: 22px;
+}
+
+.theme-toggle.mobile .theme-toggle-thumb {
+    width: 16px;
+    height: 16px;
+}
+
+.theme-toggle.mobile.active .theme-toggle-thumb {
+    transform: translateX(16px);
+}
+
+.theme-toggle.mobile .theme-icon {
+    font-size: 8px;
+}
+
+
+/* Мобильное меню */
+.mobile-theme-toggle {
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.mobile-theme-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.mobile-theme-item i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    width: 25px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.mobile-theme-item span {
+    flex-grow: 1;
+    font-weight: 500;
+}
+
+/* ===== ОБНОВЛЕНИЯ КОМПОНЕНТОВ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
+.modal-content,
+.qualification-card,
+.portfolio-item,
+.contact-card,
+.timeline-content {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.mobile-menu {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.mobile-menu ul li a {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] footer {
+    background: #0F0F0F;
+}
+
+/* Эффекты */
+.theme-toggle:hover .theme-toggle-track {
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .header-controls {
+        display: none;
+    }
+}
+
+/* Плавные переходы */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===== КРИТИЧЕСКИЕ ИСПРАВЛЕНИЯ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
+
+/* 1. ИСПРАВЛЕНИЕ: Модальные окна используют старые цвета */
+.modal-content {
+    background: var(--modal-bg) !important; /* Добавляем !important */
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+/* ИСПРАВЛЕНИЕ: Списки в модальных окнах */
+.modal-list li {
+    border-bottom: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+}
+
+.modal-list li:last-child {
+    border-bottom: none;
+}
+
+/* 2. ИСПРАВЛЕНИЕ: Карточки квалификации */
+.qualification-card {
+    background: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.qualification-title {
+    color: var(--text-color) !important; /* Исправляем заголовки */
+}
+
+.qualification-content p {
+    color: var(--text-muted) !important; /* Исправляем описания */
+}
+
+/* 3. ИСПРАВЛЕНИЕ: Портфолио карточки */
+.portfolio-item {
+    background: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.portfolio-title {
+    color: var(--text-color) !important;
+}
+
+.portfolio-description {
+    color: var(--text-muted) !important;
+}
+
+.competition-name {
+    color: var(--text-color) !important;
+}
+
+.achievement-place {
+    color: var(--primary-color) !important;
+}
+
+.competition-location,
+.team-info {
+    color: var(--text-muted) !important;
+}
+
+/* 4. ИСПРАВЛЕНИЕ: Контактные карточки */
+.contact-card {
+    background: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.contact-name {
+    color: var(--text-color) !important;
+}
+
+.contact-icon {
+    color: var(--primary-color) !important;
+}
+
+/* 5. ИСПРАВЛЕНИЕ: Timeline элементы используют хардкод цвета */
+.timeline-content {
+    background: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-left: 3px solid var(--primary-color);
+    transition: all 0.4s ease;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    border-left: none;
+    border-right: 3px solid var(--primary-color);
+}
+
+/* ИСПРАВЛЕНИЕ: Timeline детали */
+.short-description {
+    color: var(--text-muted) !important;
+}
+
+.full-details p {
+    color: var(--text-color) !important;
+}
+
+.full-details li {
+    color: var(--text-muted) !important;
+}
+
+.full-details li::before {
+    color: var(--primary-color) !important;
+}
+
+/* 6. ИСПРАВЛЕНИЕ: Футер */
+footer {
+    background: var(--footer-bg) !important;
+    color: var(--text-color) !important;
+    transition: all 0.3s ease;
+}
+
+/* 7. ИСПРАВЛЕНИЕ: Секция "О себе" использует хардкод */
+#about {
+    background: var(--light-color) !important;
+    transition: all 0.3s ease;
+}
+
+/* 8. ИСПРАВЛЕНИЕ: Experience секция */
+#experience {
+    background: var(--section-bg) !important;
+}
+
+/* 9. ИСПРАВЛЕНИЕ: Главная секция заголовки */
+.hero-title {
+    color: var(--text-color) !important;
+}
+
+.hero-fullname, 
+.hero-subtitle {
+    color: var(--primary-color) !important;
+}
+
+/* 10. ИСПРАВЛЕНИЕ: Карусель фото */
+.carousel-img {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+/* 11. ИСПРАВЛЕНИЕ: Achievement info блоки */
+.achievement-info {
+    background: var(--hover-bg) !important;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+/* 12. ИСПРАВЛЕНИЕ: No-demo блоки */
+.no-demo {
+    background: var(--hover-bg) !important;
+    color: var(--text-muted) !important;
+    border: 2px dashed var(--border-color) !important;
+}
+
+/* 13. ИСПРАВЛЕНИЕ: Tooltip для темной темы */
+[data-theme="dark"] .progress-tooltip {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: black !important;
+}
+
+[data-theme="dark"] .progress-tooltip .section-name,
+[data-theme="dark"] .progress-tooltip .section-progress {
+    color: black !important;
+}
+
+[data-theme="dark"] .progress-tooltip::after {
+    border-left-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 14. ИСПРАВЛЕНИЕ: Кнопка закрытия модального окна */
+.close-modal {
+    color: var(--text-color) !important;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: var(--hover-bg) !important;
+    color: var(--primary-color) !important;
+}
+
+/* 15. ИСПРАВЛЕНИЕ: Адаптивность переключателя */
+@media (max-width: 1200px) {
+    .header-controls {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1201px) {
+    .mobile-theme-toggle {
+        display: none !important;
+    }
+}
+
+/* 16. ИСПРАВЛЕНИЕ: Мобильное меню */
+.mobile-menu {
+    background: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    transition: right 0.3s ease, background-color 0.3s ease;
+}
+
+.mobile-menu ul li a {
+    color: var(--text-color) !important;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu ul li a:hover {
+    background: var(--hover-bg) !important;
+    color: var(--primary-color) !important;
+}
+
+.close-menu {
+    color: var(--text-color) !important;
+    transition: color 0.3s ease;
+}
+
+/* 17. ИСПРАВЛЕНИЕ: Мобильный переключатель темы */
+.mobile-theme-item {
+    color: var(--text-color) !important;
+    transition: all 0.3s ease;
+}
+
+.mobile-theme-item i {
+    color: var(--primary-color) !important;
+}
+
+.mobile-theme-item span {
+    color: var(--text-color) !important;
+}
+
+/* 18. ИСПРАВЛЕНИЕ: Карусель элементы */
+.photo-counter {
+    background: rgba(0,0,0,0.5) !important;
+    color: white !important;
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .photo-counter {
+    background: rgba(255,255,255,0.2) !important;
+    color: var(--text-color) !important;
+}
+
+/* 19. ИСПРАВЛЕНИЕ: Социальные ссылки в футере */
+.social-links a {
+    background: var(--hover-bg) !important;
+    color: var(--text-color) !important;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* 20. ИСПРАВЛЕНИЕ: Copyright в футере */
+.copyright {
+    color: var(--text-muted) !important;
+}
+
+/* 21. ИСПРАВЛЕНИЕ: Логотип в футере */
+footer .logo {
+    color: var(--primary-color) !important;
+}
+
+/* 22. ДОПОЛНИТЕЛЬНОЕ: Убираем конфликтующие стили */
+.portfolio-item.achievement-only {
+    border: 2px solid var(--primary-color) !important;
+}
+
+.portfolio-item.achievement-only:hover {
+    border-color: var(--primary-color) !important;
+}
+
+/* 23. ИСПРАВЛЕНИЕ: Qualification type badges */
+.qualification-type {
+    background: var(--primary-light) !important;
+    color: white !important;
+}
+
+/* 24. ИСПРАВЛЕНИЕ: Contact links */
+.contact-link {
+    background: var(--primary-light) !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    background: var(--primary-color) !important;
+}
+
+/* 25. ОКОНЧАТЕЛЬНОЕ ИСПРАВЛЕНИЕ: Принудительно применяем переменные везде */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Убираем любые хардкод цвета */
+body * {
+    border-color: var(--border-color) !important;
+}
+
+/* Исключения для элементов которые должны оставаться без изменений */
+.achievement-badge,
+.portfolio-type,
+.qualification-type,
+.contact-link,
+.btn {
+    /* Эти элементы сохраняют свои цвета */
 }

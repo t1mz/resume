@@ -159,6 +159,11 @@ function scrollToSection(index) {
         // Обновление активного пункта меню
         const targetId = `#${sections[index].id}`;
         updateActiveNav(targetId);
+
+        // ДОБАВЬТЕ ЭТУ СТРОКУ:
+        if (window.updateSectionProgress) {
+            window.updateSectionProgress(index);
+        }
     }
 }
 
@@ -176,16 +181,17 @@ window.addEventListener('scroll', () => {
     });
     
     // Обновление активного пункта меню
-    if (current) {
-        updateActiveNav(`#${current}`);
-        
-        // Обновление currentSection
-        sections.forEach((section, index) => {
-            if (section.id === current) {
-                currentSection = index;
+    // Обновление currentSection
+    sections.forEach((section, index) => {
+        if (section.id === current) {
+            currentSection = index;
+            
+            // ДОБАВЬТЕ ЭТУ СТРОКУ:
+            if (window.updateSectionProgress) {
+                window.updateSectionProgress(index);
             }
-        });
-    }
+        }
+    });
 });
 
 // ========== ИСПРАВЛЕНИЕ: РАЗДЕЛЕНИЕ LIGHTBOX И ГАЛЕРЕИ ==========
@@ -1285,3 +1291,623 @@ function reinitializeCloseButtons() {
 
 // Экспорт функции для использования в основном скрипте
 window.reinitializeCloseButtons = reinitializeCloseButtons;
+
+// Ленивая загрузка изображений
+const images = document.querySelectorAll('img[data-src]');
+const imageObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      imageObserver.unobserve(img);
+    }
+  });
+});
+
+// ===== ИСПРАВЛЕННАЯ КРУГОВАЯ ДИАГРАММА - СОВМЕСТИМОСТЬ С СУЩЕСТВУЮЩИМ КОДОМ =====
+
+class SectionProgressTracker {
+    constructor() {
+        this.sections = [
+            { id: 'home', name: 'Главная' },
+            { id: 'about', name: 'Обо мне' },
+            { id: 'experience', name: 'Опыт работы' },
+            { id: 'qualification', name: 'Квалификация' },
+            { id: 'portfolio', name: 'Портфолио' },
+            { id: 'photos', name: 'Фотогалерея' },
+            { id: 'contact', name: 'Контакты' },
+            { id: 'resume', name: 'Резюме' }
+        ];
+        
+        this.currentSection = 0;
+        this.totalSections = this.sections.length;
+        this.circumference = 2 * Math.PI * 25;
+        
+        // Элементы DOM
+        this.progressCircle = document.querySelector('.progress-ring-circle');
+        this.progressText = document.querySelector('.progress-text');
+        this.progressIndicator = document.getElementById('sectionProgress');
+        this.tooltip = document.querySelector('.progress-tooltip');
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.progressCircle) {
+            console.warn('Элементы круговой диаграммы не найдены');
+            return;
+        }
+        
+        // Настройка SVG
+        this.progressCircle.style.strokeDasharray = this.circumference;
+        this.progressCircle.style.strokeDashoffset = this.circumference;
+        
+        this.updateProgress();
+        this.bindEvents();
+        
+        console.log('📊 Трекер прогресса инициализирован');
+    }
+    
+    updateProgress() {
+        if (!this.progressCircle) return;
+        
+        const progress = ((this.currentSection + 1) / this.totalSections) * 100;
+        const offset = this.circumference - (progress / 100) * this.circumference;
+        
+        // Анимация круга
+        this.progressCircle.style.strokeDashoffset = offset;
+        
+        // Обновление текста
+        if (this.progressText) {
+            const currentSpan = this.progressText.querySelector('.current');
+            const totalSpan = this.progressText.querySelector('.total');
+            
+            if (currentSpan) currentSpan.textContent = this.currentSection + 1;
+            if (totalSpan) totalSpan.textContent = this.totalSections;
+        }
+        
+        // Обновление tooltip
+        this.updateTooltip();
+        
+        // Анимация обновления
+        if (this.progressIndicator) {
+            this.progressIndicator.classList.add('updating');
+            setTimeout(() => {
+                this.progressIndicator.classList.remove('updating');
+            }, 600);
+            
+            // Эффект завершения при 100%
+            if (progress === 100) {
+                setTimeout(() => {
+                    this.progressIndicator.classList.add('completed');
+                    console.log('🎉 Все разделы просмотрены!');
+                }, 800);
+            } else {
+                this.progressIndicator.classList.remove('completed');
+            }
+        }
+    }
+    
+    updateTooltip() {
+        if (!this.tooltip) return;
+        
+        const currentSectionData = this.sections[this.currentSection];
+        const progress = ((this.currentSection + 1) / this.totalSections) * 100;
+        
+        const nameSpan = this.tooltip.querySelector('.section-name');
+        const progressSpan = this.tooltip.querySelector('.section-progress');
+        
+        if (nameSpan) nameSpan.textContent = currentSectionData.name;
+        if (progressSpan) progressSpan.textContent = Math.round(progress) + '%';
+    }
+    
+    detectCurrentSection() {
+        const sectionElements = document.querySelectorAll('section');
+        let newCurrentSection = 0;
+        
+        sectionElements.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= window.innerHeight / 3 && rect.bottom > window.innerHeight / 3) {
+                newCurrentSection = index;
+            }
+        });
+        
+        // Обновляем только если раздел изменился
+        if (newCurrentSection !== this.currentSection) {
+            this.currentSection = newCurrentSection;
+            this.updateProgress();
+        }
+    }
+    
+    bindEvents() {
+        // Отслеживание скролла - НЕ МЕШАЕМ существующему коду
+        let scrollTimeout;
+        const originalScrollHandler = () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                this.detectCurrentSection();
+            }, 100);
+        };
+        
+        window.addEventListener('scroll', originalScrollHandler);
+        
+        // НЕ ТРОГАЕМ существующие обработчики кнопок!
+        // Они должны работать как раньше
+        
+        // Клик по диаграмме - только для быстрого перехода
+        if (this.progressIndicator) {
+            this.progressIndicator.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Переход к следующему разделу
+                const nextIndex = (this.currentSection + 1) % this.totalSections;
+                this.goToSection(nextIndex);
+            });
+        }
+    }
+    
+    // Метод для программного перехода к разделу
+    goToSection(sectionIndex) {
+        if (sectionIndex < 0 || sectionIndex >= this.totalSections) return;
+        
+        const targetId = this.sections[sectionIndex].id;
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Используем существующую функцию скролла если она есть
+            if (typeof scrollToSection === 'function') {
+                scrollToSection(sectionIndex);
+            } else {
+                // Fallback
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Обновляем текущий раздел
+            this.currentSection = sectionIndex;
+            this.updateProgress();
+        }
+    }
+}
+
+// Глобальная переменная для доступа из других частей кода
+let sectionProgressTracker = null;
+
+// Инициализация ПОСЛЕ загрузки всего остального кода
+function initProgressTracker() {
+    // Ждем чтобы убедиться что все элементы созданы
+    setTimeout(() => {
+        if (!sectionProgressTracker) {
+            sectionProgressTracker = new SectionProgressTracker();
+            
+            // Интеграция с существующей системой навигации
+            const originalCurrentSection = window.currentSection || 0;
+            if (sectionProgressTracker && originalCurrentSection !== undefined) {
+                sectionProgressTracker.currentSection = originalCurrentSection;
+                sectionProgressTracker.updateProgress();
+            }
+        }
+    }, 500);
+}
+
+// Функция для обновления прогресса извне (для интеграции)
+function updateSectionProgress(sectionIndex) {
+    if (sectionProgressTracker && sectionIndex !== undefined) {
+        sectionProgressTracker.currentSection = sectionIndex;
+        sectionProgressTracker.updateProgress();
+    }
+}
+
+// Инициализация
+document.addEventListener('DOMContentLoaded', initProgressTracker);
+window.addEventListener('load', initProgressTracker);
+
+// Экспорт для использования в существующем коде
+window.updateSectionProgress = updateSectionProgress;
+window.sectionProgressTracker = sectionProgressTracker;
+
+// ===== ИСПРАВЛЕННАЯ СИСТЕМА ТЕМНОЙ ТЕМЫ =====
+
+class ThemeManager {
+    constructor() {
+        this.currentTheme = 'light';
+        this.toggleButton = document.getElementById('themeToggle');
+        this.mobileToggleButton = document.getElementById('mobileThemeToggle');
+        this.storageKey = 'timofey-website-theme';
+        
+        this.init();
+    }
+    
+    init() {
+        // Ждем полной загрузки DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.initializeTheme();
+            });
+        } else {
+            this.initializeTheme();
+        }
+    }
+    
+    initializeTheme() {
+        // Загружаем сохраненную тему или определяем системную
+        this.loadTheme();
+        
+        // Привязываем обработчики событий
+        this.bindEvents();
+        
+        // Обновляем состояние переключателей
+        this.updateToggleStates();
+        
+        console.log('🎨 Система тем инициализирована:', this.currentTheme);
+    }
+    
+    loadTheme() {
+        // Проверяем сохраненную тему
+        const savedTheme = localStorage.getItem(this.storageKey);
+        
+        if (savedTheme) {
+            this.currentTheme = savedTheme;
+        } else {
+            // Определяем системную тему
+            this.currentTheme = this.getSystemTheme();
+        }
+        
+        this.applyTheme(this.currentTheme);
+    }
+    
+    getSystemTheme() {
+        // Проверяем системные настройки пользователя
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+        }
+        return 'light';
+    }
+    
+    applyTheme(theme) {
+        // Применяем тему к корневому элементу
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+        
+        this.currentTheme = theme;
+        
+        // Сохраняем в localStorage
+        localStorage.setItem(this.storageKey, theme);
+        
+        // Обновляем meta тег для мобильных браузеров
+        this.updateMetaThemeColor(theme);
+        
+        // Уведомляем другие компоненты об изменении темы
+        this.dispatchThemeChangeEvent(theme);
+    }
+    
+    updateMetaThemeColor(theme) {
+        let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        
+        if (!metaThemeColor) {
+            metaThemeColor = document.createElement('meta');
+            metaThemeColor.name = 'theme-color';
+            document.head.appendChild(metaThemeColor);
+        }
+        
+        metaThemeColor.content = theme === 'dark' ? '#1A1A1A' : '#FFFFFF';
+    }
+    
+    dispatchThemeChangeEvent(theme) {
+        const event = new CustomEvent('themeChanged', {
+            detail: { theme }
+        });
+        window.dispatchEvent(event);
+    }
+    
+    toggleTheme() {
+        const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+        this.applyTheme(newTheme);
+        this.updateToggleStates();
+        
+        // Добавляем небольшую анимацию
+        this.animateThemeChange();
+        
+        console.log('🎨 Тема изменена на:', newTheme);
+    }
+    
+    updateToggleStates() {
+        const isDark = this.currentTheme === 'dark';
+        
+        // Обновляем десктопный переключатель
+        if (this.toggleButton) {
+            this.toggleButton.classList.toggle('active', isDark);
+        }
+        
+        // Обновляем мобильный переключатель
+        if (this.mobileToggleButton) {
+            this.mobileToggleButton.classList.toggle('active', isDark);
+        }
+        
+        // Обновляем иконки
+        this.updateThemeIcons(isDark);
+    }
+    
+    updateThemeIcons(isDark) {
+        const icons = document.querySelectorAll('.theme-icon');
+        
+        icons.forEach(icon => {
+            if (isDark) {
+                icon.className = 'theme-icon fas fa-moon';
+            } else {
+                icon.className = 'theme-icon fas fa-sun';
+            }
+        });
+    }
+    
+    animateThemeChange() {
+        // Добавляем эффект мигания при смене темы
+        document.body.style.transition = 'all 0.3s ease';
+        
+        // Небольшая задержка для плавности
+        setTimeout(() => {
+            document.body.style.transition = '';
+        }, 300);
+    }
+    
+    bindEvents() {
+        // Десктопный переключатель
+        if (this.toggleButton) {
+            this.toggleButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.toggleTheme();
+            });
+        }
+        
+        // Мобильный переключатель
+        if (this.mobileToggleButton) {
+            this.mobileToggleButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleTheme();
+            });
+        }
+        
+        // Отслеживаем изменения системной темы
+        if (window.matchMedia) {
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Для старых браузеров
+            if (mediaQuery.addListener) {
+                mediaQuery.addListener((e) => {
+                    this.handleSystemThemeChange(e);
+                });
+            } else {
+                // Для новых браузеров
+                mediaQuery.addEventListener('change', (e) => {
+                    this.handleSystemThemeChange(e);
+                });
+            }
+        }
+        
+        // Горячие клавиши
+        document.addEventListener('keydown', (e) => {
+            // Ctrl + Shift + D для переключения темы
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                e.preventDefault();
+                this.toggleTheme();
+            }
+        });
+    }
+    
+    handleSystemThemeChange(e) {
+        // Автоматически переключаем тему при изменении системной темы
+        // (только если пользователь не выбрал тему вручную)
+        if (!localStorage.getItem(this.storageKey)) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            this.applyTheme(newTheme);
+            this.updateToggleStates();
+        }
+    }
+    
+    // Публичные методы для управления извне
+    setTheme(theme) {
+        if (theme === 'light' || theme === 'dark') {
+            this.applyTheme(theme);
+            this.updateToggleStates();
+        }
+    }
+    
+    getCurrentTheme() {
+        return this.currentTheme;
+    }
+    
+    // Автоматическое переключение по времени (опционально)
+    enableAutoTheme() {
+        const hour = new Date().getHours();
+        const autoTheme = (hour >= 18 || hour <= 6) ? 'dark' : 'light';
+        
+        if (this.currentTheme !== autoTheme) {
+            this.setTheme(autoTheme);
+            console.log('🌅 Автоматическое переключение темы на:', autoTheme);
+        }
+    }
+}
+
+// ===== ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ ТЕМ =====
+let themeManager;
+
+// ЗАМЕНИТЕ СУЩЕСТВУЮЩИЙ КОД ИНИЦИАЛИЗАЦИИ ТЕМЫ НА ЭТОТ:
+function initializeThemeSystem() {
+    themeManager = new ThemeManager();
+    
+    // Экспортируем в глобальную область для отладки
+    window.themeManager = themeManager;
+}
+
+// Инициализируем систему тем при загрузке
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeThemeSystem);
+} else {
+    initializeThemeSystem();
+}
+
+// ===== ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ =====
+
+// Функция для получения текущей темы (для использования в других скриптах)
+function getCurrentTheme() {
+    return themeManager ? themeManager.getCurrentTheme() : 'light';
+}
+
+// Функция для программного переключения темы
+function toggleTheme() {
+    if (themeManager) {
+        themeManager.toggleTheme();
+    }
+}
+
+// Функция для установки конкретной темы
+function setTheme(theme) {
+    if (themeManager) {
+        themeManager.setTheme(theme);
+    }
+}
+
+// Слушатель изменений темы для других компонентов
+window.addEventListener('themeChanged', (e) => {
+    console.log('🎨 Тема изменена на:', e.detail.theme);
+    
+    // Здесь можно добавить дополнительную логику
+    // например, обновление цветов диаграмм, карт и т.д.
+    
+    // Обновляем круговую диаграмму прогресса если она существует
+    if (window.sectionProgressTracker) {
+        const progressCircle = document.querySelector('.progress-ring-circle');
+        if (progressCircle && e.detail.theme === 'dark') {
+            // Можно изменить цвета диаграммы для темной темы
+            progressCircle.style.stroke = '#FF8C5A';
+        } else if (progressCircle) {
+            progressCircle.style.stroke = 'url(#progressGradient)';
+        }
+    }
+});
+
+// Экспорт функций для глобального использования
+window.getCurrentTheme = getCurrentTheme;
+window.toggleTheme = toggleTheme;
+window.setTheme = setTheme;
+
+// ===== ИСПРАВЛЕНИЯ ДЛЯ СОВМЕСТИМОСТИ =====
+
+// Убеждаемся, что старый код темы не конфликтует
+document.addEventListener('DOMContentLoaded', () => {
+    // Удаляем дублирующие обработчики если они есть
+    const oldThemeToggles = document.querySelectorAll('[id*="theme"]:not(#themeToggle):not(#mobileThemeToggle)');
+    oldThemeToggles.forEach(toggle => {
+        if (toggle.id !== 'themeToggle' && toggle.id !== 'mobileThemeToggle') {
+            toggle.remove();
+        }
+    });
+    
+    // Проверяем что переключатели находятся в правильных местах
+    const desktopToggle = document.getElementById('themeToggle');
+    const mobileToggle = document.getElementById('mobileThemeToggle');
+    
+    if (!desktopToggle) {
+        console.warn('⚠️ Десктопный переключатель темы не найден. Проверьте HTML структуру.');
+    }
+    
+    if (!mobileToggle) {
+        console.warn('⚠️ Мобильный переключатель темы не найден. Проверьте HTML структуру.');
+    }
+    
+    // Убеждаемся что header-controls находится в header, а не в мобильном меню
+    const headerControls = document.querySelector('.header-controls');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (headerControls && mobileMenu && mobileMenu.contains(headerControls)) {
+        console.warn('⚠️ header-controls находится в мобильном меню. Переместите его в header.');
+    }
+});
+
+// ===== ДОПОЛНИТЕЛЬНЫЕ ИСПРАВЛЕНИЯ ДЛЯ ТЕМНОЙ ТЕМЫ =====
+
+// Функция для принудительного обновления всех цветов
+function forceThemeUpdate() {
+    if (!themeManager) return;
+    
+    const currentTheme = themeManager.getCurrentTheme();
+    
+    // Принудительно применяем тему заново
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+    }
+    
+    // Обновляем все переключатели
+    const toggles = document.querySelectorAll('.theme-toggle');
+    toggles.forEach(toggle => {
+        toggle.classList.toggle('active', currentTheme === 'dark');
+    });
+    
+    // Обновляем иконки
+    const icons = document.querySelectorAll('.theme-icon');
+    icons.forEach(icon => {
+        if (currentTheme === 'dark') {
+            icon.className = 'theme-icon fas fa-moon';
+        } else {
+            icon.className = 'theme-icon fas fa-sun';
+        }
+    });
+    
+    console.log('🔄 Принудительное обновление темы:', currentTheme);
+}
+
+// Функция для диагностики проблем с темой
+function diagnoseThemeIssues() {
+    console.group('🔍 Диагностика темной темы');
+    
+    // Проверяем переключатели
+    const desktopToggle = document.getElementById('themeToggle');
+    const mobileToggle = document.getElementById('mobileThemeToggle');
+    
+    console.log('Десктопный переключатель:', desktopToggle ? '✅ Найден' : '❌ Не найден');
+    console.log('Мобильный переключатель:', mobileToggle ? '✅ Найден' : '❌ Не найден');
+    
+    // Проверяем текущую тему
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    console.log('Текущая тема:', currentTheme || 'light');
+    
+    // Проверяем CSS переменные
+    const computedStyles = getComputedStyle(document.documentElement);
+    const primaryColor = computedStyles.getPropertyValue('--primary-color').trim();
+    const textColor = computedStyles.getPropertyValue('--text-color').trim();
+    const bgColor = computedStyles.getPropertyValue('--bg-color').trim();
+    
+    console.log('CSS переменные:');
+    console.log('  --primary-color:', primaryColor);
+    console.log('  --text-color:', textColor);
+    console.log('  --bg-color:', bgColor);
+    
+    // Проверяем сохраненную тему
+    const savedTheme = localStorage.getItem('timofey-website-theme');
+    console.log('Сохраненная тема:', savedTheme);
+    
+    // Проверяем менеджер тем
+    console.log('Менеджер тем:', themeManager ? '✅ Инициализирован' : '❌ Не инициализирован');
+    
+    console.groupEnd();
+}
+
+// Экспортируем утилиты для отладки
+window.forceThemeUpdate = forceThemeUpdate;
+window.diagnoseThemeIssues = diagnoseThemeIssues;
+
+// ===== АВТОМАТИЧЕСКАЯ ДИАГНОСТИКА ПРИ РАЗРАБОТКЕ =====
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // Запускаем диагностику через 2 секунды после загрузки (только в разработке)
+    setTimeout(() => {
+        console.log('🔧 Режим разработки: запуск автоматической диагностики');
+        diagnoseThemeIssues();
+    }, 2000);
+}

@@ -55,11 +55,23 @@
                     <li><a href="#resume"><i class="fas fa-file-alt"></i>Резюме</a></li>
                 </ul>
             </nav>
+            
+            <!-- ПЕРЕМЕСТИТЬ СЮДА ИЗ МОБИЛЬНОГО МЕНЮ: -->
+            <div class="header-controls">
+                <div class="theme-toggle" id="themeToggle" title="Переключить тему">
+                    <div class="theme-toggle-track">
+                        <div class="theme-toggle-thumb">
+                            <i class="theme-icon fas fa-sun"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <button class="mobile-menu-btn"><i class="fas fa-bars"></i> Меню</button>
         </div>
     </header>
-
-    <!-- Мобильное меню -->
+    
+    <!-- ОБНОВИТЕ МОБИЛЬНОЕ МЕНЮ, УДАЛИВ header-controls ОТТУДА: -->
     <div class="mobile-menu">
         <button class="close-menu"><i class="fas fa-times"></i></button>
         <ul>
@@ -71,6 +83,21 @@
             <li><a href="#photos"><i class="fas fa-camera"></i> Фото</a></li>
             <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
             <li><a href="#resume"><i class="fas fa-file-alt"></i> Резюме</a></li>
+    
+            <!-- МОБИЛЬНЫЙ ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ОСТАЕТСЯ ЗДЕСЬ: -->
+            <li class="mobile-theme-toggle">
+                <div class="mobile-theme-item">
+                    <i class="fas fa-palette"></i>
+                    <span>Темная тема</span>
+                    <div class="theme-toggle mobile" id="mobileThemeToggle">
+                        <div class="theme-toggle-track">
+                            <div class="theme-toggle-thumb">
+                                <i class="theme-icon fas fa-sun"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
     <div class="overlay"></div>
@@ -123,10 +150,64 @@
     </div>
 
     <!-- Навигационные кнопки -->
-    <div class="scroll-nav top">
-        <div class="scroll-btn scroll-up"><i class="fas fa-arrow-up"></i></div>
-        <div class="scroll-btn scroll-down"><i class="fas fa-arrow-down"></i></div>
+    <!-- Навигационные кнопки с круговой диаграммой -->
+<!-- ИСПРАВЛЕННЫЙ HTML для круговой диаграммы -->
+<div class="scroll-nav top">
+    <!-- Кнопка вверх -->
+    <div class="scroll-btn scroll-up">
+        <i class="fas fa-arrow-up"></i>
     </div>
+    
+    <!-- Круговая диаграмма прогресса -->
+    <div class="progress-indicator" id="sectionProgress">
+        <svg class="progress-ring" width="60" height="60" viewBox="0 0 60 60">
+            <!-- Градиент для красивого эффекта -->
+            <defs>
+                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#FF8C5A;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            
+            <!-- Фоновый круг -->
+            <circle class="progress-ring-bg" 
+                    cx="30" cy="30" r="25"
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.2)"
+                    stroke-width="3"/>
+            
+            <!-- Прогресс круг -->
+            <circle class="progress-ring-circle" 
+                    cx="30" cy="30" r="25"
+                    fill="none"
+                    stroke="url(#progressGradient)"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-dasharray="157"
+                    stroke-dashoffset="157"
+                    transform="rotate(-90 30 30)"/>
+        </svg>
+        
+        <!-- Текст с номером раздела -->
+        <div class="progress-text">
+            <span class="current">1</span>
+            <span class="divider">/</span>
+            <span class="total">8</span>
+        </div>
+        
+        <!-- Tooltip с названием раздела -->
+        <div class="progress-tooltip">
+            <span class="section-name">Главная</span>
+            <span class="section-progress">12.5%</span>
+        </div>
+    </div>
+    
+    
+    <!-- Кнопка вниз -->
+    <div class="scroll-btn scroll-down">
+        <i class="fas fa-arrow-down"></i>
+    </div>
+</div>
     <div class="scroll-nav bottom">
         <div class="scroll-btn scroll-top"><i class="fas fa-home"></i></div>
     </div>
