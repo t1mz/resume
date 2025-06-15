@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - Земцов Тимофей Александрович</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+            font-size: 11px;
+        }
+
+        .resume-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            min-height: 297mm;
+            padding: 10mm;
+            page-break-after: always;
+            position: relative;
+        }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 15px;
+        }
+
+        .photo {
+            width: 120px;
+            height: 153px;
+            border-radius: 8px;
+            margin-right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+            .photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+        .header-info {
+            flex-grow: 1;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 3px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+
+            .contact-item strong {
+                width: 60px;
+                color: #475569;
+            }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e40af;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .left-column {
+            /* Main content */
+        }
+
+        .right-column {
+            /* Sidebar */
+        }
+
+        /* Job Experience */
+        .job {
+            margin-bottom: 15px;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 15px;
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 12px;
+        }
+
+        .company {
+            font-weight: 500;
+            color: #333;
+            font-size: 11px;
+        }
+
+        .job-period {
+            font-style: italic;
+            color: #64748b;
+            font-size: 10px;
+            margin-bottom: 8px;
+        }
+
+        .job-description {
+            font-size: 10px;
+            line-height: 1.3;
+        }
+
+            .job-description ul {
+                margin: 5px 0;
+                padding-left: 15px;
+            }
+
+            .job-description li {
+                margin-bottom: 3px;
+            }
+
+        /* Skills */
+        .skills-category {
+            margin-bottom: 12px;
+        }
+
+            .skills-category h4 {
+                font-size: 11px;
+                font-weight: 600;
+                color: #1e40af;
+                margin-bottom: 6px;
+            }
+
+        .skills-list {
+            font-size: 10px;
+            line-height: 1.3;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 10px;
+        }
+
+        .degree {
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 11px;
+        }
+
+        .institution {
+            font-size: 10px;
+            color: #333;
+        }
+
+        .year {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        /* Achievements */
+        .achievement-category {
+            margin-bottom: 10px;
+        }
+
+            .achievement-category h4 {
+                font-size: 11px;
+                font-weight: 600;
+                color: #1e40af;
+                margin-bottom: 5px;
+            }
+
+        .achievement-list {
+            font-size: 10px;
+            line-height: 1.2;
+        }
+
+            .achievement-list li {
+                margin-bottom: 2px;
+            }
+
+        /* Competencies */
+        .competency-group {
+            margin-bottom: 12px;
+        }
+
+            .competency-group h4 {
+                font-size: 11px;
+                font-weight: 600;
+                color: #1e40af;
+                margin-bottom: 5px;
+            }
+
+        .competency-list {
+            font-size: 10px;
+            line-height: 1.3;
+        }
+
+            .competency-list li {
+                margin-bottom: 2px;
+            }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                max-width: none;
+            }
+
+            .page {
+                page-break-after: always;
+                box-shadow: none;
+            }
+
+                .page:last-child {
+                    page-break-after: auto;
+                }
+        }
+
+        .website-link {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .small-text {
+            font-size: 9px;
+            color: #64748b;
+        }
+
+        .additional-info {
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Page 1 -->
+        <div class="page">
+            <!-- Header -->
+            <div class="header">
+                <div class="photo">
+                    <img src="photo.jpg" alt="Тимофей Земцов">
+                </div>
+                <div class="header-info">
+                    <h1 class="name">Земцов Тимофей Александрович</h1>
+                    <div class="title">IT-специалист, Преподаватель</div>
+                    <div class="subtitle">Мужчина, 30 лет • Опыт работы — 11 лет</div>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <strong>Телефон:</strong>
+                            <span>+7 (912) 721-08-90</span>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Email:</strong>
+                            <span><a href="mailto:timz3m+work@ya.ru" style="color: #2563eb; text-decoration: none;">timz3m+work@ya.ru</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Сайт:</strong>
+                            <span class="website-link">zemtsovta-it-work.ru</span>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Telegram:</strong>
+                            <span><a href="https://t.me/timzboi" style="color: #2563eb; text-decoration: none;">@timzboi</a></span>
+                        </div>
+
+                        <div class="contact-item">
+                            <strong>Регион:</strong>
+                            <span>Свердловская область</span>
+                        </div>
+                        <div class="contact-item">
+                            <strong>VK:</strong>
+                            <span><a href="https://vk.com/timofey_zemtsov" style="color: #2563eb; text-decoration: none;">vk.com/timofey_zemtsov</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div class="left-column">
+                    <!-- Желаемая должность -->
+                    <div class="section">
+                        <h2 class="section-title">Желаемая должность</h2>
+                        <p><strong>Педагог дополнительного образования | Учитель информатики | Наставник | Системный администратор</strong></p>
+                        <p class="small-text">Специализации: VR/AR разработка и преподавание, программирование (Python, C#, Unity), проектная деятельность с детьми и подростками, системное администрирование</p>
+                    </div>
+
+                    <!-- Опыт работы -->
+                    <div class="section">
+                        <h2 class="section-title">Опыт работы</h2>
+
+                        <div class="job">
+                            <div class="job-title">Педагог дополнительного образования</div>
+                            <div class="company">Центр цифрового образования детей «IT-Куб г. Арамиль»</div>
+                            <div class="job-period">Август 2023 — настоящее время (2 года)</div>
+                            <div class="job-description">
+                                <strong>Направления:</strong> VR/AR разработка (Varwin, Unity), программирование Python, 3D-моделирование Blender, проектная деятельность
+                                Ведение курсов дополнительного образования IT-направленности для детей 11-17 лет. Подготовка команд к всероссийским конкурсам и хакатонам. Написание образовательных программ и методических материалов. Проведение внебюджетных курсов по видеомонтажу и компьютерной грамотности.
+                                
+                            </div>
+                        </div>
+
+                        <div class="job">
+                            <div class="job-title">Учитель информатики</div>
+                            <div class="company">Частная школа «Солнечный круг»</div>
+                            <div class="job-period">Сентябрь 2024 — настоящее время (1 год)</div>
+                            <div class="job-description">
+                                Ведение занятий по компьютерной грамотности и информатике в 3-5 классах. Совместительство, 1 день в неделю.
+                            </div>
+                        </div>
+
+                        <div class="job">
+                            <div class="job-title">Учитель информатики, Системный администратор</div>
+                            <div class="company">МКОУ СОШ №5 г. Кирово-Чепецка</div>
+                            <div class="job-period">Октябрь 2021 — Август 2023 (1 год 11 месяцев)</div>
+                            <div class="job-description">
+                                Преподавание информатики, подготовка к ГИА и ЕГЭ. Обслуживание сети и парка компьютерной техники. Перевод на ЕСПД, миграция сайта на Госвеб. Техническое сопровождение ГИА и ЕГЭ.
+                                
+                            </div>
+                        </div>
+
+                        <div class="job">
+                            <div class="job-title">Системный администратор</div>
+                            <div class="company">Торговая марка «Суджук»</div>
+                            <div class="job-period">Ноябрь 2020 — Август 2023 (2 года 10 месяцев)</div>
+                            <div class="job-description">
+                                Обслуживание торгового оборудования (ККТ, весы, ТСД) и сети, сопровождение 1С Предприятие 8.3, ЕГАИС, Меркурий, администрирование Windows AD.
+                            </div>
+                        </div>
+                        <div class="job">
+                            <div class="job-title">Системный администратор</div>
+                            <div class="company">ПутевкаМаркет - Турагенство</div>
+                            <div class="job-period">Декабрь 2018 — Июль 2024 (5 лет 7 месяцев)</div>
+                            <div class="job-description">
+                                Организация и поддержание IT-инфраструктуры офиса с нуля, техподдержка и обслуживание, частичная занятость.
+                            </div>
+                        </div>
+                        <div class="job">
+                            <div class="job-title">Сервисный инженер</div>
+                            <div class="company">ЭР-Телеком Холдинг (Дом.ru)</div>
+                            <div class="job-period">Сентябрь 2017 — Сентябрь 2020 (3 года 1 месяц)</div>
+                            <div class="job-description">
+                                Обслуживание сети, аварийно-восстановительные работы, настройка сетевого оборудования, монтаж абонентских линий связи, работа на высоте.
+                            </div>
+                        </div>
+
+                        <div class="job">
+                            <div class="job-title">Учитель информатики, Техник-программист</div>
+                            <div class="company">МКОУ СОШ №5 г. Кирово-Чепецка</div>
+                            <div class="job-period">Сентябрь 2013 — Сентябрь 2017 (4 года 1 месяц)</div>
+                            <div class="job-description">
+                                Преподавание информатики, создание локальной сети школы с нуля (2013), цифровизация образования, администрирование Linux-серверов, настройка виртуализации.
+                            </div>
+                        </div>
+
+
+                        <div class="job">
+                            <div class="job-title">Помощник системного администратора</div>
+                            <div class="company">Администрация г. Кирово-Чепецка</div>
+                            <div class="job-period">Апрель — Июнь 2013 (3 месяца)</div>
+                            <div class="job-description">
+                                Практика, техническая поддержка, первый рабочий опыт по специальности.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <!-- Образование -->
+                    <div class="section">
+                        <h2 class="section-title">Образование</h2>
+
+                        <div class="education-item">
+                            <div class="degree">Профессиональная переподготовка</div>
+                            <div class="institution">Педагог дополнительного образования</div>
+                            <div class="year">2023</div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="degree">Среднее специальное</div>
+                            <div class="institution">КОГОБУ СПО Вятский Автомобильно-Промышленный Колледж</div>
+                            <div class="year">2014</div>
+                            <div class="small-text">Техническое обслуживание вычислительной техники и компьютерных сетей</div>
+                        </div>
+                    </div>
+
+                    <!-- Технические навыки -->
+                    <div class="section">
+                        <h2 class="section-title">Технические навыки</h2>
+
+                        <div class="skills-category">
+                            <h4>Преподавание и разработка:</h4>
+                            <div class="skills-list">
+                                • VR/AR: Varwin, Unity 3D, Blender<br>
+                                • Программирование: Python, C#<br>
+                                • Инструменты: Visual Studio, Git, Adobe Creative Suite, DaVinci Resolve, Figma, Miro
+                            </div>
+                        </div>
+
+                        <div class="skills-category">
+                            <h4>Системное администрирование:</h4>
+                            <div class="skills-list">
+                                • ОС: Windows Server, Linux (AltLinux, Ubuntu)<br>
+                                • Виртуализация: VMware, Hyper-V, Citrix<br>
+                                • Сети: TCP/IP, DHCP, DNS, VPN<br>
+                                • Серверы: Active Directory, файловые серверы
+                            </div>
+                        </div>
+
+                        <div class="skills-category">
+                            <h4>Специализированное ПО:</h4>
+                            <div class="skills-list">
+                                • 1С Предприятие 8.3<br>
+                                • ЕГАИС, Меркурий, Честный Знак<br>
+                                • Системы электронного документооборота
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ключевые компетенции -->
+                    <div class="section">
+                        <h2 class="section-title">Ключевые компетенции</h2>
+
+                        <div class="competency-group">
+                            <h4>Педагогические навыки:</h4>
+                            <ul class="competency-list">
+                                <li>Разработка образовательных программ</li>
+                                <li>Подготовка команд к конкурсам</li>
+                                <li>Проектная деятельность с детьми</li>
+                                <li>Индивидуальный подход к обучению</li>
+                            </ul>
+                        </div>
+
+                        <div class="competency-group">
+                            <h4>Управленческие навыки:</h4>
+                            <ul class="competency-list">
+                                <li>Организация мероприятий</li>
+                                <li>Координация проектных команд</li>
+                                <li>Планирование образовательного процесса</li>
+                            </ul>
+                        </div>
+
+                        <div class="competency-group">
+                            <h4>Личные качества:</h4>
+                            <ul class="competency-list">
+                                <li>Коммуникабельность</li>
+                                <li>Аналитическое мышление</li>
+                                <li>Постоянное саморазвитие</li>
+                                <li>Стрессоустойчивость</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Дополнительные навыки -->
+                    <div class="section">
+                        <h2 class="section-title">Дополнительные навыки</h2>
+
+                        <div class="additional-info">
+                            <strong>Творческие навыки:</strong><br>
+                            • Программирование (Python, C#)<br>
+                            • Видеомонтаж (DaVinci Resolve)<br>
+                            • Графический дизайн (Photoshop, Figma)<br>
+                            • 3D-моделирование (Blender)<br><br>
+                            <strong>Интересы:</strong> Аналитика данных, генеративные ИИ, велоспорт, туризм
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="page">
+            <!-- О себе - полная ширина -->
+            <div class="section">
+                <h2 class="section-title">О себе</h2>
+                <div class="job-description" style="font-size: 12px; line-height: 1.6; margin-bottom: 25px;">
+                    <p style="margin-bottom: 10px;">
+                        <strong>IT-специалист с 11-летним опытом работы</strong> и страстью к преподаванию.
+                        Специализируюсь на VR/AR-разработке и системном администрировании.
+                    </p>
+                    <p style="margin-bottom: 10px;">
+                        <strong>Преподавательская деятельность:</strong> Работаю в Центре цифрового образования «IT-Куб»,
+                        где помогаю детям 7-17 лет осваивать современные технологии: программирование, VR/AR разработку,
+                        3D-моделирование и проектную деятельность.
+                    </p>
+                    <p style="margin-bottom: 10px;">
+                        <strong>Языки и навыки:</strong> Владею английским языком на профессиональном уровне (C1) -
+                        чтение и перевод технической литературы, понимание на слух. Имею навыки видеомонтажа,
+                        графического дизайна и 3D-моделирования.
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        <strong>Профессиональные интересы:</strong> Постоянно стремлюсь к развитию и карьерному росту.
+                        Интересуюсь аналитикой данных, генеративными ИИ, активно использую современные технологии
+                        для автоматизации рутинных задач. Увлекаюсь велоспортом, туризмом, киноиндустрией.
+                    </p>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div class="left-column">
+                    <!-- Повышение квалификации -->
+                    <div class="section">
+                        <h2 class="section-title">Повышение квалификации (2021-2025)</h2>
+
+                        <div class="education-item">
+                            <div class="degree">Использование современного оборудования в центрах IT-Куб</div>
+                            <div class="small-text">Сертификат повышения квалификации</div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="degree">Преподавание информатики и математики в условиях цифровизации</div>
+                            <div class="small-text">Сертификат повышения квалификации</div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="degree">Углубленное программирование на Python для учителей</div>
+                            <div class="small-text">Яндекс.Учебник</div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="degree">Информационная безопасность</div>
+                            <div class="small-text">ИРО Кировской области</div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="degree">Реализация требований обновленных ФГОС</div>
+                            <div class="small-text">НОО, ООО, СОО в работе учителя</div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="degree">Создание виртуальных музеев</div>
+                            <div class="small-text">Курсы повышения квалификации</div>
+                        </div>
+                    </div>
+
+                    <!-- Достижения учеников -->
+                    <div class="section">
+                        <h2 class="section-title">Достижения учеников (2024-2025) - самые заметные</h2>
+
+                        <div class="achievement-category">
+                            <h4>Всероссийские конкурсы:</h4>
+                            <ul class="achievement-list">
+                                <li><strong>1-е место</strong> - "Оставь VR метку на карте России"</li>
+                                <li><strong>2-е место</strong> - Хакатон "Обучаюсь. Проектирую. Программирую. Будущее" (финал)</li>
+                                <li><strong>2-е место</strong> - Хакатон "ProVR" (финал)</li>
+                                <li><strong>2-е место</strong> - "Varwin Хакатон 2025"</li>
+                                <li><strong>Финалисты</strong> - Национальная Техническая Олимпиада Джуниор</li>
+                            </ul>
+                        </div>
+
+                        <div class="achievement-category">
+                            <h4>Региональные конкурсы:</h4>
+                            <ul class="achievement-list">
+                                <li><strong>1-е место</strong> - Областной хакатон "PlayDigitalArt"</li>
+                                <li><strong>2-е место</strong> - Областной конкурс "ЮнитиДжем"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Дополнительная информация -->
+                    <div class="section">
+                        <h2 class="section-title">Дополнительная информация</h2>
+
+                        <div class="additional-info">
+                            <strong>Автомобиль:</strong> Личный автомобиль, права категории B, стаж 12 лет<br><br>
+                            <strong>Готовность к работе:</strong> Екатеринбург, Сысертский/Белоярский районы, удаленная работа<br><br>
+                            <strong>Занятость:</strong> Полная, частичная, совместительство<br><br>
+                            <strong>Рекомендации:</strong> Контакты работодателей предоставляются по запросу
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+
+                    <!-- О себе -->
+                    <div class="section">
+                        <h2 class="section-title">Дополнительная информация</h2>
+
+                        <div class="additional-info">
+                            <strong>Автомобиль:</strong> Личный автомобиль, права категории B, стаж 12 лет<br><br>
+                            <strong>Готовность к работе:</strong> Екатеринбург, Сысертский/Белоярский районы, удаленная работа<br><br>
+                            <strong>Занятость:</strong> Полная, частичная, совместительство<br><br>
+                            <strong>Рекомендации:</strong> Контакты работодателей предоставляются по запросу
+                        </div>
+                    </div>
+
+                    <!-- Благодарности -->
+                    <div class="section">
+                        <h2 class="section-title">Благодарности</h2>
+
+                        <div class="achievement-list" style="font-size: 9px;">
+                            <li>Благодарность СУНЦ УрФУ за оценку работ на фестивале проектов</li>
+                            <li>Благодарность от Кванториума за подготовку команды победителей</li>
+                            <li>Благодарность ЭР-Телеком за отзывчивость и доброжелательность</li>
+                            <li>Участник образовательного интенсива "Педагогическая индивидуальность"</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ссылка на сайт -->
+            <div style="text-align: center; margin-top: 25px; margin-bottom: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                <div style="font-size: 14px; font-weight: 600; color: #1e40af; margin-bottom: 5px;">
+                    Более подробно на личном сайте-визитке:
+                </div>
+                <div style="font-size: 16px; font-weight: 700; color: #2563eb;">
+                    <a href="https://zemtsovta-it-work.ru" style="color: #2563eb; text-decoration: none;">zemtsovta-it-work.ru</a>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+                <div class="small-text" style="color: #64748b;">
+                    Резюме обновлено: Июнь 2025
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Автоматическая печать при загрузке (опционально)
+        // window.onload = function() { window.print(); }
+    </script>
+</body>
+</html>
