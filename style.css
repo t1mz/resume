@@ -811,6 +811,7 @@ section {
 .filter-tabs {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 8px;
     margin: 20px 0 0;
 }

@@ -1952,7 +1952,8 @@ function setupFilterSection(tabsId, itemsSelector, recentCount) {
         }
 
         items.forEach(item => {
-            if (item.dataset.category !== filter) item.classList.add('filter-hidden');
+            const cats = (item.dataset.category || '').split(' ');
+            if (!cats.includes(filter)) item.classList.add('filter-hidden');
         });
     }
 
