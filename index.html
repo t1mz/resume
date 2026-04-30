@@ -569,9 +569,17 @@
         <div class="container">
             <h2>Квалификация</h2>
             <p>Повышения квалификации, сертификаты и благодарности</p>
-            <div class="qualifications-grid">
+            <div class="filter-tabs" id="qualFilterTabs">
+                <button class="filter-btn active" data-filter="recent">Последнее</button>
+                <button class="filter-btn" data-filter="cert">Сертификаты</button>
+                <button class="filter-btn" data-filter="kpk">КПК</button>
+                <button class="filter-btn" data-filter="diploma">Дипломы</button>
+                <button class="filter-btn" data-filter="thanks">Благодарности</button>
+                <button class="filter-btn" data-filter="all">Всё</button>
+            </div>
+            <div class="qualifications-grid" id="qualificationsGrid">
                 <!-- Образовательные интенсивы -->
-                <div class="qualification-card" data-img="images/tavatui-intensiv.png">
+                <div class="qualification-card" data-img="images/tavatui-intensiv.png" data-category="cert">
                     <div class="qualification-img">
                         <img src="images/tavatui-intensiv.png" alt="Сертификат образовательного интенсива">
                     </div>
@@ -583,7 +591,7 @@
                 </div>
                 
                 <!-- Повышения квалификации IT-Куб -->
-                <div class="qualification-card" data-img="images/itcube-tech.png">
+                <div class="qualification-card" data-img="images/itcube-tech.png" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/itcube-tech.png" alt="Сертификат IT-Куб">
                     </div>
@@ -595,7 +603,7 @@
                 </div>
                 
                 <!-- Цифровизация образования -->
-                <div class="qualification-card" data-img="images/kval-math-inform.png">
+                <div class="qualification-card" data-img="images/kval-math-inform.png" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/kval-math-inform.png" alt="Сертификат цифровизации образования">
                     </div>
@@ -607,7 +615,7 @@
                 </div>
                 
                 <!-- Благодарности -->
-                <div class="qualification-card" data-img="images/sunc-jury.png">
+                <div class="qualification-card" data-img="images/sunc-jury.png" data-category="thanks">
                     <div class="qualification-img">
                         <img src="images/sunc-jury.png" alt="Благодарность СУНЦ УрФУ">
                     </div>
@@ -619,7 +627,7 @@
                 </div>
                 
                 <!-- Профессиональная переподготовка -->
-                <div class="qualification-card" data-img="images/diploma-perepodgotovka-pdo.jpg">
+                <div class="qualification-card" data-img="images/diploma-perepodgotovka-pdo.jpg" data-category="diploma">
                     <div class="qualification-img">
                         <img src="images/diploma-perepodgotovka-pdo.jpg" alt="Диплом переподготовки">
                     </div>
@@ -631,7 +639,7 @@
                 </div>
                 
                 <!-- ФГОС третьего поколения -->
-                <div class="qualification-card" data-img="images/Ya-7fgos.jpg">
+                <div class="qualification-card" data-img="images/Ya-7fgos.jpg" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/Ya-7fgos.jpg" alt="Сертификат ФГОС">
                     </div>
@@ -643,7 +651,7 @@
                 </div>
                 
                 <!-- Python для учителей -->
-                <div class="qualification-card" data-img="images/Ya-python.jpg">
+                <div class="qualification-card" data-img="images/Ya-python.jpg" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/Ya-python.jpg" alt="Сертификат Python">
                     </div>
@@ -655,7 +663,7 @@
                 </div>
                 
                 <!-- Python и ФГОС -->
-                <div class="qualification-card" data-img="images/minfin-python.jpg">
+                <div class="qualification-card" data-img="images/minfin-python.jpg" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/minfin-python.jpg" alt="Сертификат Python ФГОС">
                     </div>
@@ -667,7 +675,7 @@
                 </div>
                 
                 <!-- Информационная безопасность -->
-                <div class="qualification-card" data-img="images/iro-ib.jpg">
+                <div class="qualification-card" data-img="images/iro-ib.jpg" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/iro-ib.jpg" alt="Сертификат информационной безопасности">
                     </div>
@@ -679,7 +687,7 @@
                 </div>
                 
                 <!-- Качество образования -->
-                <div class="qualification-card" data-img="images/iro-kachestvo.jpg">
+                <div class="qualification-card" data-img="images/iro-kachestvo.jpg" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/iro-kachestvo.jpg" alt="Сертификат качества образования">
                     </div>
@@ -691,7 +699,7 @@
                 </div>
                 
                 <!-- Обновленные ФГОС -->
-                <div class="qualification-card" data-img="images/iro-fgos.jpg">
+                <div class="qualification-card" data-img="images/iro-fgos.jpg" data-category="kpk">
                     <div class="qualification-img">
                         <img src="images/iro-fgos.jpg" alt="Сертификат обновленных ФГОС">
                     </div>
@@ -703,7 +711,7 @@
                 </div>
                 
                 <!-- Диплом об образовании -->
-                <div class="qualification-card" data-img="images/diploma.jpg">
+                <div class="qualification-card" data-img="images/diploma.jpg" data-category="diploma">
                     <div class="qualification-img">
                         <img src="images/diploma.jpg" alt="Диплом об образовании">
                     </div>
@@ -715,7 +723,7 @@
                 </div>
                 
                 <!-- Благодарность "Они сражались за..." -->
-                <div class="qualification-card" data-img="images/oni-srazhalis-za-thanks.jpg">
+                <div class="qualification-card" data-img="images/oni-srazhalis-za-thanks.jpg" data-category="thanks">
                     <div class="qualification-img">
                         <img src="images/oni-srazhalis-za-thanks.jpg" alt="Благодарность медиапроект">
                     </div>
@@ -727,7 +735,7 @@
                 </div>
                 
                 <!-- Благодарность от Кванториума -->
-                <div class="qualification-card" data-img="images/kvantorium-thanks.jpg">
+                <div class="qualification-card" data-img="images/kvantorium-thanks.jpg" data-category="thanks">
                     <div class="qualification-img">
                         <img src="images/kvantorium-thanks.jpg" alt="Благодарность Кванториум">
                     </div>
@@ -739,7 +747,7 @@
                 </div>
                 
                 <!-- Благодарность от ЭР-Телеком -->
-                <div class="qualification-card" data-img="images/er-telecom-thanks.png">
+                <div class="qualification-card" data-img="images/er-telecom-thanks.png" data-category="thanks">
                     <div class="qualification-img">
                         <img src="images/er-telecom-thanks.png" alt="Благодарность ЭР-Телеком">
                     </div>
@@ -758,10 +766,18 @@
     <div class="container">
         <h2>Портфолио и Достижения</h2>
         <p>Проекты учеников и их успехи в конкурсах 2024-2025 учебного года</p>
-        <div class="portfolio-grid">
+        <div class="filter-tabs" id="portfolioFilterTabs">
+            <button class="filter-btn active" data-filter="recent">Последние</button>
+            <button class="filter-btn" data-filter="winners">Победители</button>
+            <button class="filter-btn" data-filter="prizes">Призёры</button>
+            <button class="filter-btn" data-filter="partners">С партнёрами</button>
+            <button class="filter-btn" data-filter="other">Прочее</button>
+            <button class="filter-btn" data-filter="all">Всё</button>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
             
             <!-- 1. ЮнитиДжем - Игра "Машина Будущего" -->
-            <div class="portfolio-item" data-title="Машина Будущего" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+2"]'>
+            <div class="portfolio-item" data-title="Машина Будущего" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+2"]' data-category="prizes">
                 <div class="achievement-badge silver">
                     <i class="fas fa-medal"></i>
                 </div>
@@ -787,7 +803,7 @@
             </div>
             
             <!-- 2. PlayDigitalArt - Игра "Лабиринт Осознания" -->
-            <div class="portfolio-item" data-title="Лабиринт Осознания" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+2"]'>
+            <div class="portfolio-item" data-title="Лабиринт Осознания" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1", "https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+2"]' data-category="winners">
                 <div class="achievement-badge gold">
                     <i class="fas fa-trophy"></i>
                 </div>
@@ -813,7 +829,7 @@
             </div>
             
             <!-- 3. Отборочный этап "Обучаюсь проектирую программирую будущее" -->
-            <div class="portfolio-item" data-title="Survivor on the Island" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Survivor on the Island" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]' data-category="other">
                 <div class="achievement-badge finalist">
                     <i class="fas fa-star"></i>
                 </div>
@@ -840,7 +856,7 @@
             </div>
             
             <!-- 4. Конкурс "Культура Сахалинских Корейцев" -->
-            <div class="portfolio-item" data-title="Приготовление Кимчхи" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Приготовление Кимчхи" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]' data-category="other">
                 <div class="achievement-badge finalist">
                     <i class="fas fa-star"></i>
                 </div>
@@ -866,7 +882,7 @@
             </div>
             
             <!-- 5. Финал "Обучаюсь проектирую программирую будущее" -->
-            <div class="portfolio-item" data-title="Дивизион Двигатели УЗГА" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Дивизион Двигатели УЗГА" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]' data-category="prizes">
                 <div class="achievement-badge silver">
                     <i class="fas fa-medal"></i>
                 </div>
@@ -892,7 +908,7 @@
             </div>
             
             <!-- 6. Отборочный ProVR -->
-            <div class="portfolio-item" data-title="Сборка ПК" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Сборка ПК" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]' data-category="other">
                 <div class="achievement-badge finalist">
                     <i class="fas fa-star"></i>
                 </div>
@@ -918,7 +934,7 @@
             </div>
             
             <!-- 7. Финал ProVR -->
-            <div class="portfolio-item" data-title="Визит на Оренклип" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Визит на Оренклип" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]' data-category="prizes">
                 <div class="achievement-badge silver">
                     <i class="fas fa-medal"></i>
                 </div>
@@ -944,7 +960,7 @@
             </div>
             
             <!-- 8. Курсы КПК создание виртуальных музеев -->
-            <div class="portfolio-item" data-title="Музей VR техники" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Музей VR техники" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]' data-category="partners">
                 <div class="portfolio-img">
                     <i class="fas fa-university"></i>
                 </div>
@@ -967,7 +983,7 @@
             </div>
             
             <!-- 9. Национальная Техническая Олимпиада (без проекта) -->
-            <div class="portfolio-item achievement-only">
+            <div class="portfolio-item achievement-only" data-category="other">
                 <div class="achievement-badge gold">
                     <i class="fas fa-trophy"></i>
                 </div>
@@ -993,7 +1009,7 @@
             </div>
             
             <!-- 10. VR-метка на карте России -->
-            <div class="portfolio-item" data-title="Экскурсия по набережной г.Арамиль" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Экскурсия по набережной г.Арамиль" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]' data-category="winners">
                 <div class="achievement-badge gold">
                     <i class="fas fa-trophy"></i>
                 </div>
@@ -1019,7 +1035,7 @@
             </div>
             
             <!-- 11. 3D-Моделирование "Нарядим 3D-Ёлку?" -->
-            <div class="portfolio-item" data-title="3D модель ёлки с окружением" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="3D модель ёлки с окружением" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]' data-category="prizes">
                 <div class="achievement-badge bronze">
                     <i class="fas fa-award"></i>
                 </div>
@@ -1045,7 +1061,7 @@
             </div>
             
             <!-- 12. VRAR Planet -->
-            <div class="portfolio-item" data-title="MakeDream. Построй дом мечты" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="MakeDream. Построй дом мечты" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]' data-category="partners">
                 <div class="achievement-badge special">
                     <i class="fas fa-star"></i>
                 </div>
@@ -1071,7 +1087,7 @@
             </div>
             
             <!-- 13. FeVRARt (не прошли в финал) -->
-            <div class="portfolio-item" data-title="Знакомство с БПЛА" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Знакомство с БПЛА" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]' data-category="other">
                 <div class="portfolio-img">
                     <i class="fas fa-helicopter"></i>
                 </div>
@@ -1094,7 +1110,7 @@
             </div>
             
             <!-- 14. Техномарт Play Digital Art 2025 -->
-            <div class="portfolio-item" data-title="Сердце ребёнка" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Сердце ребёнка" data-imgs='["https://via.placeholder.com/800x600/E55A2A/FFFFFF?text=Скриншот+1"]' data-category="partners">
                 <div class="achievement-badge special">
                     <i class="fas fa-star"></i>
                 </div>
@@ -1120,7 +1136,7 @@
             </div>
             
             <!-- 15. Varwin Хакатон 2025 -->
-            <div class="portfolio-item" data-title="Экскурсия Артек, корпус Хрустальный" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Экскурсия Артек, корпус Хрустальный" data-imgs='["https://via.placeholder.com/800x600/FF8C5A/FFFFFF?text=Скриншот+1"]' data-category="prizes">
                 <div class="achievement-badge silver">
                     <i class="fas fa-medal"></i>
                 </div>
@@ -1146,7 +1162,7 @@
             </div>
             
             <!-- 16. Музей музыкальных инструментов -->
-            <div class="portfolio-item" data-title="Музей музыкальных инструментов" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]'>
+            <div class="portfolio-item" data-title="Музей музыкальных инструментов" data-imgs='["https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Скриншот+1"]' data-category="other">
                 <div class="portfolio-img">
                     <i class="fas fa-music"></i>
                 </div>

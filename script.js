@@ -1912,6 +1912,66 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     }, 2000);
 }
 
+// ===== ФИЛЬТРЫ КВАЛИФИКАЦИИ И ПОРТФОЛИО =====
+
+const RECENT_QUAL_COUNT = 5;
+const RECENT_PORTFOLIO_COUNT = 6;
+
+function initCategoryFilters() {
+    setupFilterSection(
+        'qualFilterTabs',
+        '#qualificationsGrid .qualification-card',
+        RECENT_QUAL_COUNT
+    );
+    setupFilterSection(
+        'portfolioFilterTabs',
+        '#portfolioGrid .portfolio-item',
+        RECENT_PORTFOLIO_COUNT
+    );
+}
+
+function setupFilterSection(tabsId, itemsSelector, recentCount) {
+    const tabs = document.getElementById(tabsId);
+    if (!tabs) return;
+
+    const getItems = () => Array.from(document.querySelectorAll(itemsSelector));
+
+    function applyFilter(filter) {
+        const items = getItems();
+        items.forEach(item => item.classList.remove('filter-hidden'));
+
+        if (filter === 'all') return;
+
+        if (filter === 'recent') {
+            // показываем последние recentCount по порядку в DOM
+            const visible = items.slice(-recentCount);
+            items.forEach(item => {
+                if (!visible.includes(item)) item.classList.add('filter-hidden');
+            });
+            return;
+        }
+
+        items.forEach(item => {
+            if (item.dataset.category !== filter) item.classList.add('filter-hidden');
+        });
+    }
+
+    // применяем начальный фильтр "recent"
+    applyFilter('recent');
+
+    tabs.addEventListener('click', e => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+
+        tabs.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        applyFilter(btn.dataset.filter);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initCategoryFilters);
+
 /* ПРЕЛОАДЕР */
 window.addEventListener('load', function() {
     document.body.style.overflow = 'hidden';
