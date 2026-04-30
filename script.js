@@ -1943,8 +1943,12 @@ function setupFilterSection(tabsId, itemsSelector, recentCount) {
         if (filter === 'all') return;
 
         if (filter === 'recent') {
-            // показываем последние recentCount по порядку в DOM
-            const visible = items.slice(-recentCount);
+            const sorted = [...items].sort((a, b) => {
+                const da = a.dataset.date || '';
+                const db = b.dataset.date || '';
+                return db.localeCompare(da); // новейшие первыми
+            });
+            const visible = sorted.slice(0, recentCount);
             items.forEach(item => {
                 if (!visible.includes(item)) item.classList.add('filter-hidden');
             });
